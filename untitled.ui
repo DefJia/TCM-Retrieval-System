@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1047</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>630</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>退出</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>440</y>
+      <width>331</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>             输入病症</string>
+    </property>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>搜索</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>291</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>头痛 不思饮食 脱发</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>40</y>
+      <width>351</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>药方</string>
+    </property>
+    <widget class="QListWidget" name="listWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>311</width>
+       <height>291</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>十君子汤</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>枸杞鹿茸丸</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>十全大补丸</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>青龙汤</string>
+      </property>
+     </item>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>40</y>
+      <width>591</width>
+      <height>411</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>药</string>
+    </property>
+    <widget class="QListWidget" name="listWidget">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>50</y>
+       <width>451</width>
+       <height>281</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>黄芪</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>李可</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>枸杞</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>人生</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>林子扬</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>花生</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>瓜子</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>可乐</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>啤酒</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>350</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>确定</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1047</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
