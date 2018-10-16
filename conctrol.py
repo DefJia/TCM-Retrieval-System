@@ -36,4 +36,3 @@ if __name__=="__main__":
     M.pushButton_bingzheng.clicked.connect(lambda: a_way.chaxun(cursor,M.lineEdit_bingzheng.text()))
 
     sys.exit(app.exec_())
-close
