@@ -1,6 +1,6 @@
 from a_Main import M
 from b_Add import A
-import a_way
+import Function
 import sys
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
@@ -32,8 +32,8 @@ if __name__=="__main__":
     M.pushButton_out.clicked.connect(lambda: M.hide())
     A.pushButton_out.clicked.connect(lambda: A.hide())
     M.pushButton_daoru.clicked.connect(lambda: A.show())
-    A.pushButton_tianjia.clicked.connect(lambda: a_way.bing_add(cursor,log,A))
-    M.pushButton_bingzheng.clicked.connect(lambda: a_way.chaxun(cursor,M.lineEdit_bingzheng.text()))
+    A.pushButton_tianjia.clicked.connect(lambda: Function.bing_add(cursor, log, A))
+    M.pushButton_bingzheng.clicked.connect(lambda: Function.chaxun(cursor, M.lineEdit_bingzheng.text()))
 
     sys.exit(app.exec_())
     close

@@ -234,8 +234,12 @@ class A(QMainWindow, add):
         super(A, self).__init__()
         self.setupUi(self)
 
+
+
     def open(self):
         self.show()
 
     def close(self):
         self.hide()
+
+
