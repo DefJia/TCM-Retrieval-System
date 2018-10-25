@@ -1,5 +1,4 @@
 test.*
-test*.py
 .idea/
 venv/
 __pycache__/
