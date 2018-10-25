@@ -5,7 +5,7 @@
 # Created by: PyQt5 UI code generator 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QAbstractItemView
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Main(object):
@@ -26,11 +26,19 @@ class Main(object):
         self.pushButton_bingzheng = QtWidgets.QPushButton(self.groupBox)
         self.pushButton_bingzheng.setGeometry(QtCore.QRect(30, 80, 93, 28))
         self.pushButton_bingzheng.setObjectName("pushButton_bingzheng")
+
         self.tableWidget_yaofang = QtWidgets.QTableWidget(self.groupBox)
         self.tableWidget_yaofang.setGeometry(QtCore.QRect(190, 40, 111, 281))
         self.tableWidget_yaofang.setObjectName("tableWidget_yaofang")
-        self.tableWidget_yaofang.setColumnCount(0)
-        self.tableWidget_yaofang.setRowCount(0)
+        self.tableWidget_yaofang.setColumnCount(1)
+        self.tableWidget_yaofang.setRowCount(1)
+        self.tableWidget_yaofang.setEditTriggers(QAbstractItemView.NoEditTriggers)
+#        self.tableWidget_yaofang.setSelectionBehavior(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tableWidget_yaofang.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.tableWidget_yaofang.verticalHeader().setVisible(False)
+        self.tableWidget_yaofang.horizontalHeader().setVisible(False)
+
+
         self.pushButton_daoru = QtWidgets.QPushButton(self.groupBox)
         self.pushButton_daoru.setGeometry(QtCore.QRect(40, 310, 93, 28))
         self.pushButton_daoru.setObjectName("pushButton_daoru")
@@ -38,10 +46,14 @@ class Main(object):
         self.groupBox_2.setGeometry(QtCore.QRect(390, 40, 561, 341))
         self.groupBox_2.setObjectName("groupBox_2")
         self.tableWidget = QtWidgets.QTableWidget(self.groupBox_2)
+
+
         self.tableWidget.setGeometry(QtCore.QRect(40, 40, 501, 281))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
+
+
         self.pushButton_dayin = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_dayin.setGeometry(QtCore.QRect(700, 410, 93, 28))
         self.pushButton_dayin.setObjectName("pushButton_dayin")

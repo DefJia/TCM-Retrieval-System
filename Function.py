@@ -1,4 +1,6 @@
 
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5 import QtCore, QtGui, QtWidgets
 #import MessageBox
 
 def bing_add(cursor,log,A):
@@ -58,6 +60,26 @@ def bing_add(cursor,log,A):
         except Exception as e:
             print(e)
             print("导入错误")
+
+def setTable1(cursor,id,mg):
+    #try:
+        #sql = " WHERE bingzheng= '" + str(id) + "' "
+        cursor.execute("SELECT *  FROM bing_bingzheng WHERE bingzheng = '" + str(id) + "'")
+        #data = cursor.fetchone()
+        data1 = cursor.fetchall()
+
+        row = len(data1)
+        #col = len(data)
+        print(data1)
+        mg.tableWidget_yaofang.setRowCount(row)
+        mg.tableWidget_yaofang.setColumnCount(1)
+
+        for rows in range(row):
+            print(rows)
+            print(str(data1[0][1]))
+            mg.tableWidget_yaofang.setItem(0,0, QtWidgets.QTableWidgetItem(str(data1[0][1])))
+
+
 
 def settable(cursor,window):
     print("\n")
