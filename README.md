@@ -48,4 +48,4 @@
 
 ------
 
-Collaborators: [alanlinzy](https://github.com/alanlinzy), [brahamack](https://github.com/brahamack), [Defjia](https://github.com/DefJia)
+Collaborators: [Alanlinzy](https://github.com/alanlinzy), [Brahamack](https://github.com/brahamack), [Defjia](https://github.com/DefJia)
