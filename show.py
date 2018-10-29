@@ -1,11 +1,11 @@
-from UI.main import Ui_Main
+from UI.main import Main
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 import sys
 
 
-class M(QMainWindow, Ui_Main):
+class Interface(QMainWindow, Main):
     def __init__(self):
-        super(M, self).__init__()
+        super(Interface, self).__init__()
         self.setupUi(self)
 
     def open(self):
@@ -17,5 +17,6 @@ class M(QMainWindow, Ui_Main):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    test = M()
+    test = Interface()
     test.show()
+    sys.exit(app.exec_())
