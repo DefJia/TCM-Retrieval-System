@@ -1,30 +1,30 @@
-# µ¼ÈëSQLiteÇı¶¯:
+# å¯¼å…¥SQLiteé©±åŠ¨:
 import sqlite3
-# Á¬½Óµ½SQLiteÊı¾İ¿â
-# Êı¾İ¿âÎÄ¼şÊÇtest.db
-# Èç¹ûÎÄ¼ş²»´æÔÚ£¬»á×Ô¶¯ÔÚµ±Ç°Ä¿Â¼´´½¨:
+# è¿æ¥åˆ°SQLiteæ•°æ®åº“
+# æ•°æ®åº“æ–‡ä»¶æ˜¯test.db
+# å¦‚æœæ–‡ä»¶ä¸å­˜åœ¨ï¼Œä¼šè‡ªåŠ¨åœ¨å½“å‰ç›®å½•åˆ›å»º:
 conn = sqlite3.connect('test.db')
-# ´´½¨Ò»¸öCursor:
+# åˆ›å»ºä¸€ä¸ªCursor:
 cursor = conn.cursor()
-# Ö´ĞĞÒ»ÌõSQLÓï¾ä£¬´´½¨user±í:
+# æ‰§è¡Œä¸€æ¡SQLè¯­å¥ï¼Œåˆ›å»ºuserè¡¨:
 cursor.execute('create table user (id varchar(20) primary key, name varchar(20))')
 <sqlite3.Cursor object at 0x10f8aa260>
-# ¼ÌĞøÖ´ĞĞÒ»ÌõSQLÓï¾ä£¬²åÈëÒ»Ìõ¼ÇÂ¼:
+# ç»§ç»­æ‰§è¡Œä¸€æ¡SQLè¯­å¥ï¼Œæ’å…¥ä¸€æ¡è®°å½•:
 cursor.execute('insert into user (id, name) values (\'1\', \'Michael\')')
 <sqlite3.Cursor object at 0x10f8aa260>
-# Í¨¹ırowcount»ñµÃ²åÈëµÄĞĞÊı:
+# é€šè¿‡rowcountè·å¾—æ’å…¥çš„è¡Œæ•°:
 cursor.rowcount
-# »ñµÃ²éÑ¯½á¹û¼¯:
+# è·å¾—æŸ¥è¯¢ç»“æœé›†:
 values = cursor.fetchall()
-# ¹Ø±ÕCursor:
+# å…³é—­Cursor:
 cursor.close()
-# Ìá½»ÊÂÎñ:
+# æäº¤äº‹åŠ¡:
 conn.commit()
-# ¹Ø±ÕConnection:
+# å…³é—­Connection:
 conn.close()
 
 -------------------------------------
-¿ÉÄÜÓÃµ½Óï¾ä·¶Àı(Ã²ËÆÃ»É¶ÌØ±ğÒª×¢ÒâµÄ)
+å¯èƒ½ç”¨åˆ°è¯­å¥èŒƒä¾‹(è²Œä¼¼æ²¡å•¥ç‰¹åˆ«è¦æ³¨æ„çš„)
 
 UPDATE user SET name = '23' WHERE id = 2
 DELETE FROM table WHERE id = 1
