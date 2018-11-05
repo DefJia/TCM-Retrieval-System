@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Main(object):
+class Main(object):
     def setupUi(self, Main):
         Main.setObjectName("Main")
         Main.resize(1026, 512)
