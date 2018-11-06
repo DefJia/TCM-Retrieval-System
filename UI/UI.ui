@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1383</width>
-    <height>924</height>
+    <height>988</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
     <property name="title">
      <string>病症</string>
     </property>
-    <widget class="QLineEdit" name="lineeditSymptom">
+    <widget class="QLineEdit" name="lineSymptom">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -422,6 +422,17 @@
     <property name="text">
      <string>典籍</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>160</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
