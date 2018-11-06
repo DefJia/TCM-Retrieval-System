@@ -12,7 +12,7 @@ import sys
 class MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1383, 924)
+        MainWindow.setFixedSize(1383, 924)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.groupboxSymptom = QtWidgets.QGroupBox(self.centralwidget)
