@@ -17,7 +17,7 @@
    <widget class="QGroupBox" name="groupboxSymptom">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>10</x>
       <y>80</y>
       <width>241</width>
       <height>411</height>
@@ -37,7 +37,7 @@
       <rect>
        <x>20</x>
        <y>30</y>
-       <width>191</width>
+       <width>161</width>
        <height>41</height>
       </rect>
      </property>
@@ -47,9 +47,22 @@
       <rect>
        <x>20</x>
        <y>80</y>
-       <width>191</width>
+       <width>161</width>
        <height>321</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ButtonSymptom">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>30</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>+</string>
      </property>
     </widget>
    </widget>
@@ -58,7 +71,7 @@
      <rect>
       <x>50</x>
       <y>550</y>
-      <width>901</width>
+      <width>861</width>
       <height>291</height>
      </rect>
     </property>
@@ -152,9 +165,9 @@
    <widget class="QGroupBox" name="groupboxDisease">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>220</x>
       <y>80</y>
-      <width>241</width>
+      <width>251</width>
       <height>411</height>
      </rect>
     </property>
@@ -187,13 +200,26 @@
       </rect>
      </property>
     </widget>
+    <widget class="QPushButton" name="ButtonDisease">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>30</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>+</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupboxPrescription">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>460</x>
       <y>80</y>
-      <width>241</width>
+      <width>251</width>
       <height>411</height>
      </rect>
     </property>
@@ -226,13 +252,26 @@
       </rect>
      </property>
     </widget>
+    <widget class="QPushButton" name="ButtonPrescription">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>30</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>+</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupboxMedicine">
     <property name="geometry">
      <rect>
       <x>700</x>
       <y>80</y>
-      <width>241</width>
+      <width>271</width>
       <height>411</height>
      </rect>
     </property>
@@ -265,11 +304,24 @@
       </rect>
      </property>
     </widget>
+    <widget class="QPushButton" name="ButtonMedicine">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>30</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>+</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QPushButton" name="pushButtonInitial">
+   <widget class="QPushButton" name="ButtonInitial">
     <property name="geometry">
      <rect>
-      <x>550</x>
+      <x>570</x>
       <y>490</y>
       <width>161</width>
       <height>51</height>
@@ -285,10 +337,10 @@
      <string>初始化</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonInput">
+   <widget class="QPushButton" name="ButtonInput">
     <property name="geometry">
      <rect>
-      <x>730</x>
+      <x>750</x>
       <y>490</y>
       <width>161</width>
       <height>51</height>
@@ -304,10 +356,10 @@
      <string>录入</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonClean">
+   <widget class="QPushButton" name="ButtonClean">
     <property name="geometry">
      <rect>
-      <x>550</x>
+      <x>570</x>
       <y>850</y>
       <width>161</width>
       <height>51</height>
@@ -323,10 +375,10 @@
      <string>清空</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonSave">
+   <widget class="QPushButton" name="ButtonSave">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>750</x>
       <y>850</y>
       <width>161</width>
       <height>51</height>
@@ -378,7 +430,7 @@
      <x>0</x>
      <y>0</y>
      <width>1383</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
