@@ -1,5 +1,6 @@
-import PyQt5.QtWidgets.QTableWidgetItem
-
+import PyQt5.QtWidgets
+from PyQt5 import QtWidgets
+import UI
 def SearchTable(cursor,id,mg):
     #try:
         cursor.execute("sql")
@@ -40,3 +41,7 @@ def addTable(cursor,id,mg):
         for rows in range(row):
             for columns in range(4):
                 mg.tableWidget_guanli.setItem(rows,columns, QtWidgets.QTableWidgetItem(str(data1[rows][columns])))
+
+
+        basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+        UI.lineeditSymptom.text()
