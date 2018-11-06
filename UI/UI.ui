@@ -86,6 +86,12 @@
      <property name="midLineWidth">
       <number>0</number>
      </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
     </widget>
    </widget>
    <widget class="QTableWidget" name="tablewidgetPrescribe">

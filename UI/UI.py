@@ -41,6 +41,8 @@ class Ui_MainWindow(object):
         self.symptomOption.setObjectName("symptomOption")
         self.symptomOption.setColumnCount(0)
         self.symptomOption.setRowCount(0)
+        self.symptomOption.horizontalHeader().setVisible(False)
+        self.symptomOption.verticalHeader().setVisible(False)
         self.tablewidgetPrescribe = QtWidgets.QTableWidget(self.centralwidget)
         self.tablewidgetPrescribe.setGeometry(QtCore.QRect(50, 550, 861, 291))
         self.tablewidgetPrescribe.setObjectName("tablewidgetPrescribe")
