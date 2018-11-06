@@ -28,7 +28,7 @@ def addTable(cursor,id,mg):
         #sql= " WHERE aid= '" + str(id) + "' "
         #data = cursor.fetchone()
         data1 = cursor.fetchall()
-    #顺序
+    #测试
         #print(data)
         #print(data1)
         #print(len(data))
@@ -38,10 +38,13 @@ def addTable(cursor,id,mg):
         #col = len(data)
         mg.tableWidget_guanli.setRowCount(row)
         #print("检查")
+        A = UI.lineSymptom.text()
+
         for rows in range(row):
             for columns in range(4):
-                mg.tableWidget_guanli.setItem(rows,columns, QtWidgets.QTableWidgetItem(str(data1[rows][columns])))
+                # mg.tablewidgetSymptom.setItem(rows,columns, QtWidgets.QTableWidgetItem(str(data1[rows][columns])))
+
+                UI.tablewidgetSymptom.setItem(rows, 0, QtWidgets.QTableWidgetItem(A))
 
 
-        basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
-        UI.lineeditSymptom.text()
+        basket = { A , 'orange', 'apple', 'pear', 'orange', 'banana'}

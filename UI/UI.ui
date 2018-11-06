@@ -65,6 +65,19 @@
       <string>+</string>
      </property>
     </widget>
+    <widget class="QTableWidget" name="symptomOption">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>161</width>
+       <height>271</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+    </widget>
    </widget>
    <widget class="QTableWidget" name="tablewidgetPrescribe">
     <property name="geometry">
@@ -213,6 +226,16 @@
       <string>+</string>
      </property>
     </widget>
+    <widget class="QTableWidget" name="diseaseOption">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>191</width>
+       <height>271</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupboxPrescription">
     <property name="geometry">
@@ -265,6 +288,16 @@
       <string>+</string>
      </property>
     </widget>
+    <widget class="QTableWidget" name="prescriptionOption">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>191</width>
+       <height>271</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupboxMedicine">
     <property name="geometry">
@@ -315,6 +348,16 @@
      </property>
      <property name="text">
       <string>+</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="medicineOption">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>191</width>
+       <height>271</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -422,17 +465,6 @@
     <property name="text">
      <string>典籍</string>
     </property>
-   </widget>
-   <widget class="QWidget" name="gridLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>160</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
