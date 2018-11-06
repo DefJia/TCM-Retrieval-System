@@ -30,7 +30,7 @@ def inputA():
     interface.buttonMedicine.clicked.connect(lambda:setTable(interface.tablewidgetMedicine,listMedicine))
     
     #清空
-    interface.buttonInitial.clicked.connect(lambda:clearAll())
+    interface.buttonInitial.clicked.connect(lambda:clearAll(interface))
     
     #添加
     interface.buttonInput.clicked.connect(lambda:transForm(interface.tablewidgetPrescribe,listMedicine,listAll))
@@ -41,6 +41,16 @@ def inputA():
     #清空
     interface.buttonClean.clicked.connect(lambda:cleanTable(interface.tablewidgetPrescribe))
 
+def setTable(table,dataList):
+    row = len(dataList)
+    column = len(dataList[0])
+    table.setRowCount(row)
+    table.setColumnCount(column)
+    for r in range(row):
+        for c in range(column):
+            table.setItem(r,c, QtWidgets.QTableWidgetItem(dataList[r][c]))
+                
+    
 def bing_add(cursor,log,A):
     if A.lineEdit_yaofang.text() == "":
         try:
