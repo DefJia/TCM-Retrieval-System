@@ -11,12 +11,6 @@ class Interface(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.symptomOption.hide()  # 隐藏下拉框
 
-    # def open(self):
-        # self.show()
-
-    # def close(self):
-        # self.hide()
-
 
 class Control():
     def __init__(self):
@@ -25,9 +19,13 @@ class Control():
         self.interface.show()
         self.interface.buttonSymptom.clicked.connect(lambda: self.test())
         self.interface.lineSymptom.textChanged.connect(lambda: self.test())
+        self.interface.symptomOption.clicked.connect(lambda: self.hhh())
         # Generate interface
         self.front = Frontend()
         sys.exit(app.exec_())
+
+    def hhh(self):
+        data = self.interface.symptomOption.selectedItems()[0]
 
     def test(self):
         print(1)
