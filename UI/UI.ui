@@ -52,7 +52,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="ButtonSymptom">
+    <widget class="QPushButton" name="buttonSymptom">
      <property name="geometry">
       <rect>
        <x>180</x>
@@ -77,6 +77,15 @@
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="midLineWidth">
+      <number>0</number>
+     </property>
     </widget>
    </widget>
    <widget class="QTableWidget" name="tablewidgetPrescribe">
@@ -89,7 +98,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="ButtonInputModel">
+   <widget class="QPushButton" name="buttonInputModel">
     <property name="geometry">
      <rect>
       <x>580</x>
@@ -213,7 +222,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="ButtonDisease">
+    <widget class="QPushButton" name="buttonDisease">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -234,6 +243,9 @@
        <width>191</width>
        <height>271</height>
       </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
      </property>
     </widget>
    </widget>
@@ -275,7 +287,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="ButtonPrescription">
+    <widget class="QPushButton" name="buttonPrescription">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -296,6 +308,9 @@
        <width>191</width>
        <height>271</height>
       </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
      </property>
     </widget>
    </widget>
@@ -337,7 +352,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="ButtonMedicine">
+    <widget class="QPushButton" name="buttonMedicine">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -359,9 +374,12 @@
        <height>271</height>
       </rect>
      </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="ButtonInitial">
+   <widget class="QPushButton" name="buttonInitial">
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -380,7 +398,7 @@
      <string>初始化</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ButtonInput">
+   <widget class="QPushButton" name="buttonInput">
     <property name="geometry">
      <rect>
       <x>750</x>
@@ -399,7 +417,7 @@
      <string>录入</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ButtonClean">
+   <widget class="QPushButton" name="buttonClean">
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -418,7 +436,7 @@
      <string>清空</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ButtonSave">
+   <widget class="QPushButton" name="buttonSave">
     <property name="geometry">
      <rect>
       <x>750</x>
@@ -473,7 +491,7 @@
      <x>0</x>
      <y>0</y>
      <width>1383</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
