@@ -1,7 +1,12 @@
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
-#import MessageBox
+import MessageBox
+import UI.UI
+
+def inputA():
+    
+    
 
 def bing_add(cursor,log,A):
     if A.lineEdit_yaofang.text() == "":
@@ -9,22 +14,29 @@ def bing_add(cursor,log,A):
             cursor.execute("INSERT INTO bing (id_bing,name) \
                 VALUES ( '"+str(A.lineEdit_id.text())+"' ,'"+str(A.lineEdit_bingming.text())+"')")
             log.commit()
-            #massageBox = MessageBox.MessageBox("导入成功")      ?????
-            print("导入病成功")
+            massageBox = MessageBox.MessageBox("导入成功")     # ?????
+            #print("导入病成功")
         except Exception as e:
-            print(e)
-            print("导入错误")
+            massageBox = MessageBox.MessageBox(str(e))  
+            #print(e)
+            #print("导入错误")
+        finally:
+            massageBox.show()
+            
 
     elif A.lineEdit_bingming.text() == "":
         try:
             cursor.execute("INSERT INTO yaofang (id_bing,yaofang) \
                 VALUES ( '"+str(A.lineEdit_id.text())+"' ,'"+str(A.lineEdit_yaofang.text())+"')")
             log.commit()
-            #massageBox = MessageBox.MessageBox("导入成功")      ?????
-            print("导入药方成功")
+            massageBox = MessageBox.MessageBox("导入成功")      #?????
+            #print("导入药方成功")
         except Exception as e:
-            print(e)
-            print("导入错误")
+            massageBox = MessageBox.MessageBox(str(e))
+            #print(e)
+            #print("导入错误")
+        finally:
+            massageBox.show()
 
     elif A.lineEdit_1.text() == "":
         try:
