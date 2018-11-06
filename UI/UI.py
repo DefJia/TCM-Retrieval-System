@@ -12,7 +12,7 @@ import sys
 class MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1383, 924)
+        MainWindow.setFixedSize(1383, 924)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.groupboxSymptom = QtWidgets.QGroupBox(self.centralwidget)
@@ -22,9 +22,9 @@ class MainWindow(object):
         font.setPointSize(16)
         self.groupboxSymptom.setFont(font)
         self.groupboxSymptom.setObjectName("groupboxSymptom")
-        self.lineeditSymptom = QtWidgets.QLineEdit(self.groupboxSymptom)
-        self.lineeditSymptom.setGeometry(QtCore.QRect(20, 30, 161, 41))
-        self.lineeditSymptom.setObjectName("lineeditSymptom")
+        self.lineSymptom = QtWidgets.QLineEdit(self.groupboxSymptom)
+        self.lineSymptom.setGeometry(QtCore.QRect(20, 30, 161, 41))
+        self.lineSymptom.setObjectName("lineSymptom")
         self.tablewidgetSymptom = QtWidgets.QTableWidget(self.groupboxSymptom)
         self.tablewidgetSymptom.setGeometry(QtCore.QRect(20, 80, 161, 321))
         self.tablewidgetSymptom.setObjectName("tablewidgetSymptom")
