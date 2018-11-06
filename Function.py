@@ -5,8 +5,41 @@ import MessageBox
 import UI.UI
 
 def inputA():
+    interface = UI.UI()
+    listAll = []
+    listSymptom = []
+    listDisease = []
+    listPrescription = []
+    listMedicine = []
     
+    #模式转换
+    interface.buttonInputModel
+    interface.pushButtonInquiryModel
     
+    #四个查数据库
+    interface.buttonSymptom.clicked.connect(listSymptom = getData(interface.lineSymptom.text()))
+    interface.buttonSymptom.clicked.connect(lambda:setTable(interface.tablewidgetSymptom,listSymptom))
+                                                            
+    interface.buttonDisease.clicked.connect(listDisease = getData(interface.lineDisease.text()))
+    interface.buttonDisease.clicked.connect(lambda:setTable(interface.tablewidgetDisease,listDisease))
+                                                            
+    interface.buttonPrescription.clicked.connect(listPrescription = getData(interface.linePrescription.text()))
+    interface.buttonPrescription.clicked.connect(lambda:setTable(interface.tablewidgetPrescription,listPrescription))
+                                                            
+    interface.buttonMedicine.clicked.connect(listMedicine = getData(interface.lineMedicine.text()))
+    interface.buttonMedicine.clicked.connect(lambda:setTable(interface.tablewidgetMedicine,listMedicine))
+    
+    #清空
+    interface.buttonInitial.clicked.connect(lambda:clearAll())
+    
+    #添加
+    interface.buttonInput.clicked.connect(lambda:transForm(interface.tablewidgetPrescribe,listMedicine,listAll))
+    
+    #保存
+    interface.buttonSave.clicked.connect(lambda:saveA(interface))
+    
+    #清空
+    interface.buttonClean.clicked.connect(lambda:cleanTable(interface.tablewidgetPrescribe))
 
 def bing_add(cursor,log,A):
     if A.lineEdit_yaofang.text() == "":

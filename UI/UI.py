@@ -213,4 +213,3 @@ if __name__=="__main__":
     UI.show()
 
     sys.exit(app.exec_())
-close
