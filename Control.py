@@ -9,7 +9,8 @@ class Interface(QMainWindow, Ui_MainWindow):
         # 修改界面
         super(Interface, self).__init__()
         self.setupUi(self)
-        self.symptomOption.hide()  # 隐藏下拉框
+        # 隐藏下拉框
+        self.symptomOption.hide()
 
 
 class Control():
