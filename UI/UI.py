@@ -195,21 +195,3 @@ class MainWindow(object):
         self.buttonClean.setText(_translate("MainWindow", "清空"))
         self.buttonSave.setText(_translate("MainWindow", "保存"))
         self.labelPosition_2.setText(_translate("MainWindow", "典籍"))
-
-class UI(QMainWindow, MainWindow):
-    def __init__(self):
-        super(UI, self).__init__()
-        self.setupUi(self)
-
-    def open(self):
-        self.show()
-
-    def close(self):
-        self.hide()
-
-if __name__=="__main__":
-    app=QApplication(sys.argv)
-    UI = UI()
-    UI.show()
-
-    sys.exit(app.exec_())

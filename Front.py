@@ -9,8 +9,8 @@ class Frontend:
         # 当获取到输入触发此函数，然后在下拉框中显示匹配内容
         pass
 
-    def add_data(self, box_id, content):
+    def get_data(self, box_id=1, content=1):
         # 录入模式下，当添加按钮被触发时，将输入的内容添加到数据库
         # 如果当前位置不为空，还要添加关系
-        pass
+        return ['3', '2']
 
