@@ -38,7 +38,9 @@ class Backend:
                 data.append(self.get_data(elem))
         return data
 
-    def query(self, box_id, content=''):
+    def query(self, box_id, content):
+        para = (self.index[box_id], content)
+        # self.cursor.execute('select ')
         pass
 
     def add_data(self):

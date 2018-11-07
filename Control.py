@@ -19,7 +19,7 @@ class Control:
         self.interface = Interface()
         self.interface.show()
         # Generate interface
-        self.front = Frontend()
+        self.front = Frontend(self.interface)
         # Functions class
         self.line_text_changed()
         self.button_clicked()
@@ -28,7 +28,7 @@ class Control:
         sys.exit(app.exec_())
 
     def line_text_changed(self):
-        # self.interface.lineSymptom.textChanged.connect(lambda: self.front.)
+        self.interface.lineSymptom.textChanged.connect(lambda: self.front.get_input(0))
         pass
 
     def button_clicked(self):
