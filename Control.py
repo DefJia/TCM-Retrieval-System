@@ -12,7 +12,6 @@ class Interface(QMainWindow, Ui_MainWindow):
         # 隐藏下拉框
         self.symptomOption.hide()
 
-
 class Control:
     def __init__(self):
         app = QApplication(sys.argv)
@@ -45,6 +44,9 @@ class Control:
         self.interface.symptomOption.show()
         data = self.front.get_data()
         self.setTable(self.interface.symptomOption, data)
+
+
+
 
     @staticmethod
     def setTable(table, dataList):
