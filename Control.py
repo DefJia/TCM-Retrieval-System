@@ -41,7 +41,7 @@ class Control:
         pass
 
     def option_clicked(self):
-<<<<<<< HEAD
+#<<<<<<< HEAD
         self.interface.symptomOption.clicked.connect(lambda: self.hhh())
 
     def hhh(self):
