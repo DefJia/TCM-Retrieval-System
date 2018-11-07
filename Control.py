@@ -15,7 +15,7 @@ class Interface(QMainWindow, Ui_MainWindow):
         self.prescriptionOption.hide()
         self.medicineOption.hide()
 
-
+   
 class Control:
     def __init__(self):
         app = QApplication(sys.argv)
