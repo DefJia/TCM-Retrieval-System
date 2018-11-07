@@ -42,17 +42,7 @@ class Control:
         pass
 
     def option_clicked(self):
-        self.interface.symptomOption.clicked.connect(lambda: self.hhh())
-
-    def hhh(self):
-        data = self.interface.symptomOption.selectedItems()[0]
-
-    def test(self):
-        print(1)
-        self.interface.symptomOption.show()
-        data = self.front.get_data()
-        self.setTable(self.interface.symptomOption, data)
-
-
+        pass
+    
 if __name__ == "__main__":
     test = Control()
