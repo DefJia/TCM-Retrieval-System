@@ -15,6 +15,7 @@ class Interface(QMainWindow, Ui_MainWindow):
         self.prescriptionOption.hide()
         self.medicineOption.hide()
 
+
 class Control:
     def __init__(self):
         app = QApplication(sys.argv)
@@ -41,7 +42,6 @@ class Control:
         pass
 
     def option_clicked(self):
-<<<<<<< HEAD
         self.interface.symptomOption.clicked.connect(lambda: self.hhh())
 
     def hhh(self):
@@ -52,23 +52,6 @@ class Control:
         self.interface.symptomOption.show()
         data = self.front.get_data()
         self.setTable(self.interface.symptomOption, data)
-
-
-
-
-    @staticmethod
-    def setTable(table, dataList):
-        row = len(dataList)
-        column = len(dataList[0])
-        table.setRowCount(row)
-        table.setColumnCount(column)
-        for r in range(row):
-            for c in range(column):
-                table.setItem(r, c, QTableWidgetItem(dataList[r][c]))
-=======
-        # self.interface.symptomOption.clicked.connect(lambda: self.front.)
-        pass
->>>>>>> 1390aab1d4c3fc1a07f0b16843a8f77df16b7a11
 
 
 if __name__ == "__main__":
