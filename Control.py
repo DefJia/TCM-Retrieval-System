@@ -65,10 +65,10 @@ class Control:
         for r in range(row):
             for c in range(column):
                 table.setItem(r, c, QTableWidgetItem(dataList[r][c]))
-=======
+#=======
         # self.interface.symptomOption.clicked.connect(lambda: self.front.)
         pass
->>>>>>> 1390aab1d4c3fc1a07f0b16843a8f77df16b7a11
+#>>>>>>> 1390aab1d4c3fc1a07f0b16843a8f77df16b7a11
 
 
 if __name__ == "__main__":
