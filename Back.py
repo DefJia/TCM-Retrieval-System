@@ -34,8 +34,10 @@ class Backend:
             for elem in self.index:
                 data.append(self.get_data(elem))
         elif type_ == 1:
+            data.append(list())
             for elem in self.index[1:-1]:
                 data.append(self.get_data(elem))
+            data.append(list())
         return data
 
     def query(self, box_id, content):

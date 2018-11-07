@@ -1,5 +1,6 @@
 from configparser import ConfigParser
 from Back import Backend
+from PyQt5.QtWidgets import QTableWidgetItem
 
 
 class Frontend:
@@ -16,11 +17,13 @@ class Frontend:
         # Global Variable
         self.back = Backend()
         # Import function
-        data = self.back.init(self.type)
-        
+        self.init_data()
+        # Init data
 
     def init_data(self):
-        pass
+        data = self.back.init(self.type)
+        self.set_all_tables(data)
+        return 0
 
     def get_input(self, box_id):
         # 当获取到输入触发此函数，然后在下拉框中显示匹配内容
@@ -39,12 +42,25 @@ class Frontend:
         return ['3', '2']
 
     @staticmethod
-    def setTable(table, dataList):
-        row = len(dataList)
-        column = len(dataList[0])
-        table.setRowCount(row)
-        table.setColumnCount(column)
-        for r in range(row):
-            for c in range(column):
-                table.setItem(r, c, QTableWidgetItem(dataList[r][c]))
+    def set_table(table, data_list):
+        if data_list:
+            row = len(data_list)
+            column = len(data_list[0])
+            table.setRowCount(row)
+            table.setColumnCount(column)
+            for r in range(row):
+                for c in range(column):
+                    table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
 
+    def set_all_tables(self, data):
+        cnt = 0
+        widgets = list(range(4))
+        widgets[0] = self.interface.tablewidgetSymptom
+        widgets[1] = self.interface.tablewidgetDisease
+        widgets[2] = self.interface.tablewidgetPrescription
+        widgets[3] = self.interface.tablewidgetMedicine
+        for item in data:
+            if item:
+                self.set_table(widgets[cnt], item)
+            cnt += 1
+        return 0

@@ -11,6 +11,9 @@ class Interface(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         # 隐藏下拉框
         self.symptomOption.hide()
+        self.diseaseOption.hide()
+        self.prescriptionOption.hide()
+        self.medicineOption.hide()
 
 
 class Control:
@@ -21,9 +24,12 @@ class Control:
         # Generate interface
         self.front = Frontend(self.interface)
         # Functions class
-        self.line_text_changed()
-        self.button_clicked()
-        self.option_clicked()
+        # 模式按钮切换 以及四个功能按钮
+        # 开方工作区操作
+        self.line_text_changed()  # 输入框
+        self.button_clicked()  # 按钮
+        self.option_clicked()  # 显示框选择
+        # 下拉框选择
         # Add trigger
         sys.exit(app.exec_())
 
@@ -32,29 +38,12 @@ class Control:
         pass
 
     def button_clicked(self):
-        self.interface.buttonSymptom.clicked.connect(lambda: self.test())
+        # self.interface.buttonSymptom.clicked.connect(lambda: self.front.())
+        pass
 
     def option_clicked(self):
-        self.interface.symptomOption.clicked.connect(lambda: self.hhh())
-
-    def hhh(self):
-        data = self.interface.symptomOption.selectedItems()[0]
-
-    def test(self):
-        print(1)
-        self.interface.symptomOption.show()
-        data = self.front.get_data()
-        self.setTable(self.interface.symptomOption, data)
-
-    @staticmethod
-    def setTable(table, dataList):
-        row = len(dataList)
-        column = len(dataList[0])
-        table.setRowCount(row)
-        table.setColumnCount(column)
-        for r in range(row):
-            for c in range(column):
-                table.setItem(r, c, QTableWidgetItem(dataList[r][c]))
+        # self.interface.symptomOption.clicked.connect(lambda: self.front.)
+        pass
 
 
 if __name__ == "__main__":
