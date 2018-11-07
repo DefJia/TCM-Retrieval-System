@@ -13,17 +13,29 @@ class Interface(QMainWindow, Ui_MainWindow):
         self.symptomOption.hide()
 
 
-class Control():
+class Control:
     def __init__(self):
         app = QApplication(sys.argv)
         self.interface = Interface()
         self.interface.show()
-        self.interface.buttonSymptom.clicked.connect(lambda: self.test())
-        self.interface.lineSymptom.textChanged.connect(lambda: self.test())
-        self.interface.symptomOption.clicked.connect(lambda: self.hhh())
         # Generate interface
         self.front = Frontend()
+        # Functions class
+        self.line_text_changed()
+        self.button_clicked()
+        self.option_clicked()
+        # Add trigger
         sys.exit(app.exec_())
+
+    def line_text_changed(self):
+        # self.interface.lineSymptom.textChanged.connect(lambda: self.front.)
+        pass
+
+    def button_clicked(self):
+        self.interface.buttonSymptom.clicked.connect(lambda: self.test())
+
+    def option_clicked(self):
+        self.interface.symptomOption.clicked.connect(lambda: self.hhh())
 
     def hhh(self):
         data = self.interface.symptomOption.selectedItems()[0]
