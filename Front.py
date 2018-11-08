@@ -27,13 +27,17 @@ class Frontend:
 
     def get_input(self, box_id):
         # 当获取到输入触发此函数，然后在下拉框中显示匹配内容
-        if box_id == 0: text = self.interface.lineSymptom.text()
+        if box_id == 0:
+            text = self.interface.lineSymptom.text()
+            table = self.interface.symptomOption
+            table.show()
         elif box_id == 1: text = self.interface.lineDisease.text()
         elif box_id == 2: text = self.interface.linePrescription.text()
         elif box_id == 3: text = self.interface.lineMedicine.text()
         else: text = ''
         if text:
-            data = self.back.get_data(box_id, text)
+            data = self.back.query(box_id, text)
+        self.set_table(table, data)
         return 0
 
     def get_data(self, box_id=1, content=1):

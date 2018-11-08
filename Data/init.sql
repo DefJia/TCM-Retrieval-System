@@ -27,22 +27,22 @@ create table medicine(
 
 -- Relations
 create table illness_symptom(
-  illness_id integer,
-  symptom_id integer,
-  foreign key (illness_id) references illness(id),
-  foreign key (symptom_id) references symptom(id)
+  illness varchar,
+  symptom varchar,
+  foreign key (illness) references illness(id),
+  foreign key (symptom) references symptom(id)
 );
 create table illness_anagraph(
-  illness_id integer,
-  anagraph_id integer,
-  foreign key (illness_id) references illness(id),
-  foreign key (anagraph_id) references anagraph(id)
+  illness varchar,
+  anagraph varchar,
+  foreign key (illness) references illness(id),
+  foreign key (anagraph) references anagraph(id)
 );
 create table anagraph_medicine(
-  anagraph_id integer,
-  medicine_id integer,
-  foreign key (anagraph_id) references anagraph(id),
-  foreign key (medicine_id) references medicine(id)
+  anagraph varchar,
+  medicine varchar,
+  foreign key (anagraph) references anagraph(id),
+  foreign key (medicine) references medicine(id)
 );
 
 -- init data
@@ -56,8 +56,8 @@ insert into anagraph('name') values ('小柴胡汤');
 insert into medicine('name') values ('枸杞');
 insert into medicine('name') values ('当归');
 
-insert into illness_symptom (illness_id, symptom_id) values (1, 1);
-insert into illness_symptom (illness_id, symptom_id) VALUES (1, 2);
-insert into illness_anagraph (illness_id, anagraph_id) VALUES (1, 1);
-insert into anagraph_medicine (anagraph_id, medicine_id) VALUES (1, 2);
-insert into anagraph_medicine (anagraph_id, medicine_id) VALUES (1, 1);
+insert into illness_symptom (illness, symptom) values (1, 1);
+insert into illness_symptom (illness, symptom) VALUES (1, 2);
+insert into illness_anagraph (illness, anagraph) VALUES (1, 1);
+insert into anagraph_medicine (anagraph, medicine) VALUES (1, 2);
+insert into anagraph_medicine (anagraph, medicine) VALUES (1, 1);
