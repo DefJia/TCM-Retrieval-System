@@ -37,7 +37,7 @@ class Frontend:
         else: text = ''
         if text:
             data = self.back.query(box_id, text)
-        self.set_table(table, data)
+        self.set_table(table, [data])
         return 0
 
     def get_data(self, box_id=1, content=1):

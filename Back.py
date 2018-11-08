@@ -42,8 +42,8 @@ class Backend:
 
     def query(self, box_id, content):
         para = (self.index[box_id], content)
-        self.union_query(0, 1, '头疼')
-        return ['3', '2']
+        data = self.union_query(0, 1, content)
+        return data
 
     def add_data(self):
         pass
@@ -66,9 +66,12 @@ class Backend:
         elif a + b == 3: db_name = 'illness_anagraph'
         elif a + b == 5: db_name = 'anagraph_medicine'
         else: db_name = ''
-        self.cursor.execute('select %s from %s where %s = ?' % (self.index[a]+'_id', db_name, self.index[b]+'_id'), (id, ))
-        a = self.cursor.fetchall()
-        print(id)
+        self.cursor.execute('select name from illness inner join illness_symptom on illness.id = illness_symptom.illness_id where symptom_id = ?', (id, ))
+        raw = self.cursor.fetchall()
+        data = list()
+        for elem in raw[0]:
+            data.append(elem)
+        return data
 
 
 if __name__ == '__main__':
