@@ -21,6 +21,7 @@ class Backend:
         if type(field_name) == int and 0 <= field_name <= 3:
             field_name = self.index[field_name]
         if type(field_name) == str and field_name in self.index:
+            sql = 'select name from ' + field_name
             self.cursor.execute(sql)
             data = self.cursor.fetchall()
             return data
