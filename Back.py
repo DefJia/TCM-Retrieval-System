@@ -21,7 +21,6 @@ class Backend:
         if type(field_name) == int and 0 <= field_name <= 3:
             field_name = self.index[field_name]
         if type(field_name) == str and field_name in self.index:
-            sql = 'select * from ' + field_name
             self.cursor.execute(sql)
             data = self.cursor.fetchall()
             return data
@@ -42,8 +41,10 @@ class Backend:
 
     def query(self, box_id, content):
         para = (self.index[box_id], content)
-        # self.cursor.execute('select ')
-        pass
+        # self.cursor.execute('select * from ? where id = ?', (self.index[box_id], content))
+        # self.cursor.execute(select * from )
+        # data = self.cursor.fetchall()
+        return []
 
     def add_data(self):
         pass

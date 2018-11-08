@@ -43,6 +43,6 @@ class Control:
 
     def option_clicked(self):
         pass
-    
+
 if __name__ == "__main__":
     test = Control()

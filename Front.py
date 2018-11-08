@@ -33,7 +33,7 @@ class Frontend:
         elif box_id == 3: text = self.interface.lineMedicine.text()
         else: text = ''
         if text:
-            data = self.back.get_data(box_id, text)
+            data = self.back.query(box_id, text)
         return 0
 
     def get_data(self, box_id=1, content=1):
