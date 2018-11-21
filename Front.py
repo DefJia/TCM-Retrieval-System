@@ -27,6 +27,8 @@ class Frontend:
 
     def get_input(self, box_id):
         # 当获取到输入触发此函数，然后在下拉框中显示匹配内容
+        text = str()
+        table = 0
         if box_id == 0:
             text = self.interface.lineSymptom.text()
             table = self.interface.symptomOption
@@ -41,6 +43,24 @@ class Frontend:
         # self.set_table(self.interface.symptomOption, )
         # self.set_table(self.interface.tablewidgetDisease, [data])
         self.set_table(table, [data])
+        elif box_id == 1:
+            text = self.interface.lineDisease.text()
+            table = self.interface.diseaseOption
+        elif box_id == 2:
+            text = self.interface.linePrescription.text()
+            table = self.interface.prescriptionOption
+        elif box_id == 3:
+            text = self.interface.lineMedicine.text()
+            table = self.interface.medicineOption
+        if text:
+            data = self.back.query_input(box_id, text)
+            if data:
+                table.show()
+                self.set_table(table, data)
+            else:
+                table.hide()
+        else:
+            table.hide()
         return 0
 
     def get_data(self, box_id=1, content=1):
