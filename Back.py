@@ -29,7 +29,7 @@ class Backend:
             return []
 
     def init(self, type_):
-	# 初始化界面数据
+        # 初始化界面数据
         data = list()
         if type_ == 0:
             for elem in self.index:
@@ -42,11 +42,11 @@ class Backend:
         return data
 
     def query_input(self, box_id, content):
-	# data = self.union_query(box_id, content)
-	self.cursor.execute('select name from %s where name LIKE ?' % self.index[a], ('%%%s%%' % content, ))
-	names = self.cursor.fetchall()
-	print names
-        # return data
+        # data = self.union_query(box_id, content)
+        self.cursor.execute('select name from %s where name LIKE ?' % self.index[box_id], ('%%%s%%' % content, ))
+        names = self.cursor.fetchall()
+        data = names if names else None
+        return data
 
     def query_option(self):
         pass
@@ -78,6 +78,6 @@ class Backend:
 
 
 if __name__ == '__main__':
-	test = Backend()
-	test.query_input(1, '少')
+    test = Backend()
+    test.query_input(1, '少')
 	

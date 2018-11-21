@@ -45,10 +45,10 @@ class Control:
         # self.interface.linePrescription.textChanged.connect(lambda: self.front.set_table(self.interface.prescriptionOption,self.front.data))
         # self.interface.lineMedicine.textChanged.connect(lambda: self.front.set_table(self.interface.medicineOption,self.front.data))
         # self.interface.lineBook.textChanged.connect(lambda: self.front.set_table(self.interface.bookOption,self.front.data))
-        self.interface.lineSymptom.textChanged.connect(lambda: self.interface.symptomOption.show())
-        self.interface.lineDisease.textChanged.connect(lambda:self.interface.diseaseOption.show())
-        self.interface.linePrescription.textChanged.connect(lambda:  self.interface.prescriptionOption.show())
-        self.interface.lineMedicine.textChanged.connect(lambda: self.interface.medicineOption.show())
+        self.interface.lineSymptom.textChanged.connect(lambda: self.front.get_input(0))
+        self.interface.lineDisease.textChanged.connect(lambda: self.front.get_input(1))
+        self.interface.linePrescription.textChanged.connect(lambda: self.front.get_input(2))
+        self.interface.lineMedicine.textChanged.connect(lambda: self.front.get_input(3))
         pass
 
     def button_clicked(self):
