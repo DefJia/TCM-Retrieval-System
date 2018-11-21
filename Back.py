@@ -42,10 +42,8 @@ class Backend:
 
     def query(self, box_id, content):
         para = (self.index[box_id], content)
-        # self.cursor.execute('select * from ? where id = ?', (self.index[box_id], content))
-        # self.cursor.execute(select * from )
-        # data = self.cursor.fetchall()
-        return []
+        data = self.union_query(0, 1, content)
+        return data
 
     def add_data(self):
         pass
@@ -55,6 +53,25 @@ class Backend:
 
     def match_data(self):
         pass
+
+    def union_query(self, a, b, text):
+        """
+        :param a:
+        :param b:
+        :return: data
+        """
+        self.cursor.execute('select id from %s where name = ?' % self.index[a], (text, ))
+        id = self.cursor.fetchone()[0]
+        if a + b == 1: db_name = 'illness_symptom'
+        elif a + b == 3: db_name = 'illness_anagraph'
+        elif a + b == 5: db_name = 'anagraph_medicine'
+        else: db_name = ''
+        self.cursor.execute('select name from illness inner join illness_symptom on illness.id = illness_symptom.illness_id where symptom_id = ?', (id, ))
+        raw = self.cursor.fetchall()
+        data = list()
+        for elem in raw[0]:
+            data.append(elem)
+        return data
 
 
 if __name__ == '__main__':
