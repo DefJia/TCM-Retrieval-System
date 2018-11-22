@@ -34,9 +34,14 @@ class Control:
         self.line_text_changed()  # 输入框
         # self.button_clicked()  # 按钮
         self.option_clicked()  # 显示框选择
+        # self.interface.radioButton_2.isChecked.connect(lambda: self.hidden_add())  # 隐藏加号
         # 下拉框选择
         # Add trigger
         sys.exit(app.exec_())
+
+    def hidden_add(self):
+        self.interface.buttonPrescription.hide()
+        pass
 
     def line_text_changed(self):
         # 可能今后会有bug，有点小冲突问题
