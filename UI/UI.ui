@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1383</width>
-    <height>988</height>
+    <height>888</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -97,30 +97,11 @@
    <widget class="QTableWidget" name="tablewidgetPrescribe">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>30</x>
       <y>550</y>
-      <width>861</width>
-      <height>291</height>
+      <width>881</width>
+      <height>171</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="buttonInputModel">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>10</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>宋体</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>录入模式</string>
     </property>
    </widget>
    <widget class="QTableWidget" name="tablewidgetBook">
@@ -150,44 +131,6 @@
     </property>
     <property name="text">
      <string>当前位置：</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButtonInquiryModel">
-    <property name="geometry">
-     <rect>
-      <x>750</x>
-      <y>10</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>宋体</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>问诊模式</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labelPosition">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>-10</y>
-      <width>191</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>宋体</family>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>当前位置</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupboxDisease">
@@ -427,7 +370,7 @@
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>850</y>
+      <y>730</y>
       <width>161</width>
       <height>51</height>
      </rect>
@@ -490,6 +433,71 @@
      <string>典籍</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="buttonClean_2">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>730</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>宋体</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>保存</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>40</y>
+      <width>96</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Noto Serif CJK SC</family>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>录入模式</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_2">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>40</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Noto Serif CJK SC</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>开方模式</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -497,9 +505,15 @@
      <x>0</x>
      <y>0</y>
      <width>1383</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>智能中医开方检索系统</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

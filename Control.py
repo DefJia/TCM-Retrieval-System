@@ -14,6 +14,11 @@ class Interface(QMainWindow, Ui_MainWindow):
         self.diseaseOption.hide()
         self.prescriptionOption.hide()
         self.medicineOption.hide()
+        # 隐藏内部边框
+        self.symptomOption.setShowGrid(False)
+        self.diseaseOption.setShowGrid(False)
+        self.prescriptionOption.setShowGrid(False)
+        self.medicineOption.setShowGrid(False)
 
    
 class Control:
@@ -45,10 +50,6 @@ class Control:
         # self.interface.linePrescription.textChanged.connect(lambda: self.front.set_table(self.interface.prescriptionOption,self.front.data))
         # self.interface.lineMedicine.textChanged.connect(lambda: self.front.set_table(self.interface.medicineOption,self.front.data))
         # self.interface.lineBook.textChanged.connect(lambda: self.front.set_table(self.interface.bookOption,self.front.data))
-        self.interface.lineSymptom.textChanged.connect(lambda: self.front.get_input(0))
-        self.interface.lineDisease.textChanged.connect(lambda: self.front.get_input(1))
-        self.interface.linePrescription.textChanged.connect(lambda: self.front.get_input(2))
-        self.interface.lineMedicine.textChanged.connect(lambda: self.front.get_input(3))
         pass
 
     def button_clicked(self):
@@ -61,7 +62,7 @@ class Control:
         self.interface.buttonDisease.clicked.connect(lambda: self.front.save_data("disease",self.interface.lineDisease.text()))
         self.interface.buttonDisease.clicked.connect(lambda: self.front.data.append(self.interface.lineDisease.text()))
         self.interface.buttonDisease.clicked.connect(lambda: self.front.set_table(self.interface.diseaseOption,self.front.data))
-        
+
          #if self.interface.linePrescription.text() != "" :
         self.interface.buttonPrescription.clicked.connect(lambda: self.front.save_data("symptom",self.interface.linePrescription.text()))
         self.interface.buttonPrescription.clicked.connect(lambda: self.front.data.append(self.interface.linePrescription.text()))
@@ -73,12 +74,16 @@ class Control:
         self.interface.buttonMedicine.clicked.connect(lambda: self.front.set_table(self.interface.medicineOption,self.front.data))
         pass
 
+    @staticmethod
+    def set_select_item(source_widget, target_widget):
+        text = source_widget.selectedItems()[0].text()
+        target_widget.setText(text)
+
     def option_clicked(self):
-        self.interface.symptomOption.clicked.connect(lambda:self.interface.lineSymptom.setText(self.interface.symptomOption.selectedItems.text()))
+        self.interface.symptomOption.clicked.connect(lambda: self.set_select_item(self.interface.symptomOption, self.interface.lineSymptom))
         self.interface.diseaseOption.clicked.connect(lambda:self.interface.lineDiseasesetText(self.interface.diseaseOption.selectedItems.text()))
         self.interface.prescriptionOption.clicked.connect(lambda:self.interface.linePrescription.setText(self.interface.prescriptionOption.selectedItems.text()))
         self.interface.medicineOption.clicked.connect(lambda:self.interface.lineMedicine.setText(self.interface.medicineOption.selectedItems.text()))
-        
         self.interface.symptomOption.clicked.connect(lambda: self.interface.symptomOption.hide())
         self.interface.diseaseOption.clicked.connect(lambda: self.interface.diseaseOption.hide())
         self.interface.prescriptionOption.clicked.connect(lambda: self.interface.prescriptionOption.hide())
