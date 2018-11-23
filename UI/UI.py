@@ -202,23 +202,20 @@ class Ui_MainWindow(object):
         self.radioButton_2.setChecked(True)
         self.radioButton_2.setObjectName("radioButton_2")
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1383, 25))
-        self.menubar.setObjectName("menubar")
-        self.menu = QtWidgets.QMenu(self.menubar)
-        self.menu.setObjectName("menu")
-        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        self.menubar.addAction(self.menu.menuAction())
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1383, 25))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "智能中医开放检索系统"))
         self.groupboxSymptom.setTitle(_translate("MainWindow", "病症"))
         self.buttonSymptom.setText(_translate("MainWindow", "+"))
         self.label.setText(_translate("MainWindow", "当前位置："))
@@ -236,5 +233,4 @@ class Ui_MainWindow(object):
         self.buttonClean_2.setText(_translate("MainWindow", "保存"))
         self.radioButton.setText(_translate("MainWindow", "录入模式"))
         self.radioButton_2.setText(_translate("MainWindow", "开方模式"))
-        self.menu.setTitle(_translate("MainWindow", "智能中医开方检索系统"))
 
