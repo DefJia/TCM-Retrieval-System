@@ -25,37 +25,29 @@ class Frontend:
         self.set_all_tables(data)
         return 0
 
-    def get_input(self, box_id):
+    def get_input(self, box_id, input_box, option_box):
         # 当获取到输入触发此函数，然后在下拉框中显示匹配内容
-        text = str()
-        table = 0
-        if box_id == 0:
-            text = self.interface.lineSymptom.text()
-            table = self.interface.symptomOption
-        elif box_id == 1:
-            text = self.interface.lineDisease.text()
-            table = self.interface.diseaseOption
-        elif box_id == 2:
-            text = self.interface.linePrescription.text()
-            table = self.interface.prescriptionOption
-        elif box_id == 3:
-            text = self.interface.lineMedicine.text()
-            table = self.interface.medicineOption
+        text = input_box.text()
         if text:
             data = self.back.query_input(box_id, text)
             if data:
-                table.show()
-                self.set_table(table, data)
+                option_box.show()
+                self.set_table(option_box, data)
             else:
-                table.hide()
+                option_box.hide()
         else:
-            table.hide()
+            option_box.hide()
         return 0
 
     def get_data(self, box_id=1, content=1):
         # 录入模式下，当添加按钮被触发时，将输入的内容添加到数据库
         # 如果当前位置不为空，还要添加关系
         return ['3', '2']
+
+    def save_data(self, box_id):
+        # if not self.location:
+            # text = self.interface.
+        return 0
 
     @staticmethod
     def set_table(table, data_list):

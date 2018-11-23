@@ -9,16 +9,6 @@ class Interface(QMainWindow, Ui_MainWindow):
         # 修改界面
         super(Interface, self).__init__()
         self.setupUi(self)
-        # 隐藏下拉框
-        self.symptomOption.hide()
-        self.diseaseOption.hide()
-        self.prescriptionOption.hide()
-        self.medicineOption.hide()
-        # 隐藏内部边框
-        self.symptomOption.setShowGrid(False)
-        self.diseaseOption.setShowGrid(False)
-        self.prescriptionOption.setShowGrid(False)
-        self.medicineOption.setShowGrid(False)
 
    
 class Control:
@@ -26,43 +16,68 @@ class Control:
         app = QApplication(sys.argv)
         self.interface = Interface()
         self.interface.show()
-        # Generate interface
+        # 界面生成
         self.front = Frontend(self.interface)
-        # Functions class
-        # 模式按钮切换 以及四个功能按钮
-        # 开方工作区操作
+        # 定义交互Class
+        self.group_inputs = list()
+        self.group_inputs.append(self.interface.lineSymptom)
+        self.group_inputs.append(self.interface.lineDisease)
+        self.group_inputs.append(self.interface.linePrescription)
+        self.group_inputs.append(self.interface.lineMedicine)
+        self.group_additions = list()
+        self.group_additions.append(self.interface.buttonSymptom)
+        self.group_additions.append(self.interface.buttonDisease)
+        self.group_additions.append(self.interface.buttonPrescription)
+        self.group_additions.append(self.interface.buttonMedicine)
+        self.group_options = list()
+        self.group_options.append(self.interface.symptomOption)
+        self.group_options.append(self.interface.diseaseOption)
+        self.group_options.append(self.interface.prescriptionOption)
+        self.group_options.append(self.interface.medicineOption)
+        self.group_tables = list()
+        self.group_tables.append(self.interface.tablewidgetSymptom)
+        self.group_tables.append(self.interface.tablewidgetDisease)
+        self.group_tables.append(self.interface.tablewidgetPrescription)
+        self.group_tables.append(self.interface.tablewidgetMedicine)
+        self.group_tables.append(self.interface.tablewidgetBook)
+        self.group_tables.append(self.interface.tablewidgetPrescribe)
+        # 定义组件组
+        ''' 以下为信号操作 '''
         self.line_text_changed()  # 输入框
-        # self.button_clicked()  # 按钮
-        self.option_clicked()  # 显示框选择
-        # self.interface.radioButton_2.isChecked.connect(lambda: self.hidden_add())  # 隐藏加号
-        # 下拉框选择
-        # Add trigger
+        self.button_clicked()  # 按钮
+        self.option_clicked()  # 下拉框选择
+        self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
+        ''' 以下为界面初始化处理 '''
+        for addition in self.group_additions: addition.hide()  # 隐藏加号
+        for table in self.group_tables: table.setShowGrid(False)  # 隐藏内边框
+        for option in self.group_options: option.hide()  # 隐藏下拉框
         sys.exit(app.exec_())
 
-    def hidden_add(self):
-        self.interface.buttonPrescription.hide()
+    def change_type(self):
+        #  切换模式
+        if self.interface.radioButton_2.isChecked():
+            self.front.type = 1
+            for addition in self.group_additions:
+                addition.hide()
+        else:
+            self.front.type = 0
+            for addition in self.group_additions:
+                addition.show()
+        self.front.init_data()
         pass
 
     def line_text_changed(self):
-        # 可能今后会有bug，有点小冲突问题
-        self.interface.lineSymptom.textChanged.connect(lambda: self.front.get_input(0))
-        self.interface.lineDisease.textChanged.connect(lambda: self.front.get_input(1))
-        self.interface.linePrescription.textChanged.connect(lambda: self.front.get_input(2))
-        self.interface.lineMedicine.textChanged.connect(lambda: self.front.get_input(3))
-        # self.interface.lineBook.textChanged.connect(lambda: self.front.get_input(4))
-        # self.interface.lineSymptom.textChanged.connect(lambda: self.front.set_table(self.interface.symptomOption,self.front.data))  # 取数据还未完成
-        # self.interface.lineDisease.textChanged.connect(lambda:self.front.set_table(self.interface.diseaseOption,self.front.data))
-        # self.interface.linePrescription.textChanged.connect(lambda: self.front.set_table(self.interface.prescriptionOption,self.front.data))
-        # self.interface.lineMedicine.textChanged.connect(lambda: self.front.set_table(self.interface.medicineOption,self.front.data))
-        # self.interface.lineBook.textChanged.connect(lambda: self.front.set_table(self.interface.bookOption,self.front.data))
+        # 原有代码已精简
+        i = 0
+        for input_box in self.group_inputs:
+            input_box.textChanged.connect(lambda: self.front.get_input(i, input_box, self.group_options[i]))
+            i += 1
         pass
 
     def button_clicked(self):
         # 之后根据front再做变化
-        # if self.interface.lineSymptom.text() != "" :
-        self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data("symptom",self.interface.lineSymptom.text()))
-        self.interface.buttonSymptom.clicked.connect(lambda: self.front.data.append(self.interface.lineSymptom.text()))#可合并再上个方法
-        self.interface.buttonSymptom.clicked.connect(lambda: self.front.set_table(self.interface.symptomOption,self.front.data))#有错应该再back取数据
+        self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0))
+        # 此处代码已合并至Front的save_data
          #if self.interface.lineDisease.text() != "" :
         self.interface.buttonDisease.clicked.connect(lambda: self.front.save_data("disease",self.interface.lineDisease.text()))
         self.interface.buttonDisease.clicked.connect(lambda: self.front.data.append(self.interface.lineDisease.text()))

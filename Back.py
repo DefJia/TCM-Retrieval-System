@@ -48,6 +48,9 @@ class Backend:
         data = names if names else None
         return data
 
+    def save_data(self):
+        pass
+
     def query_option(self):
         pass
 

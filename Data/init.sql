@@ -22,7 +22,8 @@ create table anagraph(
 );
 create table medicine(
   id integer primary key AUTOINCREMENT,
-  name varchar(10) not null unique
+  name varchar(10) not null unique,
+  property varchar(5) check(property in ('先煎', '后下'))
 );
 
 -- Relations
@@ -48,6 +49,7 @@ create table anagraph_medicine(
 -- init data
 insert into symptom('name') values ('头疼');
 insert into symptom('name') values ('头炸');
+insert into symptom('name') values ('手气');
 insert into symptom('name') values ('脚痛');
 
 insert into illness('name') values ('少阳症');
