@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'UI/UI.ui'
+# Form implementation generated from reading ui file 'UI.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.2
 #
@@ -84,6 +84,8 @@ class Ui_MainWindow(object):
         self.diseaseOption.setObjectName("diseaseOption")
         self.diseaseOption.setColumnCount(0)
         self.diseaseOption.setRowCount(0)
+        self.diseaseOption.horizontalHeader().setVisible(False)
+        self.diseaseOption.verticalHeader().setVisible(False)
         self.groupboxPrescription = QtWidgets.QGroupBox(self.centralwidget)
         self.groupboxPrescription.setGeometry(QtCore.QRect(460, 80, 251, 411))
         font = QtGui.QFont()
@@ -108,6 +110,8 @@ class Ui_MainWindow(object):
         self.prescriptionOption.setObjectName("prescriptionOption")
         self.prescriptionOption.setColumnCount(0)
         self.prescriptionOption.setRowCount(0)
+        self.prescriptionOption.horizontalHeader().setVisible(False)
+        self.prescriptionOption.verticalHeader().setVisible(False)
         self.groupboxMedicine = QtWidgets.QGroupBox(self.centralwidget)
         self.groupboxMedicine.setGeometry(QtCore.QRect(700, 80, 271, 411))
         font = QtGui.QFont()
@@ -132,6 +136,8 @@ class Ui_MainWindow(object):
         self.medicineOption.setObjectName("medicineOption")
         self.medicineOption.setColumnCount(0)
         self.medicineOption.setRowCount(0)
+        self.medicineOption.horizontalHeader().setVisible(False)
+        self.medicineOption.verticalHeader().setVisible(False)
         self.buttonInitial = QtWidgets.QPushButton(self.centralwidget)
         self.buttonInitial.setGeometry(QtCore.QRect(570, 490, 161, 51))
         font = QtGui.QFont()
@@ -178,7 +184,7 @@ class Ui_MainWindow(object):
         self.buttonClean_2.setFont(font)
         self.buttonClean_2.setObjectName("buttonClean_2")
         self.radioButton = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton.setGeometry(QtCore.QRect(480, 40, 96, 24))
+        self.radioButton.setGeometry(QtCore.QRect(430, 40, 131, 24))
         font = QtGui.QFont()
         font.setFamily("Noto Serif CJK SC")
         font.setPointSize(14)
@@ -188,7 +194,7 @@ class Ui_MainWindow(object):
         self.radioButton.setChecked(False)
         self.radioButton.setObjectName("radioButton")
         self.radioButton_2 = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_2.setGeometry(QtCore.QRect(590, 40, 111, 24))
+        self.radioButton_2.setGeometry(QtCore.QRect(590, 40, 131, 24))
         font = QtGui.QFont()
         font.setFamily("Noto Serif CJK SC")
         font.setPointSize(14)
@@ -197,7 +203,7 @@ class Ui_MainWindow(object):
         self.radioButton_2.setObjectName("radioButton_2")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1383, 23))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1383, 25))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
