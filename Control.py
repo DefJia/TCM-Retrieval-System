@@ -86,7 +86,7 @@ class Control:
 
     def option_clicked(self, option):
         index = self.group_options.index(option)
-        text = option.selectedItems.text
+        text = str(option.selectedItems.text())
         self.group_inputs[index].setText(text)
         option.hide()
         option.clicked.connect(lambda: self.front.optioned_data(index, text))
