@@ -29,7 +29,7 @@ class Frontend:
         # 当获取到输入触发此函数，然后在下拉框中显示匹配内容
         text = input_box.text()
         if text:
-            data = self.back.query_input(box_id, text)
+            data = self.back.query_similar_data(box_id, text)
             if data:
                 option_box.show()
                 self.set_table(option_box, data)
@@ -37,6 +37,23 @@ class Frontend:
                 option_box.hide()
         else:
             option_box.hide()
+        return 0
+
+    def optioned_data(self, box_id, text):
+        # 任意模式下，当option被选中时，显示相关数据
+        target_indexs = list()
+        if box_id in (0, 3):
+            # 选中的是子类（症状 or 药）
+            target_indexs.append(box_id / 3 + 1)
+        else:
+            target_indexs.append(box_id - 1)
+            target_indexs.append(box_id + 1)
+        data = list(range(4))
+        data[box_id] = [text]
+        for index in target_indexs:
+            sub_data = self.back.union_query(box_id, index, text)
+            data[index] = sub_data
+        self.set_all_tables(data)
         return 0
 
     def get_data(self, box_id=1, content=1):
@@ -68,7 +85,7 @@ class Frontend:
         widgets[2] = self.interface.tablewidgetPrescription
         widgets[3] = self.interface.tablewidgetMedicine
         for item in data:
-            if item:
+            if type(item) == list and item:
                 self.set_table(widgets[cnt], item)
             cnt += 1
         return 0

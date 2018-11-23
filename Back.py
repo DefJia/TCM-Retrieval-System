@@ -31,6 +31,8 @@ class Backend:
     def init(self, type_):
         # 初始化界面数据
         data = list()
+        type_ = 0
+        # 突然觉得任何模式都应该显示所有信息
         if type_ == 0:
             for elem in self.index:
                 data.append(self.get_data(elem))
@@ -41,24 +43,11 @@ class Backend:
             data.append(list())
         return data
 
-    def query_input(self, box_id, content):
-        # data = self.union_query(box_id, content)
+    def query_similar_data(self, box_id, content):
         self.cursor.execute('select name from %s where name LIKE ?' % self.index[box_id], ('%%%s%%' % content, ))
         names = self.cursor.fetchall()
         data = names if names else None
         return data
-
-    def save_data(self):
-        pass
-
-    def query_option(self):
-        pass
-
-    def get_relations(self):
-        pass
-
-    def match_data(self):
-        pass
 
     def union_query(self, a, b, text):
         """
@@ -79,8 +68,20 @@ class Backend:
             data.append(elem)
         return data
 
+    def save_data(self):
+        pass
+
+    def query_option(self):
+        pass
+
+    def get_relations(self):
+        pass
+
+    def match_data(self):
+        pass
+
 
 if __name__ == '__main__':
     test = Backend()
-    test.query_input(1, '少')
+    test.query_similar_data(1, '少')
 	

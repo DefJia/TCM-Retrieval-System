@@ -43,9 +43,21 @@ class Control:
         self.group_tables.append(self.interface.tablewidgetPrescribe)
         # 定义组件组
         ''' 以下为信号操作 '''
-        self.line_text_changed()  # 输入框
-        self.button_clicked()  # 按钮
-        self.option_clicked()  # 下拉框选择
+        '''
+        for option in self.group_options:  # 下拉框选择
+            option.clicked.connect(lambda: self.option_clicked(option))
+        for input_box in self.group_inputs:  # 输入框输入
+            input_box.textChanged.connect(lambda: self.line_text_changed(input_box))
+        '''
+        self.interface.symptomOption.clicked.connect(lambda: self.option_clicked(self.interface.symptomOption))
+        self.interface.diseaseOption.clicked.connect(lambda: self.option_clicked(self.interface.diseaseOption))
+        self.interface.prescriptionOption.clicked.connect(lambda: self.option_clicked(self.interface.prescriptionOption))
+        self.interface.medicineOption.clicked.connect(lambda: self.option_clicked(self.interface.medicineOption))
+        self.interface.lineSymptom.textChanged.connect(lambda: self.line_text_changed(self.interface.lineSymptom))
+        self.interface.lineDisease.textChanged.connect(lambda: self.line_text_changed(self.interface.lineDisease))
+        self.interface.linePrescription.textChanged.connect(lambda: self.line_text_changed(self.interface.linePrescription))
+        self.interface.lineMedicine.textChanged.connect(lambda: self.line_text_changed(self.interface.lineMedicine))
+        self.button_clicked()  # 按钮点击
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
         ''' 以下为界面初始化处理 '''
         for addition in self.group_additions: addition.hide()  # 隐藏加号
@@ -66,12 +78,18 @@ class Control:
         self.front.init_data()
         pass
 
-    def line_text_changed(self):
+    def line_text_changed(self, input_box):
         # 原有代码已精简
-        i = 0
-        for input_box in self.group_inputs:
-            input_box.textChanged.connect(lambda: self.front.get_input(i, input_box, self.group_options[i]))
-            i += 1
+        index = self.group_inputs.index(input_box)
+        self.front.get_input(index, input_box, self.group_options[index])
+        pass
+
+    def option_clicked(self, option):
+        index = self.group_options.index(option)
+        text = option.selectedItems.text
+        self.group_inputs[index].setText(text)
+        option.hide()
+        option.clicked.connect(lambda: self.front.optioned_data(index, text))
         pass
 
     def button_clicked(self):
@@ -92,22 +110,6 @@ class Control:
         self.interface.buttonMedicine.clicked.connect(lambda: self.front.save_data("symptom",self.interface.lineMedicine.text()))
         self.interface.buttonMedicine.clicked.connect(lambda: self.front.data.append(self.interface.lineMedicine.text()))
         self.interface.buttonMedicine.clicked.connect(lambda: self.front.set_table(self.interface.medicineOption,self.front.data))
-        pass
-
-    @staticmethod
-    def set_select_item(source_widget, target_widget):
-        text = source_widget.selectedItems()[0].text()
-        target_widget.setText(text)
-
-    def option_clicked(self):
-        self.interface.symptomOption.clicked.connect(lambda: self.set_select_item(self.interface.symptomOption, self.interface.lineSymptom))
-        self.interface.diseaseOption.clicked.connect(lambda:self.interface.lineDiseasesetText(self.interface.diseaseOption.selectedItems.text()))
-        self.interface.prescriptionOption.clicked.connect(lambda:self.interface.linePrescription.setText(self.interface.prescriptionOption.selectedItems.text()))
-        self.interface.medicineOption.clicked.connect(lambda:self.interface.lineMedicine.setText(self.interface.medicineOption.selectedItems.text()))
-        self.interface.symptomOption.clicked.connect(lambda: self.interface.symptomOption.hide())
-        self.interface.diseaseOption.clicked.connect(lambda: self.interface.diseaseOption.hide())
-        self.interface.prescriptionOption.clicked.connect(lambda: self.interface.prescriptionOption.hide())
-        self.interface.medicineOption.clicked.connect(lambda: self.interface.medicineOption.hide())
         pass
 
 
