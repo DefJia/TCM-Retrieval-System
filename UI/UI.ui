@@ -54,6 +54,9 @@
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
      </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>161</number>
+     </attribute>
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
      </attribute>
@@ -94,6 +97,9 @@
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>161</number>
      </attribute>
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
