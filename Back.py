@@ -49,7 +49,7 @@ class Backend:
         data = names if names else None
         return data
 
-    def union_query(self, a, b, text):
+    def union_query(self, a, b, text):#有问题
         """
         :param a:
         :param b:
