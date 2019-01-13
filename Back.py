@@ -49,19 +49,36 @@ class Backend:
         data = names if names else None
         return data
 
-    def union_query(self, a, b, text):#有问题
+    def union_query(self, box_id, index, text):#有问题
         """
-        :param a:
+        :param box_id:
         :param b:
         :return: data
         """
-        self.cursor.execute('select id from %s where name = ?' % self.index[a], (text, ))
+        self.cursor.execute('select id from %s where name = ?' % self.index[box_id], (text, ))
         id = self.cursor.fetchone()[0]
-        if a + b == 1: db_name = 'illness_symptom'
-        elif a + b == 3: db_name = 'illness_anagraph'
-        elif a + b == 5: db_name = 'anagraph_medicine'
-        else: db_name = ''
-        self.cursor.execute('select name from illness inner join illness_symptom on illness.id = illness_symptom.illness_id where symptom_id = ?', (id, ))
+        if box_id + index == 1: 
+            db_name = 'illness_symptom'
+            if index == 1:
+                self.cursor.execute('select name from illness inner join illness_symptom on symptom.id = illness_symptom.symptom_id where symptom_id = ?', (id, ))
+            else:
+                self.cursor.execute('select name from symptom inner join illness_symptom on illness.id = illness_symptom.illness_id where illness_id = ?', (id, ))
+        elif box_id + index == 3: 
+            db_name = 'illness_anagraph'
+            if index == 1:
+                self.cursor.execute('select name from illness inner join illness_anagraph on illness.id = illness_anagraph.illness_id where illness_id = ?', (id, ))
+            else:
+                self.cursor.execute('select name from anagraph inner join illness_anagraph on anagraph.id = illness_anagraph.anagraph_id where anagraph_id = ?', (id, ))
+        elif box_id + index == 5: 
+            db_name = 'anagraph_medicine'
+            if index == 2:
+                self.cursor.execute('select name from anagraph inner join anagraph_medicine on illness.id = anagraph_medicine.illness_id where anagraph_id = ?', (id, ))
+            else:
+                self.cursor.execute('select name from medicine inner join anagraph_medicine on medicine.id = anagraph_medicine.medicine_id where medicine_id = ?', (id, ))
+        else: 
+            db_name = ''
+            pass
+        #self.cursor.execute('select name from illness inner join illness_symptom on illness.id = illness_symptom.illness_id where symptom_id = ?', (id, ))
         raw = self.cursor.fetchall()
         data = list()
         for elem in raw[0]:

@@ -46,7 +46,7 @@ class Frontend:
         if box_id == 0:
             # 选中的是子类（症状 or 药）
             target_indexs.append(box_id + 1)
-        elif box_id == 0:
+        elif box_id == 3:
             target_indexs.append(box_id - 1)
         else:
             target_indexs.append(box_id - 1)
