@@ -41,7 +41,12 @@
 
 - [ ] 完善相关功能
 - [x] RadioButtom使加号消失
-
+- [ ] 以列表的形式添加数据到 tablewidgetXXX里面
+- [ ] symptom ---> disease 里面查询(按匹配程度排序)
+- [ ] 点击disease，prescript变化
+- [ ] 点击药方，药变化
+- [ ] 点 录入 药方下移
+- [ ] 修改 药克 数以及用法，可删除，添加
 ### Front类
 
 - [x] set_table函数应该只显示一列
