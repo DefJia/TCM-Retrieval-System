@@ -51,14 +51,20 @@ class Frontend:
         else:
             target_indexs.append(box_id - 1)
             target_indexs.append(box_id + 1)
-        data = list(range(4))
-        data[box_id] = [text]
+        #data = list(range(4))
+        #data[box_id] = [text]
+
+        self.search_area[box_id].append(text)
+        # wedget中水平显示，不知道该如何转置
+        # wedget中水平显示，不知道该如何转置
+        # wedget中水平显示，不知道该如何转置
+        # wedget中水平显示，不知道该如何转置
         
         for index in target_indexs:
             sub_data = self.back.union_query(box_id, index, text)
-            data[index] = sub_data
-        
-        self.set_all_tables(data)
+            self.search_area[index] = sub_data
+        print(self.search_area)
+        self.set_all_tables(self.search_area)
         return 0
 
     def get_data(self, box_id=1, content=1):

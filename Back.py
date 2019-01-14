@@ -57,7 +57,8 @@ class Backend:
         """
         self.cursor.execute('select id from %s where name = ?' % self.index[box_id], (text, ))
         id = self.cursor.fetchone()[0]
-        if box_id + index == 1: 
+
+        '''
             db_name = 'illness_symptom'
             if index == 1:
                 self.cursor.execute('select name from illness inner join illness_symptom on symptom.id = illness_symptom.symptom_id where symptom_id = ?', (id, ))
@@ -78,8 +79,11 @@ class Backend:
         else: 
             db_name = ''
             pass
-        #self.cursor.execute('select name from illness inner join illness_symptom on illness.id = illness_symptom.illness_id where symptom_id = ?', (id, ))
-        raw = self.cursor.fetchall()
+        '''
+        if box_id + index == 1:
+            self.cursor.execute('select name from illness inner join illness_symptom on illness.id = illness_symptom.illness_id where symptom_id = ?', (id, ))
+            raw = self.cursor.fetchall()
+        else: raw = []
         data = list()
         for elem in raw[0]:
             data.append(elem)

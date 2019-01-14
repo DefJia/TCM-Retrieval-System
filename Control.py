@@ -70,12 +70,14 @@ class Control:
         if self.interface.radioButton_2.isChecked():
             self.front.type = 1
             for addition in self.group_additions:
+                print("开方")
                 addition.hide()
         else:
             self.front.type = 0
             for addition in self.group_additions:
                 addition.show()
-        self.front.init_data()
+                print("录入")
+        #self.front.init_data()
         pass
 
     def line_text_changed(self, input_box):
@@ -87,11 +89,11 @@ class Control:
     def option_clicked(self, option):
         index = self.group_options.index(option)
         text = str(option.selectedItems()[0].text())
-        self.group_inputs[index].setText(text)
+        #self.group_inputs[index].setText(text)
+        self.group_inputs[index].setText("")
         option.hide()
         #option.clicked.connect(lambda: self.front.optioned_data(index, text))
         self.front.optioned_data(index, text)
-        
         #option.clicked.connect(lambda: self.front.add_item(index, text))
         
         pass
