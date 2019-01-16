@@ -48,9 +48,11 @@ create table anagraph_medicine(
 
 -- init data
 insert into symptom('name') values ('头疼');
-insert into symptom('name') values ('头炸');
-insert into symptom('name') values ('手气');
+insert into symptom('name') values ('头痛');
+insert into symptom('name') values ('发热');
 insert into symptom('name') values ('脚痛');
+insert into symptom('name') values ('口苦');
+insert into symptom('name') values ('咽干');
 
 insert into illness('name') values ('少阳症');
 

@@ -76,7 +76,8 @@ class Backend:
                     data.append(elem[0])
                 return data
 
-    def save_data(self):
+    def save_data(self, sql):
+        self.cursor.execute(sql)
         pass
 
     def query_option(self):

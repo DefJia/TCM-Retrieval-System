@@ -46,9 +46,10 @@ class Frontend:
 
     def optioned_data(self, box_id, text):
         # 任意模式下，当option被选中时，显示相关数据
-        self.search_area = [list(), list(), list(), list()]
-        for widget in self.widgets:
-            widget.clear()
+        if self.type == 1:
+            self.search_area = [list(), list(), list(), list()]
+            for widget in self.widgets:
+                widget.clear()
         # 初始化
         target_indexs = list()
         self.search_area[box_id].append(text)
@@ -72,10 +73,13 @@ class Frontend:
         # 如果当前位置不为空，还要添加关系
         return ['3', '2']
 
-    def save_data(self, box_id,text):
+    def save_data(self, box_id, line):
         # if not self.location:
             # text = self.interface.
-        return 0
+        if line.text():
+            sql = format('insert into %s (name) values ("%s")' % (self.index[box_id], line.text()))
+            self.back.save_data(sql)
+
 
     @staticmethod
     def set_table(table, data_list):
@@ -113,4 +117,7 @@ class Frontend:
             print(text)
             if self.type == 0 :
                 self.save_data(box_id,text)
-   
+
+
+if __name__ == '__main__':
+    pass

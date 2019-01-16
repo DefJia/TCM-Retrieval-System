@@ -70,10 +70,12 @@ class Control:
         if self.interface.radioButton_2.isChecked():
             print("当前处于开方模式")
             self.front.type = 1
+            self.interface.labelType.setText('开方模式')
             for addition in self.group_additions:
                 addition.hide()
         else:
             self.front.type = 0
+            self.interface.labelType.setText('录入模式')
             print("当前处于录入模式")
             for addition in self.group_additions:
                 addition.show()
@@ -98,22 +100,12 @@ class Control:
 
     def button_clicked(self):
         # 之后根据front再做变化
-        self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0))
+        # self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0))
         # 此处代码已合并至Front的save_data
-         #if self.interface.lineDisease.text() != "" :
-        self.interface.buttonDisease.clicked.connect(lambda: self.front.save_data("disease",self.interface.lineDisease.text()))
-        self.interface.buttonDisease.clicked.connect(lambda: self.front.data.append(self.interface.lineDisease.text()))
-        self.interface.buttonDisease.clicked.connect(lambda: self.front.set_table(self.interface.diseaseOption,self.front.data))
-
-        # if self.interface.linePrescription.text() != "" :
-        self.interface.buttonPrescription.clicked.connect(lambda: self.front.save_data("symptom",self.interface.linePrescription.text()))
-        self.interface.buttonPrescription.clicked.connect(lambda: self.front.data.append(self.interface.linePrescription.text()))
-        self.interface.buttonPrescription.clicked.connect(lambda: self.front.set_table(self.interface.prescriptionOption,self.front.data))
-        
-        # if self.interface.lineSymptom.text() != "" :
-        self.interface.buttonMedicine.clicked.connect(lambda: self.front.save_data("symptom",self.interface.lineMedicine.text()))
-        self.interface.buttonMedicine.clicked.connect(lambda: self.front.data.append(self.interface.lineMedicine.text()))
-        self.interface.buttonMedicine.clicked.connect(lambda: self.front.set_table(self.interface.medicineOption,self.front.data))
+        self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0, self.interface.lineSymptom))
+        self.interface.buttonDisease.clicked.connect(lambda: self.front.save_data(1, self.interface.lineDisease))
+        self.interface.buttonPrescription.clicked.connect(lambda: self.front.save_data(2, self.interface.linePrescription))
+        self.interface.buttonMedicine.clicked.connect(lambda: self.front.save_data(3, self.interface.lineMedicine))
         pass
 
 
