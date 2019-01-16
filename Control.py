@@ -68,16 +68,15 @@ class Control:
     def change_type(self):
         #  切换模式
         if self.interface.radioButton_2.isChecked():
+            print("当前处于开方模式")
             self.front.type = 1
             for addition in self.group_additions:
-                print("开方")
                 addition.hide()
         else:
             self.front.type = 0
+            print("当前处于录入模式")
             for addition in self.group_additions:
                 addition.show()
-                print("录入")
-        #self.front.init_data()
         pass
 
     def line_text_changed(self, input_box):
@@ -95,7 +94,6 @@ class Control:
         #option.clicked.connect(lambda: self.front.optioned_data(index, text))
         self.front.optioned_data(index, text)
         #option.clicked.connect(lambda: self.front.add_item(index, text))
-        
         pass
 
     def button_clicked(self):
@@ -107,7 +105,7 @@ class Control:
         self.interface.buttonDisease.clicked.connect(lambda: self.front.data.append(self.interface.lineDisease.text()))
         self.interface.buttonDisease.clicked.connect(lambda: self.front.set_table(self.interface.diseaseOption,self.front.data))
 
-         #if self.interface.linePrescription.text() != "" :
+        # if self.interface.linePrescription.text() != "" :
         self.interface.buttonPrescription.clicked.connect(lambda: self.front.save_data("symptom",self.interface.linePrescription.text()))
         self.interface.buttonPrescription.clicked.connect(lambda: self.front.data.append(self.interface.linePrescription.text()))
         self.interface.buttonPrescription.clicked.connect(lambda: self.front.set_table(self.interface.prescriptionOption,self.front.data))
