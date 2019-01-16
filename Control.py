@@ -1,4 +1,6 @@
 from UI.UI import Ui_MainWindow
+from UI.reminder import Ui_reminder
+from UI.property import Ui_Property
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 import sys
 from Front import Frontend
@@ -10,12 +12,28 @@ class Interface(QMainWindow, Ui_MainWindow):
         super(Interface, self).__init__()
         self.setupUi(self)
 
-   
+
+class Reminder(QMainWindow, Ui_reminder):
+    def __init__(self):
+        # 修改界面
+        super(Reminder, self).__init__()
+        self.setupUi(self)
+
+
+class Property(QMainWindow, Ui_Property):
+    def __init__(self):
+        # 修改界面
+        super(Property, self).__init__()
+        self.setupUi(self)
+
+
 class Control:
     def __init__(self):
         app = QApplication(sys.argv)
         self.interface = Interface()
         self.interface.show()
+        self.reminder = Reminder()
+        self.property = Property()
         # 界面生成
         self.front = Frontend(self.interface)
         # 定义交互Class

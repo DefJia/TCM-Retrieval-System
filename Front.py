@@ -74,11 +74,12 @@ class Frontend:
         return ['3', '2']
 
     def save_data(self, box_id, line):
-        # if not self.location:
-            # text = self.interface.
         if line.text():
-            sql = format('insert into %s (name) values ("%s")' % (self.index[box_id], line.text()))
-            self.back.save_data(sql)
+            res = self.back.save_data(self.index[box_id], line.text())
+            if res:
+                print('该名称已存在')
+            else:
+                print('录入成功')
 
 
     @staticmethod
