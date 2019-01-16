@@ -4,7 +4,7 @@ drop table illness;
 drop table anagraph;
 drop table medicine;
 drop table illness_anagraph;
-drop table illness_symptom;
+drop table symptom_illness;
 drop table anagraph_medicine;
 
 -- create basic tables
@@ -27,7 +27,7 @@ create table medicine(
 );
 
 -- Relations
-create table illness_symptom(
+create table symptom_illness(
   illness_id integer,
   symptom_id integer,
   foreign key (illness_id) references illness(id),
@@ -59,8 +59,8 @@ insert into anagraph('name') values ('小柴胡汤');
 insert into medicine('name') values ('枸杞');
 insert into medicine('name') values ('当归');
 
-insert into illness_symptom (illness_id, symptom_id) values (1, 1);
-insert into illness_symptom (illness_id, symptom_id) VALUES (1, 2);
+insert into symptom_illness (symptom_id, illness_id) values (1, 1);
+insert into symptom_illness (symptom_id, illness_id) VALUES (2, 1);
 insert into illness_anagraph (illness_id, anagraph_id) VALUES (1, 1);
 insert into anagraph_medicine (anagraph_id, medicine_id) VALUES (1, 2);
 insert into anagraph_medicine (anagraph_id, medicine_id) VALUES (1, 1);

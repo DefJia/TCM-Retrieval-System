@@ -14,10 +14,15 @@ class Frontend:
         self.location = tuple()  # 当前位置
         self.search_area = [list(), list(), list(), list()]  # 检索区
         self.work_area = dict()  # 药方工作区
+        self.widgets = list(range(4))
+        self.widgets[0] = self.interface.tablewidgetSymptom
+        self.widgets[1] = self.interface.tablewidgetDisease
+        self.widgets[2] = self.interface.tablewidgetPrescription
+        self.widgets[3] = self.interface.tablewidgetMedicine
         # Global Variable
         self.back = Backend()
         # Import function
-        #self.init_data() #不用一开始显示,而且显示会崩溃，原因未查
+        # self.init_data() # 不用一开始显示,而且显示会崩溃，原因未查
         # Init data
 
     def init_data(self):
@@ -41,8 +46,12 @@ class Frontend:
 
     def optioned_data(self, box_id, text):
         # 任意模式下，当option被选中时，显示相关数据
-        
+        self.search_area = [list(), list(), list(), list()]
+        for widget in self.widgets:
+            widget.clear()
+        # 初始化
         target_indexs = list()
+        self.search_area[box_id].append(text)
         if box_id == 0:
             # 选中的是子类（症状 or 药）
             target_indexs.append(box_id + 1)
@@ -51,20 +60,11 @@ class Frontend:
         else:
             target_indexs.append(box_id - 1)
             target_indexs.append(box_id + 1)
-        #data = list(range(4))
-        #data[box_id] = [text]
-
-        self.search_area[box_id].append(text)
-        # wedget中水平显示，不知道该如何转置
-        # wedget中水平显示，不知道该如何转置
-        # wedget中水平显示，不知道该如何转置
-        # wedget中水平显示，不知道该如何转置
-        
         for index in target_indexs:
             sub_data = self.back.union_query(box_id, index, text)
             self.search_area[index] = sub_data
-        print(self.search_area)
         self.set_all_tables(self.search_area)
+        print(self.search_area)
         return 0
 
     def get_data(self, box_id=1, content=1):
@@ -83,27 +83,25 @@ class Frontend:
             row = len(data_list)
             column = len(data_list[0])
             table.setRowCount(row)
-            
             table.setColumnCount(column)
             for r in range(row):
                 for c in range(column):
                     table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
 
     def set_all_tables(self, data):
-        
         cnt = 0
-        widgets = list(range(4))
-        widgets[0] = self.interface.tablewidgetSymptom
-        widgets[1] = self.interface.tablewidgetDisease
-        widgets[2] = self.interface.tablewidgetPrescription
-        widgets[3] = self.interface.tablewidgetMedicine
         for item in data:
             if type(item) == list and item:
-                ensure_tuple = (item,)#防止每个字单独1列
-                self.set_table(widgets[cnt], ensure_tuple)
+                # ensure_tuple = (item,)  # 防止每个字单独1列
+                ensure_tuple = list()
+                for elem in item:
+                    ensure_tuple.append((elem, ))
+                self.set_table(self.widgets[cnt], ensure_tuple)
             cnt += 1
         return 0
-    #新加方法
+
+
+    # 新加方法
     def add_item(self,box_id,text):
         check_id = 0
         for value in self.search_area[box_id]:

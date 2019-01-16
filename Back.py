@@ -7,6 +7,7 @@ class Backend:
         config = ConfigParser()
         config.read('.config.ini')
         self.index = config.get('Setting', 'index').split(',')
+        self.relations = config.get('Setting', 'relations').split(',')
         # 读取配置文件
         db_path = config.get('Environment', 'database_path')
         self.database = sqlite3.connect(db_path)
@@ -49,45 +50,31 @@ class Backend:
         data = names if names else None
         return data
 
-    def union_query(self, box_id, index, text):#有问题
+    def union_query(self, box_id, index, text):
         """
-        :param box_id:
-        :param b:
+        :param box_id: 输入的id
+        :param index: 查询的id
+        :param text: 匹配文本
         :return: data
         """
         self.cursor.execute('select id from %s where name = ?' % self.index[box_id], (text, ))
-        id = self.cursor.fetchone()[0]
-
-        '''
-            db_name = 'illness_symptom'
-            if index == 1:
-                self.cursor.execute('select name from illness inner join illness_symptom on symptom.id = illness_symptom.symptom_id where symptom_id = ?', (id, ))
-            else:
-                self.cursor.execute('select name from symptom inner join illness_symptom on illness.id = illness_symptom.illness_id where illness_id = ?', (id, ))
-        elif box_id + index == 3: 
-            db_name = 'illness_anagraph'
-            if index == 1:
-                self.cursor.execute('select name from illness inner join illness_anagraph on illness.id = illness_anagraph.illness_id where illness_id = ?', (id, ))
-            else:
-                self.cursor.execute('select name from anagraph inner join illness_anagraph on anagraph.id = illness_anagraph.anagraph_id where anagraph_id = ?', (id, ))
-        elif box_id + index == 5: 
-            db_name = 'anagraph_medicine'
-            if index == 2:
-                self.cursor.execute('select name from anagraph inner join anagraph_medicine on illness.id = anagraph_medicine.illness_id where anagraph_id = ?', (id, ))
-            else:
-                self.cursor.execute('select name from medicine inner join anagraph_medicine on medicine.id = anagraph_medicine.medicine_id where medicine_id = ?', (id, ))
-        else: 
-            db_name = ''
-            pass
-        '''
-        if box_id + index == 1:
-            self.cursor.execute('select name from illness inner join illness_symptom on illness.id = illness_symptom.illness_id where symptom_id = ?', (id, ))
+        # 先查询关系号
+        res = self.cursor.fetchone()
+        if res:
+            id = res[0]
+            db_name = self.relations[int((box_id + index - 1) / 2)]
+            t = self.index[index]
+            s = self.index[box_id]
+            a = self.index[min(index, box_id)]
+            b = self.index[max(index, box_id)]
+            sql = format('select name from %s inner join %s_%s on %s.id = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
+            self.cursor.execute(sql, (id, ))
             raw = self.cursor.fetchall()
-        else: raw = []
-        data = list()
-        for elem in raw[0]:
-            data.append(elem)
-        return data
+            if raw:
+                data = list()
+                for elem in raw:
+                    data.append(elem[0])
+                return data
 
     def save_data(self):
         pass
@@ -104,5 +91,6 @@ class Backend:
 
 if __name__ == '__main__':
     test = Backend()
-    test.query_similar_data(1, '少')
+    # test.query_similar_data(1, '少')
+    test.union_query(1, 0, '少阳症')
 	
