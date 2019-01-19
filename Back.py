@@ -76,9 +76,13 @@ class Backend:
                     data.append(elem[0])
                 return data
 
-    def save_data(self, sql):
-        self.cursor.execute(sql)
-        pass
+    def save_data(self, db_name, name):
+        sql = format('insert into %s (name) values ("%s")' % (db_name, name))
+        try:
+            self.cursor.execute(sql)
+            return 0
+        except sqlite3.IntegrityError:
+            return 1
 
     def query_option(self):
         pass
