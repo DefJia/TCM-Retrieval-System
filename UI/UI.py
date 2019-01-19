@@ -61,7 +61,7 @@ class Ui_MainWindow(object):
         self.symptomOption.horizontalHeader().setDefaultSectionSize(161)
         self.symptomOption.verticalHeader().setVisible(False)
         self.tablewidgetPrescribe = QtWidgets.QTableWidget(self.centralwidget)
-        self.tablewidgetPrescribe.setGeometry(QtCore.QRect(30, 550, 881, 271))
+        self.tablewidgetPrescribe.setGeometry(QtCore.QRect(30, 550, 880, 271))
         self.tablewidgetPrescribe.setObjectName("tablewidgetPrescribe")
         self.tablewidgetPrescribe.setColumnCount(8)
         self.tablewidgetPrescribe.setRowCount(7)

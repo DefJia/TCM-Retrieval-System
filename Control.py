@@ -78,6 +78,11 @@ class Control:
         self.button_clicked()  # 按钮点击
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
         ''' 以下为界面初始化处理 '''
+        for i in range(8):
+            if i % 2 == 0:
+                self.interface.tablewidgetPrescribe.setColumnWidth(i, 150)
+            else:
+                self.interface.tablewidgetPrescribe.setColumnWidth(i, 69)
         for addition in self.group_additions: addition.hide()  # 隐藏加号
         for table in self.group_tables: table.setShowGrid(False)  # 隐藏内边框
         for option in self.group_options: option.hide()  # 隐藏下拉框
