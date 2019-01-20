@@ -35,7 +35,7 @@ class Control:
         self.reminder = Reminder()
         self.property = Property()
         # 界面生成
-        self.front = Frontend(self.interface)
+        self.front = Frontend(self.interface, self.reminder, self.property)
         # 定义交互Class
         self.group_inputs = list()
         self.group_inputs.append(self.interface.lineSymptom)
@@ -67,6 +67,10 @@ class Control:
         for input_box in self.group_inputs:  # 输入框输入
             input_box.textChanged.connect(lambda: self.line_text_changed(input_box))
         '''
+        self.interface.tablewidgetSymptom.clicked.connect(lambda: self.table_option_clicked(0))
+        self.interface.tablewidgetDisease.clicked.connect(lambda: self.table_option_clicked(1))
+        self.interface.tablewidgetPrescription.clicked.connect(lambda: self.table_option_clicked(2))
+        self.interface.tablewidgetMedicine.clicked.connect(lambda: self.table_option_clicked(3))
         self.interface.symptomOption.clicked.connect(lambda: self.option_clicked(self.interface.symptomOption))
         self.interface.diseaseOption.clicked.connect(lambda: self.option_clicked(self.interface.diseaseOption))
         self.interface.prescriptionOption.clicked.connect(lambda: self.option_clicked(self.interface.prescriptionOption))
@@ -79,13 +83,20 @@ class Control:
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
         ''' 以下为界面初始化处理 '''
         for i in range(8):
+            # 设定药方区结构
             if i % 2 == 0:
                 self.interface.tablewidgetPrescribe.setColumnWidth(i, 150)
             else:
                 self.interface.tablewidgetPrescribe.setColumnWidth(i, 69)
+        tmp = [90, 50, 50]
+        for i in range(3):
+            self.interface.tablewidgetMedicine.setColumnWidth(i, tmp[i])
         for addition in self.group_additions: addition.hide()  # 隐藏加号
         for table in self.group_tables: table.setShowGrid(False)  # 隐藏内边框
         for option in self.group_options: option.hide()  # 隐藏下拉框
+        # data = [('小sss汤', '3', '克'), ('哈哈', '2', '克' )]
+        # self.front.set_table(self.interface.tablewidgetMedicine, data)
+        # 测试代码
         sys.exit(app.exec_())
 
     def change_type(self):
@@ -113,13 +124,19 @@ class Control:
     def option_clicked(self, option):
         index = self.group_options.index(option)
         text = str(option.selectedItems()[0].text())
-        #self.group_inputs[index].setText(text)
+        # self.group_inputs[index].setText(text)
         self.group_inputs[index].setText("")
         option.hide()
-        #option.clicked.connect(lambda: self.front.optioned_data(index, text))
         self.front.optioned_data(index, text)
-        #option.clicked.connect(lambda: self.front.add_item(index, text))
         pass
+
+    def table_option_clicked(self, table_id):
+        table = self.group_tables[table_id]
+        try:
+            text = str(table.selectedItems()[0].text())
+            self.front.optioned_data(table_id, text, 1)
+        except IndexError:
+            pass
 
     def button_clicked(self):
         # 之后根据front再做变化

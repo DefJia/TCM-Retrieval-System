@@ -42,6 +42,7 @@ create table illness_anagraph(
 create table anagraph_medicine(
   anagraph_id integer,
   medicine_id integer,
+  grams integer,
   foreign key (anagraph_id) references anagraph(id),
   foreign key (medicine_id) references medicine(id)
 );
@@ -64,5 +65,5 @@ insert into medicine('name') values ('当归');
 insert into symptom_illness (symptom_id, illness_id) values (1, 1);
 insert into symptom_illness (symptom_id, illness_id) VALUES (2, 1);
 insert into illness_anagraph (illness_id, anagraph_id) VALUES (1, 1);
-insert into anagraph_medicine (anagraph_id, medicine_id) VALUES (1, 2);
-insert into anagraph_medicine (anagraph_id, medicine_id) VALUES (1, 1);
+insert into anagraph_medicine (anagraph_id, medicine_id, grams) VALUES (1, 2, 5);
+insert into anagraph_medicine (anagraph_id, medicine_id, grams) VALUES (1, 1, 10);

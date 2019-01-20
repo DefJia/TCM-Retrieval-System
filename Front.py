@@ -4,12 +4,14 @@ from PyQt5.QtWidgets import QTableWidgetItem
 
 
 class Frontend:
-    def __init__(self, interface):
+    def __init__(self, interface, reminder=None, property=None):
         config = ConfigParser()
         config.read('.config.ini')
         self.index = config.get('Setting', 'index').split(',')
         # 读取配置文件
         self.interface = interface
+        self.reminder = reminder
+        self.property = property
         self.type = 1  # 模式
         self.location = tuple()  # 当前位置
         self.search_area = [list(), list(), list(), list()]  # 检索区
@@ -44,28 +46,29 @@ class Frontend:
             option_box.hide()
         return 0
 
-    def optioned_data(self, box_id, text):
+    def optioned_data(self, box_id, text, mode=0):
         # 任意模式下，当option被选中时，显示相关数据
-        if self.type == 1:
-            self.search_area = [list(), list(), list(), list()]
-            for widget in self.widgets:
-                widget.clear()
+        # mode为0时只显示右边
+        self.search_area = [list() for i in range(4)]
+        for widget in self.widgets:
+            widget.clear()
         # 初始化
         target_indexs = list()
-        self.search_area[box_id].append(text)
-        if box_id == 0:
-            # 选中的是子类（症状 or 药）
+        self.search_area[box_id].append([text])
+        if mode == 0 and box_id != 3:
             target_indexs.append(box_id + 1)
-        elif box_id == 3:
-            target_indexs.append(box_id - 1)
-        else:
-            target_indexs.append(box_id - 1)
-            target_indexs.append(box_id + 1)
+        elif mode == 1:
+            left = box_id - 1
+            right = box_id + 1
+            for i in (left, right):
+                if 0 <= i <= 3:
+                    target_indexs.append(i)
         for index in target_indexs:
             sub_data = self.back.union_query(box_id, index, text)
-            self.search_area[index] = sub_data
+            if sub_data:
+                self.search_area[index] = sub_data
         self.set_all_tables(self.search_area)
-        print(self.search_area)
+        # print(self.search_area)
         return 0
 
     def get_data(self, box_id=1, content=1):
@@ -74,6 +77,8 @@ class Frontend:
         return ['3', '2']
 
     def save_data(self, box_id, line):
+        self.reminder.show()
+        # 如何获取点击按钮
         if line.text():
             res = self.back.save_data(self.index[box_id], line.text())
             if res:
@@ -81,11 +86,27 @@ class Frontend:
             else:
                 print('录入成功')
 
+    # 新加方法
+    def add_item(self, box_id, text):
+        check_id = 0
+        for value in self.search_area[box_id]:
+            if text == value:
+                check_id = check_id + 1
+        if check_id == 0:
+            self.search_area[box_id].append(text)
+            # print(text)
+            if self.type == 0:
+                self.save_data(box_id, text)
 
     @staticmethod
     def set_table(table, data_list):
+        # data_list: [[item, item], [item, item]]
         if data_list:
+            # print(data_list)
             row = len(data_list)
+            if row > 1:
+                for elem in data_list:
+                    elem.append('克')
             column = len(data_list[0])
             table.setRowCount(row)
             table.setColumnCount(column)
@@ -97,27 +118,9 @@ class Frontend:
         cnt = 0
         for item in data:
             if type(item) == list and item:
-                # ensure_tuple = (item,)  # 防止每个字单独1列
-                ensure_tuple = list()
-                for elem in item:
-                    ensure_tuple.append((elem, ))
-                self.set_table(self.widgets[cnt], ensure_tuple)
+                self.set_table(self.widgets[cnt], item)
             cnt += 1
         return 0
-
-
-    # 新加方法
-    def add_item(self,box_id,text):
-        check_id = 0
-        for value in self.search_area[box_id]:
-            if text == value:
-                check_id = check_id + 1
-        
-        if check_id == 0:
-            self.search_area[box_id].append(text)
-            print(text)
-            if self.type == 0 :
-                self.save_data(box_id,text)
 
 
 if __name__ == '__main__':

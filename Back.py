@@ -47,7 +47,7 @@ class Backend:
     def query_similar_data(self, box_id, content):
         self.cursor.execute('select name from %s where name LIKE ?' % self.index[box_id], ('%%%s%%' % content, ))
         names = self.cursor.fetchall()
-        data = names if names else None
+        data = self.convert_raw_to_data(names) if names else list()
         return data
 
     def union_query(self, box_id, index, text):
@@ -62,19 +62,17 @@ class Backend:
         res = self.cursor.fetchone()
         if res:
             id = res[0]
-            db_name = self.relations[int((box_id + index - 1) / 2)]
+            # db_name = self.relations[int((box_id + index - 1) / 2)]
             t = self.index[index]
             s = self.index[box_id]
             a = self.index[min(index, box_id)]
             b = self.index[max(index, box_id)]
             sql = format('select name from %s inner join %s_%s on %s.id = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
+            if 'medicine' in (a, b):
+                sql = format('select name, grams from %s inner join %s_%s on %s.id = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
             self.cursor.execute(sql, (id, ))
             raw = self.cursor.fetchall()
-            if raw:
-                data = list()
-                for elem in raw:
-                    data.append(elem[0])
-                return data
+            return self.convert_raw_to_data(raw)
 
     def save_data(self, db_name, name):
         sql = format('insert into %s (name) values ("%s")' % (db_name, name))
@@ -93,9 +91,17 @@ class Backend:
     def match_data(self):
         pass
 
+    @staticmethod
+    def convert_raw_to_data(raw):
+        tmp = list()
+        for elem in raw:
+            tmp.append(list())
+            for item in elem:
+                tmp[-1].append(str(item))
+        return tmp
+
 
 if __name__ == '__main__':
     test = Backend()
     # test.query_similar_data(1, '少')
     test.union_query(1, 0, '少阳症')
-	
