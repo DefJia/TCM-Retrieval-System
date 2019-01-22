@@ -81,6 +81,9 @@ class Control:
         self.interface.lineMedicine.textChanged.connect(lambda: self.line_text_changed(self.interface.lineMedicine))
         self.button_clicked()  # 按钮点击
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
+
+        self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
+
         ''' 以下为界面初始化处理 '''
         for i in range(8):
             # 设定药方区结构
@@ -146,6 +149,19 @@ class Control:
         self.interface.buttonDisease.clicked.connect(lambda: self.front.save_data(1, self.interface.lineDisease))
         self.interface.buttonPrescription.clicked.connect(lambda: self.front.save_data(2, self.interface.linePrescription))
         self.interface.buttonMedicine.clicked.connect(lambda: self.front.save_data(3, self.interface.lineMedicine))
+        pass
+
+    def buttonInput_clicked(self):
+        #text = self.interface.tablewidgetMedicine.Items()
+
+        rows = self.interface.tablewidgetMedicine.rowCount()
+
+        for rows_index in range(rows):
+            # print items[item_index].text()
+            print(self.interface.tablewidgetMedicine.item(rows_index, 0).text())
+
+        print(rows)
+        #没写完
         pass
 
 
