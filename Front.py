@@ -50,19 +50,21 @@ class Frontend:
         # 任意模式下，当option被选中时，显示相关数据
         # mode为0时只显示右边
         self.search_area = [list() for i in range(4)]
+        '''
         for widget in self.widgets:
             widget.clear()
+        '''
         # 初始化
         target_indexs = list()
         self.search_area[box_id].append([text])
         if mode == 0 and box_id != 3:
             target_indexs.append(box_id + 1)
         elif mode == 1:
-            left = box_id - 1
+            #left = box_id - 1
             right = box_id + 1
-            for i in (left, right):
-                if 0 <= i <= 3:
-                    target_indexs.append(i)
+            #for i in (left, right):
+            if 0 <= right <= 3:
+                target_indexs.append(right)
         for index in target_indexs:
             sub_data = self.back.union_query(box_id, index, text)
             if sub_data:

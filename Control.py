@@ -136,8 +136,9 @@ class Control:
     def table_option_clicked(self, table_id):
         table = self.group_tables[table_id]
         try:
-            text = str(table.selectedItems()[0].text())
-            self.front.optioned_data(table_id, text, 1)
+            if table_id != 3:
+                text = str(table.selectedItems()[0].text())
+                self.front.optioned_data(table_id, text, 1)
         except IndexError:
             pass
 
