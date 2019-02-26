@@ -79,7 +79,15 @@ class Control:
         self.interface.lineDisease.textChanged.connect(lambda: self.line_text_changed(self.interface.lineDisease))
         self.interface.linePrescription.textChanged.connect(lambda: self.line_text_changed(self.interface.linePrescription))
         self.interface.lineMedicine.textChanged.connect(lambda: self.line_text_changed(self.interface.lineMedicine))
-        self.button_clicked()  # 按钮点击
+
+
+        # 按钮点击
+        self.interface.buttonSymptom.clicked.connect(lambda: self.button_clicked(self.interface.symptomOption))
+        self.interface.buttonDisease.clicked.connect(lambda: self.button_clicked(self.interface.diseaseOption))
+        self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.prescriptionOption))
+        self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.medicineOption))
+
+
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
 
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
