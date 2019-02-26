@@ -104,9 +104,11 @@ class Frontend:
         if data_list:
             # print(data_list)
             row = len(data_list)
+            '''
             if row > 1:
                 for elem in data_list:
                     elem.append('克')
+            '''
             column = len(data_list[0])
             table.setRowCount(row)
             table.setColumnCount(column)

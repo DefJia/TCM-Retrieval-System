@@ -67,7 +67,7 @@ class Control:
         for input_box in self.group_inputs:  # 输入框输入
             input_box.textChanged.connect(lambda: self.line_text_changed(input_box))
         '''
-        self.interface.tablewidgetSymptom.clicked.connect(lambda: self.table_option_clicked(0))
+        #self.interface.tablewidgetSymptom.clicked.connect(lambda: self.table_option_clicked(0))
         self.interface.tablewidgetDisease.clicked.connect(lambda: self.table_option_clicked(1))
         self.interface.tablewidgetPrescription.clicked.connect(lambda: self.table_option_clicked(2))
         self.interface.tablewidgetMedicine.clicked.connect(lambda: self.table_option_clicked(3))
