@@ -104,6 +104,13 @@ class Control:
 
     def change_type(self):
         #  切换模式
+        for widget in self.group_tables[0:3]:
+            widget.clear()
+
+        for line in self.group_inputs:
+            line.clear()
+
+
         if self.interface.radioButton_2.isChecked():
             print("当前处于开方模式")
             self.front.type = 1
@@ -153,8 +160,19 @@ class Control:
         pass
 
     def buttonInput_clicked(self):
-        #text = self.interface.tablewidgetMedicine.Items()
+        medicines = self.front.search_area[3]
+        if int(len(medicines))%4 == 0:
+            row = int(len(medicines) / 4)
+        else: row = int(len(medicines) / 4) + 1
+        text_all = [list() for i in range(row)]
+        n = 0
+        for i in medicines:
+            text_all[int(n/4)] += i
+            n+=1
+        self.front.set_table(self.group_tables[5], text_all)
 
+
+        '''
         rows = self.interface.tablewidgetMedicine.rowCount()
 
         for rows_index in range(rows):
@@ -162,6 +180,7 @@ class Control:
             print(self.interface.tablewidgetMedicine.item(rows_index, 0).text())
 
         print(rows)
+        '''
         #没写完
         pass
 

@@ -49,14 +49,17 @@ class Frontend:
     def optioned_data(self, box_id, text, mode=0):
         # 任意模式下，当option被选中时，显示相关数据
         # mode为0时只显示右边
-        self.search_area = [list() for i in range(4)]
+        #self.search_area = [list() for i in range(4)]
+
         '''
         for widget in self.widgets:
             widget.clear()
         '''
+
         # 初始化
         target_indexs = list()
-        self.search_area[box_id].append([text])
+        if [text] not in self.search_area[box_id]:
+            self.search_area[box_id].append([text])
         if mode == 0 and box_id != 3:
             target_indexs.append(box_id + 1)
         elif mode == 1:
