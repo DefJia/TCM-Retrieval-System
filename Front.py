@@ -3,6 +3,7 @@ from Back import Backend
 from PyQt5.QtWidgets import QTableWidgetItem
 
 
+
 class Frontend:
     def __init__(self, interface, reminder=None, property=None):
         config = ConfigParser()
@@ -81,8 +82,8 @@ class Frontend:
         # 如果当前位置不为空，还要添加关系
         return ['3', '2']
 
-    def save_data(self, box_id, line):
-        self.reminder.show()
+    def save_data(self, reminder, line, box_id):
+        reminder.show()
         # 如何获取点击按钮
         if line.text():
             res = self.back.save_data(self.index[box_id], line.text())
@@ -90,6 +91,7 @@ class Frontend:
                 print('该名称已存在')
             else:
                 print('录入成功')
+
 
     # 新加方法
     def add_item(self, box_id, text):

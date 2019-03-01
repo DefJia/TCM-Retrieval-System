@@ -6,6 +6,7 @@ import sys
 from Front import Frontend
 
 
+
 class Interface(QMainWindow, Ui_MainWindow):
     def __init__(self):
         # 修改界面
@@ -82,15 +83,18 @@ class Control:
 
 
         # 按钮点击
-        self.interface.buttonSymptom.clicked.connect(lambda: self.button_clicked(self.interface.symptomOption))
+        self.interface.buttonSymptom.clicked.connect(lambda: self.button_clicked())
+        '''
         self.interface.buttonDisease.clicked.connect(lambda: self.button_clicked(self.interface.diseaseOption))
         self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.prescriptionOption))
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.medicineOption))
-
-
+        '''
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
 
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
+
+        #self.reminder.show()
+
 
         ''' 以下为界面初始化处理 '''
         for i in range(8):
@@ -161,10 +165,14 @@ class Control:
         # 之后根据front再做变化
         # self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0))
         # 此处代码已合并至Front的save_data
-        self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0, self.interface.lineSymptom))
-        self.interface.buttonDisease.clicked.connect(lambda: self.front.save_data(1, self.interface.lineDisease))
-        self.interface.buttonPrescription.clicked.connect(lambda: self.front.save_data(2, self.interface.linePrescription))
-        self.interface.buttonMedicine.clicked.connect(lambda: self.front.save_data(3, self.interface.lineMedicine))
+        self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(self.reminder, ))
+
+        '''
+        self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0, self.interface.lineSymptom,self.reminder))
+        self.interface.buttonDisease.clicked.connect(lambda: self.front.save_data(1, self.interface.lineDisease,self.reminder))
+        self.interface.buttonPrescription.clicked.connect(lambda: self.front.save_data(2, self.interface.linePrescription,self.reminder))
+        self.interface.buttonMedicine.clicked.connect(lambda: self.front.save_data(3, self.interface.lineMedicine,self.reminder))
+        '''
         pass
 
     def buttonInput_clicked(self):

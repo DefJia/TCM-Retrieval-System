@@ -31,7 +31,7 @@
      <rect>
       <x>10</x>
       <y>80</y>
-      <width>241</width>
+      <width>211</width>
       <height>411</height>
      </rect>
     </property>
@@ -47,7 +47,7 @@
     <widget class="QLineEdit" name="lineSymptom">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>30</y>
        <width>161</width>
        <height>41</height>
@@ -57,7 +57,7 @@
     <widget class="QTableWidget" name="tablewidgetSymptom">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>80</y>
        <width>161</width>
        <height>321</height>
@@ -113,7 +113,7 @@
     <widget class="QPushButton" name="buttonSymptom">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>170</x>
        <y>30</y>
        <width>41</width>
        <height>41</height>
@@ -126,7 +126,7 @@
     <widget class="QTableWidget" name="symptomOption">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>70</y>
        <width>161</width>
        <height>271</height>
@@ -299,7 +299,7 @@
      <rect>
       <x>220</x>
       <y>80</y>
-      <width>251</width>
+      <width>241</width>
       <height>411</height>
      </rect>
     </property>
@@ -315,7 +315,7 @@
     <widget class="QLineEdit" name="lineDisease">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>30</y>
        <width>191</width>
        <height>41</height>
@@ -325,7 +325,7 @@
     <widget class="QTableWidget" name="tablewidgetDisease">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>80</y>
        <width>191</width>
        <height>321</height>
@@ -384,7 +384,7 @@
     <widget class="QPushButton" name="buttonDisease">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>200</x>
        <y>30</y>
        <width>41</width>
        <height>41</height>
@@ -397,7 +397,7 @@
     <widget class="QTableWidget" name="diseaseOption">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>70</y>
        <width>191</width>
        <height>271</height>
@@ -422,7 +422,7 @@
      <rect>
       <x>460</x>
       <y>80</y>
-      <width>251</width>
+      <width>241</width>
       <height>411</height>
      </rect>
     </property>
@@ -438,7 +438,7 @@
     <widget class="QLineEdit" name="linePrescription">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>30</y>
        <width>191</width>
        <height>41</height>
@@ -448,7 +448,7 @@
     <widget class="QTableWidget" name="tablewidgetPrescription">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>80</y>
        <width>191</width>
        <height>321</height>
@@ -504,7 +504,7 @@
     <widget class="QPushButton" name="buttonPrescription">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>200</x>
        <y>30</y>
        <width>41</width>
        <height>41</height>
@@ -517,7 +517,7 @@
     <widget class="QTableWidget" name="prescriptionOption">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>70</y>
        <width>191</width>
        <height>271</height>
@@ -542,7 +542,7 @@
      <rect>
       <x>700</x>
       <y>80</y>
-      <width>271</width>
+      <width>251</width>
       <height>411</height>
      </rect>
     </property>
@@ -558,7 +558,7 @@
     <widget class="QLineEdit" name="lineMedicine">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>30</y>
        <width>191</width>
        <height>41</height>
@@ -568,7 +568,7 @@
     <widget class="QTableWidget" name="tablewidgetMedicine">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>80</y>
        <width>191</width>
        <height>321</height>
@@ -639,7 +639,7 @@
     <widget class="QPushButton" name="buttonMedicine">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>200</x>
        <y>30</y>
        <width>41</width>
        <height>41</height>
@@ -652,7 +652,7 @@
     <widget class="QTableWidget" name="medicineOption">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>70</y>
        <width>191</width>
        <height>271</height>
@@ -840,6 +840,25 @@
     </property>
     <property name="text">
      <string>开方模式</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonDelete">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>490</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>宋体</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>删除</string>
     </property>
    </widget>
   </widget>
