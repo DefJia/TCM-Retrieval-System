@@ -82,8 +82,7 @@ class Frontend:
         # 如果当前位置不为空，还要添加关系
         return ['3', '2']
 
-    def save_data(self, reminder, line, box_id):
-        reminder.show()
+    def save_data(self, line, box_id):
         # 如何获取点击按钮
         if line.text():
             res = self.back.save_data(self.index[box_id], line.text())

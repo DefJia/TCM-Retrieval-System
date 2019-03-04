@@ -84,6 +84,8 @@ class Control:
 
         # 按钮点击
         self.interface.buttonSymptom.clicked.connect(lambda: self.button_clicked())
+        self.reminder.buttonYes.clicked.connect(lambda: self.buttonyes_reminder())
+        self.reminder.buttonNo.clicked.connect(lambda: self.buttonno_reminder())
         '''
         self.interface.buttonDisease.clicked.connect(lambda: self.button_clicked(self.interface.diseaseOption))
         self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.prescriptionOption))
@@ -165,7 +167,14 @@ class Control:
         # 之后根据front再做变化
         # self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0))
         # 此处代码已合并至Front的save_data
-        self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(self.reminder, ))
+        self.reminder.show()
+
+
+    def buttonyes_reminder(self):
+        self.front.save_data(self.interface.lineSymptom,'（需要变化）', 0,'（需要变化）')
+
+    def buttonno_reminder(self):
+        self.reminder.hide()
 
         '''
         self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0, self.interface.lineSymptom,self.reminder))
