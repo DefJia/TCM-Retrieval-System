@@ -82,9 +82,9 @@ class Control:
         self.interface.lineMedicine.textChanged.connect(lambda: self.line_text_changed(self.interface.lineMedicine))
 
 
-        # 按钮点击
-        self.interface.buttonSymptom.clicked.connect(lambda: self.button_clicked())
-        self.reminder.buttonYes.clicked.connect(lambda: self.buttonyes_reminder())
+        # reminder 按钮点击
+        self.interface.buttonSymptom.clicked.connect(lambda: self.button_clicked(self.interface.lineSymptom))
+        self.reminder.buttonYes.clicked.connect(lambda: self.buttonyes_reminder(self.interface.lineSymptom))
         self.reminder.buttonNo.clicked.connect(lambda: self.buttonno_reminder())
         '''
         self.interface.buttonDisease.clicked.connect(lambda: self.button_clicked(self.interface.diseaseOption))
@@ -96,6 +96,7 @@ class Control:
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
 
         #self.reminder.show()
+
 
 
         ''' 以下为界面初始化处理 '''
@@ -163,19 +164,26 @@ class Control:
         except IndexError:
             pass
 
-    def button_clicked(self):
+    def button_clicked(self,line):
         # 之后根据front再做变化
         # self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0))
         # 此处代码已合并至Front的save_data
-        self.reminder.show()
+        text = line.text()
+        if text:
+            print(text)
+            self.reminder.show()
+        else:
+            pass
 
 
-    def buttonyes_reminder(self):
-        self.front.save_data(self.interface.lineSymptom,'（需要变化）', 0,'（需要变化）')
+    def buttonyes_reminder(self,line):
+        #self.front.save_data(self.interface.lineSymptom,'（需要变化）',box_id)
+        text = self.interface.lineSymptom.text()
+        index = self.group_options.index(line)
+        self.front.save_data(index,text)
 
     def buttonno_reminder(self):
         self.reminder.hide()
-
         '''
         self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0, self.interface.lineSymptom,self.reminder))
         self.interface.buttonDisease.clicked.connect(lambda: self.front.save_data(1, self.interface.lineDisease,self.reminder))
