@@ -86,13 +86,13 @@ class Frontend:
         # 如何获取点击按钮
         #index = self.group_inputs.index(input_box)
         if index == 0:
-            name = "lineSymptom"  #是不是直接这个
+            name = "symptom"  #是不是直接这个
         elif index == 1:
-            name = "lineDisease"
+            name = "illness"
         elif index == 2:
-            name = "linePrescription"
-        else:
-            name = "lineMedicine"
+            name = "anagraph"
+        elif index == 3:
+            name = "medicine"
 
         if text:
             res = self.back.save_data(name, text)
