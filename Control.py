@@ -84,6 +84,11 @@ class Control:
 
         # reminder 按钮点击
         self.interface.buttonSymptom.clicked.connect(lambda: self.button_clicked(self.interface.lineSymptom))
+        self.interface.buttonDisease.clicked.connect(lambda: self.button_clicked(self.interface.lineDisease))
+        self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.linePrescription))
+        self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.lineMedicine))
+
+
         self.reminder.buttonYes.clicked.connect(lambda: self.buttonyes_reminder(self.interface.lineSymptom))
         self.reminder.buttonNo.clicked.connect(lambda: self.buttonno_reminder())
         '''
@@ -178,9 +183,15 @@ class Control:
 
     def buttonyes_reminder(self,line):
         #self.front.save_data(self.interface.lineSymptom,'（需要变化）',box_id)
-        text = self.interface.lineSymptom.text()
-        index = self.group_options.index(line)
+        text = line.text()
+        #print(text)
+        index = self.group_inputs.index(line)
+        #print(index)
         self.front.save_data(index,text)
+        self.reminder.hide()
+        self.front.search_area[index].append([text])
+        self.front.set_all_tables(self.front.search_area)
+        self.interface.lineSymptom.clear()
 
     def buttonno_reminder(self):
         self.reminder.hide()

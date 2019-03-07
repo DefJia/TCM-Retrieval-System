@@ -78,6 +78,8 @@ class Backend:
         sql = format('insert into %s (name) values ("%s")' % (db_name, name))
         try:
             self.cursor.execute(sql)
+            self.database.commit()
+
             return 0
         except sqlite3.IntegrityError:
             return 1
