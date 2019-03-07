@@ -174,7 +174,7 @@ class Control:
         # self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0))
         # 此处代码已合并至Front的save_data
         text = line.text()
-        if text:
+        if text != None:
             self.reminder.show()
             print(text)
         else:
@@ -183,6 +183,7 @@ class Control:
 
     def buttonyes_reminder(self):
         #self.front.save_data(self.interface.lineSymptom,'（需要变化）',box_id)
+        '''
         text = self.interface.lineSymptom.text()
         #print(text)
         index = self.group_inputs.index(self.interface.lineSymptom)
@@ -202,12 +203,12 @@ class Control:
         for l in listIndex:
             line = self.group_inputs[l]
             text = line.text()
-            self.front.save_data(index,text)
+            self.front.save_data(l,text)
             self.front.search_area[l].append([text])
             self.front.set_all_tables(self.front.search_area)
-            self.line.clear()
+            line.clear()
             self.reminder.hide()
-        '''
+        
         #print(text)
         
         #print(index)
