@@ -84,8 +84,17 @@ class Backend:
         except sqlite3.IntegrityError:
             return 1
 
-    def query_option(self):
-        pass
+    def save_relation(self,dbid,left_id,right_id):
+        db_name = self.relations[dbid]
+        left_name = db_name.split("_")[0]
+        right_name = db_name.split("_")[-1]
+        sql = format('insert into %s (%s_id,%s_id) values (%s,%s)' % (db_name,left_name,right_name,left_id, right_id))
+        try:
+            self.cursor.execute(sql)
+            self.database.commit()
+            return 0
+        except Exception as e:
+            return e
 
     def get_relations(self):
         pass
