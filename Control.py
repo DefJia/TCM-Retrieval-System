@@ -89,7 +89,7 @@ class Control:
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.lineMedicine))
 
 
-        self.reminder.buttonYes.clicked.connect(lambda: self.buttonyes_reminder())
+        self.reminder.buttonYes.clicked.connect(lambda: self.buttonyes_reminder(self.interface.lineSymptom))
         self.reminder.buttonNo.clicked.connect(lambda: self.buttonno_reminder())
         '''
         self.interface.buttonDisease.clicked.connect(lambda: self.button_clicked(self.interface.diseaseOption))
@@ -180,20 +180,13 @@ class Control:
         else:
             pass
 
-
-    def buttonyes_reminder(self):
-        #self.front.save_data(self.interface.lineSymptom,'（需要变化）',box_id)
-        
-        for i in self.group_inputs:
-            if i.text():
-                index = self.group_inputs.index(i)
-        text = self.interface.lineSymptom.text()
-        text = self.interface.lineSymptom.text()
-        text = self.interface.lineSymptom.text()
-        #print(text)
+    def buttonyes_reminder(self, line):
+        # self.front.save_data(self.interface.lineSymptom,'（需要变化）',box_id)
+        text = line.text()
+        # print(text)
         index = self.group_inputs.index(line)
-        #print(index)
-        self.front.save_data(index,text)
+        # print(index)
+        self.front.save_data(index, text)
         self.reminder.hide()
         self.front.search_area[index].append([text])
         self.front.set_all_tables(self.front.search_area)
