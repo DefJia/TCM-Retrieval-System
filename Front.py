@@ -88,9 +88,9 @@ class Frontend:
         if index == 0:
             name = "symptom"  #是不是直接这个
         elif index == 1:
-            name = "illness"
+            name = "disease"
         elif index == 2:
-            name = "anagraph"
+            name = "prescription"
         elif index == 3:
             name = "medicine"
 
