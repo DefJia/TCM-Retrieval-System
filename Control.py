@@ -238,10 +238,11 @@ class Control:
 
         elif self.front.type == 0:
             for i in range(3):
-                if len(search_area[i])!=0 and len(search_area[i+1]) != 0:
-                    for l in search_area[i]:
-                        for m in search_area[i+1]:
-                            self.front.back.save_relation(i,l,m)
+                if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
+                    for l in self.front.search_area[i]:
+                        for m in self.front.search_area[i+1]:
+                            self.front.back.save_relation(i,l[0],m[0])
+                            
 
 
         '''

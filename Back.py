@@ -94,7 +94,7 @@ class Backend:
             self.database.commit()
             return 0
         except Exception as e:
-            return e
+            print(e)
 
     def get_relations(self):
         pass
