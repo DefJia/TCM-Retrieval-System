@@ -99,6 +99,9 @@ class Control:
 
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
 
+        self.interface.buttonInitial.clicked.connect(lambda: self.buttonInitial_clicked())
+
+
         #self.reminder.show()
 
 
@@ -123,8 +126,11 @@ class Control:
 
     def change_type(self):
         #  切换模式
-        for widget in self.group_tables[0:3]:
+        for widget in self.group_tables[0:4]:
             widget.clear()
+
+        for list in self.front.search_area:
+            list.clear()
 
         for line in self.group_inputs:
             line.clear()
@@ -221,6 +227,12 @@ class Control:
         self.interface.buttonMedicine.clicked.connect(lambda: self.front.save_data(3, self.interface.lineMedicine,self.reminder))
         '''
         pass
+
+    def buttonInitial_clicked(self):
+        for i in self.front.search_area:
+            self.front.search_area.clear()
+        for widget in self.group_tables[0:4]:
+            widget.clear()
 
     def buttonInput_clicked(self):
         if self.front.type == 1:
