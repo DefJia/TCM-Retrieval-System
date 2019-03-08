@@ -67,7 +67,7 @@ class Control:
         for input_box in self.group_inputs:  # 输入框输入
             input_box.textChanged.connect(lambda: self.line_text_changed(input_box))
         '''
-        #self.interface.tablewidgetSymptom.clicked.connect(lambda: self.table_option_clicked(0))
+        # self.interface.tablewidgetSymptom.clicked.connect(lambda: self.table_option_clicked(0))
         self.interface.tablewidgetDisease.clicked.connect(lambda: self.table_option_clicked(1))
         self.interface.tablewidgetPrescription.clicked.connect(lambda: self.table_option_clicked(2))
         self.interface.tablewidgetMedicine.clicked.connect(lambda: self.table_option_clicked(3))
@@ -79,30 +79,23 @@ class Control:
         self.interface.lineDisease.textChanged.connect(lambda: self.line_text_changed(self.interface.lineDisease))
         self.interface.linePrescription.textChanged.connect(lambda: self.line_text_changed(self.interface.linePrescription))
         self.interface.lineMedicine.textChanged.connect(lambda: self.line_text_changed(self.interface.lineMedicine))
-
-
-        # reminder 按钮点击
+        # 加号按钮
         self.interface.buttonSymptom.clicked.connect(lambda: self.button_clicked(self.interface.lineSymptom))
         self.interface.buttonDisease.clicked.connect(lambda: self.button_clicked(self.interface.lineDisease))
         self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.linePrescription))
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.lineMedicine))
-
-
-        self.reminder.buttonYes.clicked.connect(lambda: self.buttonyes_reminder())
-        self.reminder.buttonNo.clicked.connect(lambda: self.buttonno_reminder())
+        # reminder 按钮点击
+        self.reminder.buttonYes.clicked.connect(lambda: self.button_yes_reminder())
+        self.reminder.buttonNo.clicked.connect(lambda: self.button_no_reminder())
         '''
         self.interface.buttonDisease.clicked.connect(lambda: self.button_clicked(self.interface.diseaseOption))
         self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.prescriptionOption))
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.medicineOption))
         '''
-        self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
-
+        # 切换模式
+        self.interface.radioButton_2.toggled.connect(lambda: self.change_type())
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
-
-        #self.reminder.show()
-
-
-
+        # self.reminder.show()
         ''' 以下为界面初始化处理 '''
         for i in range(8):
             # 设定药方区结构
@@ -116,20 +109,18 @@ class Control:
         for addition in self.group_additions: addition.hide()  # 隐藏加号
         for table in self.group_tables: table.setShowGrid(False)  # 隐藏内边框
         for option in self.group_options: option.hide()  # 隐藏下拉框
-        # data = [('小sss汤', '3', '克'), ('哈哈', '2', '克' )]
         # self.front.set_table(self.interface.tablewidgetMedicine, data)
         # 测试代码
         sys.exit(app.exec_())
 
     def change_type(self):
         #  切换模式
+        # 清空所有框
         for widget in self.group_tables[0:3]:
             widget.clear()
-
         for line in self.group_inputs:
             line.clear()
-
-
+        # hhh
         if self.interface.radioButton_2.isChecked():
             print("当前处于开方模式")
             self.front.type = 1
@@ -179,9 +170,9 @@ class Control:
         else:
             pass
 
-    def buttonyes_reminder(self):
-        #self.front.save_data(self.interface.lineSymptom,'（需要变化）',box_id)
-        '''
+    def button_yes_reminder(self):
+        # self.front.save_data(self.interface.lineSymptom,'（需要变化）',box_id)
+        """
         text = self.interface.lineSymptom.text()
         #print(text)
         index = self.group_inputs.index(self.interface.lineSymptom)
@@ -191,7 +182,7 @@ class Control:
         self.front.search_area[index].append([text])
         self.front.set_all_tables(self.front.search_area)
         self.interface.lineSymptom.clear()
-        '''
+        """
         listIndex = []
         for i in self.group_inputs:
             if i.text():
@@ -210,9 +201,8 @@ class Control:
         #print(text)
         
         #print(index)
-        
 
-    def buttonno_reminder(self):
+    def button_no_reminder(self):
         self.reminder.hide()
         '''
         self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0, self.interface.lineSymptom,self.reminder))
@@ -234,11 +224,9 @@ class Control:
                 text_all[int(n/4)] += i
                 n+=1
             self.front.set_table(self.group_tables[5], text_all)
-
-
         elif self.front.type == 0:
             for i in range(3):
-                if len(search_area[i])!=0 and len(search_area[i+1]) != 0:
+                if len(self.search_area[i])!=0 and len(self.search_area[i+1]) != 0:
                     for l in search_area[i]:
                         for m in search_area[i+1]:
                             self.front.back.save_relation(i,l,m)
