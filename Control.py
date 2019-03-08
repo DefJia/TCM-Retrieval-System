@@ -129,8 +129,8 @@ class Control:
         for widget in self.group_tables[0:4]:
             widget.clear()
 
-        for list in self.front.search_area:
-            list.clear()
+        for list0 in self.front.search_area:
+            list0.clear()
 
         for line in self.group_inputs:
             line.clear()
@@ -254,7 +254,9 @@ class Control:
                     for l in self.front.search_area[i]:
                         for m in self.front.search_area[i+1]:
                             self.front.back.save_relation(i,l[0],m[0])
-                            
+            for list0 in self.front.search_area:
+                list0.clear()
+            
 
 
         '''
