@@ -52,11 +52,11 @@ def find_files(root_dir,word):
 if __name__=='__main__':
     #文件根目录
     #root_dir=sys.argv[1]
-    root_dir = r"D:\2018.6.25组会\药方著作"
+    root_dir = r"/home/defjia/Desktop/Pycharm/Medicine/Docs/"
     #要搜索的关键字
     #word=sys.argv[2]
     word = "枸杞"
     try:
-        find_files(root_dir,word)
+        find_files(root_dir, word)
     except Exception as e:
         print(e)

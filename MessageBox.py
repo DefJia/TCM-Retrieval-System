@@ -5,7 +5,10 @@ Created on Sun Oct  7 15:04:54 2018
 @author: yang
 """
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QApplication
+from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
+
 
 class MessageBox(QtWidgets.QWidget):
     def __init__(self,content,question):
@@ -60,5 +63,9 @@ class MessageBox(QtWidgets.QWidget):
     def showWindow(self):
         self.show()
 
+
 if __name__ == "__main__":
-    test = MessageBox("你好吗","还行")
+    app = QApplication(sys.argv)
+    main_window = MessageBox("你好吗","还行")
+    main_window.show()
+    sys.exit(app.exec_())

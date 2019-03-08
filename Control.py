@@ -6,7 +6,6 @@ import sys
 from Front import Frontend
 
 
-
 class Interface(QMainWindow, Ui_MainWindow):
     def __init__(self):
         # 修改界面
