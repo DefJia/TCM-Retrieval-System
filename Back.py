@@ -14,7 +14,7 @@ class Backend:
         self.cursor = self.database.cursor()
         # 连接数据库
 
-    def get_data(self, field_name):
+    def get_data(self, field_name, column = "name"):
         """
         :param field_name: str/int 字段名称（可填序号或名称）
         :return: list 相关字段数据列表
@@ -22,7 +22,7 @@ class Backend:
         if type(field_name) == int and 0 <= field_name <= 3:
             field_name = self.index[field_name]
         if type(field_name) == str and field_name in self.index:
-            sql = 'select name from ' + field_name
+            sql = 'select ' + column + ' from ' + field_name
             self.cursor.execute(sql)
             data = self.cursor.fetchall()
             return data
@@ -83,18 +83,27 @@ class Backend:
             return 0
         except sqlite3.IntegrityError:
             return 1
-
-    def save_relation(self,dbid,left_id,right_id):
+    def search_data(self,dbname,column,data):
+        try:
+            sql = 'select ' + column + ' from ' + dbname + " where name = '" + data +"'"
+            self.cursor.execute(sql)
+            data = self.cursor.fetchall()
+            return data[0]
+        except Exception as e:
+            print(e)
+    def save_relation(self,dbid,left_data,right_data):
         db_name = self.relations[dbid]
         left_name = db_name.split("_")[0]
         right_name = db_name.split("_")[-1]
+        left_id = int(self.search_data(left_name,"id",left_data)[0])
+        right_id = int(self.search_data(right_name,"id",right_data)[0])
         sql = format('insert into %s (%s_id,%s_id) values (%s,%s)' % (db_name,left_name,right_name,left_id, right_id))
         try:
             self.cursor.execute(sql)
             self.database.commit()
             return 0
         except Exception as e:
-            return e
+            print(e)
 
     def get_relations(self):
         pass

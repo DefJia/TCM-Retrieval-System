@@ -95,6 +95,7 @@ class Control:
         # 切换模式
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
+        self.interface.buttonInitial.clicked.connect(lambda: self.buttonInitial_clicked())
         # self.reminder.show()
         ''' 以下为界面初始化处理 '''
         for i in range(8):
@@ -115,9 +116,10 @@ class Control:
 
     def change_type(self):
         #  切换模式
-        # 清空所有框
-        for widget in self.group_tables[0:3]:
+        for widget in self.group_tables[0:4]:
             widget.clear()
+        for list0 in self.front.search_area:
+            list0.clear()
         for line in self.group_inputs:
             line.clear()
         # hhh
@@ -212,6 +214,12 @@ class Control:
         '''
         pass
 
+    def buttonInitial_clicked(self):
+        for i in self.front.search_area:
+            self.front.search_area.clear()
+        for widget in self.group_tables[0:4]:
+            widget.clear()
+
     def buttonInput_clicked(self):
         if self.front.type == 1:
             medicines = self.front.search_area[3]
@@ -226,12 +234,12 @@ class Control:
             self.front.set_table(self.group_tables[5], text_all)
         elif self.front.type == 0:
             for i in range(3):
-                if len(self.search_area[i])!=0 and len(self.search_area[i+1]) != 0:
-                    for l in search_area[i]:
-                        for m in search_area[i+1]:
-                            self.front.back.save_relation(i,l,m)
-
-
+                if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
+                    for l in self.front.search_area[i]:
+                        for m in self.front.search_area[i+1]:
+                            self.front.back.save_relation(i,l[0],m[0])
+            for list0 in self.front.search_area:
+                list0.clear()
         '''
         rows = self.interface.tablewidgetMedicine.rowCount()
 
