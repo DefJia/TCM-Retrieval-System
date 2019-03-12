@@ -216,12 +216,17 @@ class Control:
 
     def buttonInitial_clicked(self):
         for i in self.front.search_area:
-            self.front.search_area.clear()
+            i.clear()
 
-        for widget in self.group_tables[0:4]:
+        for widget in self.group_tables:
             widget.clear()
+        '''
+        for j in self.front.widgets:
+            j.clear()
 
-
+        for i in self.group_tables:
+            i.clear
+        '''
     def buttonInput_clicked(self):
         if self.front.type == 1:
             medicines = self.front.search_area[3]
