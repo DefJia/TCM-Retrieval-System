@@ -96,6 +96,7 @@ class Control:
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
         self.interface.buttonInitial.clicked.connect(lambda: self.buttonInitial_clicked())
+        self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())
         # self.reminder.show()
         ''' 以下为界面初始化处理 '''
         for i in range(8):
@@ -204,6 +205,10 @@ class Control:
         
         #print(index)
 
+    #def buttonDelete_clicked(self):
+        
+
+
     def button_no_reminder(self):
         self.reminder.hide()
         '''
@@ -216,10 +221,17 @@ class Control:
 
     def buttonInitial_clicked(self):
         for i in self.front.search_area:
-            self.front.search_area.clear()
-        for widget in self.group_tables[0:4]:
-            widget.clear()
+            i.clear()
 
+        for widget in self.group_tables:
+            widget.clear()
+        '''
+        for j in self.front.widgets:
+            j.clear()
+
+        for i in self.group_tables:
+            i.clear
+        '''
     def buttonInput_clicked(self):
         if self.front.type == 1:
             medicines = self.front.search_area[3]
@@ -232,6 +244,8 @@ class Control:
                 text_all[int(n/4)] += i
                 n+=1
             self.front.set_table(self.group_tables[5], text_all)
+
+
         elif self.front.type == 0:
             for i in range(3):
                 if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
