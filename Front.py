@@ -128,8 +128,10 @@ class Frontend:
             table.setRowCount(row)
             table.setColumnCount(column)
             for r in range(row):
-                for c in range(column):
+                columnCurrentRow = len(data_list[r])
+                for c in range(columnCurrentRow):               
                     table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
+                    
 
     def set_all_tables(self, data):
         cnt = 0

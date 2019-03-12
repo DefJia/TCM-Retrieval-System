@@ -100,6 +100,9 @@
        </disabled>
       </palette>
      </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
      </attribute>
@@ -143,6 +146,9 @@
      </property>
      <property name="midLineWidth">
       <number>0</number>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
@@ -371,6 +377,9 @@
      <property name="autoFillBackground">
       <bool>true</bool>
      </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
      </attribute>
@@ -405,6 +414,9 @@
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
@@ -491,6 +503,9 @@
        </disabled>
       </palette>
      </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
      </attribute>
@@ -525,6 +540,9 @@
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
@@ -611,6 +629,9 @@
        </disabled>
       </palette>
      </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
      </attribute>
@@ -660,6 +681,9 @@
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
