@@ -3,7 +3,6 @@ from Back import Backend
 from PyQt5.QtWidgets import QTableWidgetItem
 
 
-
 class Frontend:
     def __init__(self, interface, reminder=None, property=None):
         config = ConfigParser()
@@ -34,7 +33,7 @@ class Frontend:
         return 0
 
     def get_input(self, box_id, input_box, option_box):
-        # 当获取到输入触发此函数，然后在下拉框中显示匹配内容
+        # 当获取到输入，触发此函数，然后在下拉框中显示匹配内容
         text = input_box.text()
         if text:
             data = self.back.query_similar_data(box_id, text)
