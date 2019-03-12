@@ -217,8 +217,10 @@ class Control:
     def buttonInitial_clicked(self):
         for i in self.front.search_area:
             self.front.search_area.clear()
+
         for widget in self.group_tables[0:4]:
             widget.clear()
+
 
     def buttonInput_clicked(self):
         if self.front.type == 1:
@@ -232,6 +234,8 @@ class Control:
                 text_all[int(n/4)] += i
                 n+=1
             self.front.set_table(self.group_tables[5], text_all)
+
+
         elif self.front.type == 0:
             for i in range(3):
                 if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
