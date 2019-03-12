@@ -96,6 +96,7 @@ class Control:
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
         self.interface.buttonInitial.clicked.connect(lambda: self.buttonInitial_clicked())
+        self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())
         # self.reminder.show()
         ''' 以下为界面初始化处理 '''
         for i in range(8):
@@ -203,6 +204,10 @@ class Control:
         #print(text)
         
         #print(index)
+
+    #def buttonDelete_clicked(self):
+        
+
 
     def button_no_reminder(self):
         self.reminder.hide()
