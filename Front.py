@@ -3,7 +3,6 @@ from Back import Backend
 from PyQt5.QtWidgets import QTableWidgetItem
 
 
-
 class Frontend:
     def __init__(self, interface, reminder=None, property=None):
         config = ConfigParser()
@@ -34,7 +33,7 @@ class Frontend:
         return 0
 
     def get_input(self, box_id, input_box, option_box):
-        # 当获取到输入触发此函数，然后在下拉框中显示匹配内容
+        # 当获取到输入，触发此函数，然后在下拉框中显示匹配内容
         text = input_box.text()
         if text:
             data = self.back.query_similar_data(box_id, text)
@@ -129,8 +128,10 @@ class Frontend:
             table.setRowCount(row)
             table.setColumnCount(column)
             for r in range(row):
-                for c in range(column):
+                columnCurrentRow = len(data_list[r])
+                for c in range(columnCurrentRow):               
                     table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
+                    
 
     def set_all_tables(self, data):
         cnt = 0
@@ -139,6 +140,10 @@ class Frontend:
                 self.set_table(self.widgets[cnt], item)
             cnt += 1
         return 0
+
+    def deletedata(self,text,index):
+        self.back.deletedate(text,index)
+        pass
 
 
 if __name__ == '__main__':

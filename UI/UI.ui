@@ -323,7 +323,7 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>191</width>
+       <width>161</width>
        <height>41</height>
       </rect>
      </property>
@@ -333,7 +333,7 @@
       <rect>
        <x>10</x>
        <y>80</y>
-       <width>191</width>
+       <width>161</width>
        <height>321</height>
       </rect>
      </property>
@@ -393,7 +393,7 @@
     <widget class="QPushButton" name="buttonDisease">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>170</x>
        <y>30</y>
        <width>41</width>
        <height>41</height>
@@ -408,7 +408,7 @@
       <rect>
        <x>10</x>
        <y>70</y>
-       <width>191</width>
+       <width>161</width>
        <height>271</height>
       </rect>
      </property>

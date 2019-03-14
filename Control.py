@@ -1,6 +1,7 @@
 from UI.UI import Ui_MainWindow
 from UI.reminder import Ui_reminder
 from UI.property import Ui_Property
+from UI.MessageBox import MessageBox
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 import sys
 from Front import Frontend
@@ -19,6 +20,13 @@ class Reminder(QMainWindow, Ui_reminder):
         super(Reminder, self).__init__()
         self.setupUi(self)
 
+'''
+class ReminderAdvanced(QMainWindow, MessageBox, title, text):
+    app = QApplication(sys.argv)
+    main_window = MessageBox(title, text)
+    main_window.show()
+    sys.exit(app.exec_())
+'''
 
 class Property(QMainWindow, Ui_Property):
     def __init__(self):
@@ -85,19 +93,27 @@ class Control:
         self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.linePrescription))
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.lineMedicine))
         # reminder 按钮点击
-        self.reminder.buttonYes.clicked.connect(lambda: self.button_yes_reminder())
-        self.reminder.buttonNo.clicked.connect(lambda: self.button_no_reminder())
+        # self.reminder.buttonYes.clicked.connect(lambda: self.button_yes_reminder())
+        # self.reminder.buttonNo.clicked.connect(lambda: self.button_no_reminder())
         '''
         self.interface.buttonDisease.clicked.connect(lambda: self.button_clicked(self.interface.diseaseOption))
         self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.prescriptionOption))
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.medicineOption))
         '''
+<<<<<<< HEAD
         # 切换模式
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
         self.interface.buttonInitial.clicked.connect(lambda: self.buttonInitial_clicked())
-        self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())
+        self.interface.buttonDelete.clicked.connect(lambda: self.buttonRelationDelete_clicked())
         # self.reminder.show()
+=======
+        # --- 按钮组 --- #
+        self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
+        self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())  # 录入
+        self.interface.buttonInitial.clicked.connect(lambda: self.initial_button_clicked())  # 初始化
+        # self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())  # 删除
+>>>>>>> 5cf1c88cf836bf9b71c77afa14e39fbfba97db7a
         ''' 以下为界面初始化处理 '''
         for i in range(8):
             # 设定药方区结构
@@ -115,6 +131,14 @@ class Control:
         # 测试代码
         sys.exit(app.exec_())
 
+    @staticmethod
+    def show_reminder(title, text):
+        # 显示弹框
+        main_window = MessageBox(title, text)
+        main_window.show()
+        return main_window.status
+        # 1 -> Yes, 0 -> No
+
     def change_type(self):
         #  切换模式
         for widget in self.group_tables[0:4]:
@@ -123,37 +147,44 @@ class Control:
             list0.clear()
         for line in self.group_inputs:
             line.clear()
-        # hhh
+        # 清空当前所有信息
         if self.interface.radioButton_2.isChecked():
             print("当前处于开方模式")
             self.front.type = 1
             self.interface.labelType.setText('开方模式')
+            self.interface.groupboxSymptom.setGeometry(10, 80, 211, 411)
+            self.interface.groupboxDisease.setGeometry(220, 80, 241, 411)
             for addition in self.group_additions:
                 addition.hide()
         else:
             self.front.type = 0
             self.interface.labelType.setText('录入模式')
+
+            self.interface.groupboxSymptom.setGeometry(220, 80, 241, 411)
+            self.interface.groupboxDisease.setGeometry(10, 80, 211, 411)
+
             print("当前处于录入模式")
             for addition in self.group_additions:
                 addition.show()
         pass
 
     def line_text_changed(self, input_box):
-        # 原有代码已精简
+        # 检测到输入框有输入
         index = self.group_inputs.index(input_box)
         self.front.get_input(index, input_box, self.group_options[index])
         pass
 
     def option_clicked(self, option):
+        # 检测到下拉框被点击
         index = self.group_options.index(option)
         text = str(option.selectedItems()[0].text())
-        # self.group_inputs[index].setText(text)
         self.group_inputs[index].setText("")
         option.hide()
-        self.front.optioned_data(index, text)
+        self.front.optioned_data(index, text, 0)
         pass
 
     def table_option_clicked(self, table_id):
+        # 检测到列表中的选项被选中
         table = self.group_tables[table_id]
         try:
             if table_id != 3:
@@ -162,17 +193,33 @@ class Control:
         except IndexError:
             pass
 
-    def button_clicked(self,line):
-        # 之后根据front再做变化
+    def button_clicked(self, line):
+        # 录入模式中，当+按钮被点击
         # self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0))
-        # 此处代码已合并至Front的save_data
         text = line.text()
-        if text != None:
-            self.reminder.show()
-            print(text)
-        else:
-            pass
+        if text != '':
+            # self.reminder.show()
+            result = self.show_reminder('', '等等')
+            print(text)  # test
+            if result:
+                # 点击yes
+                listIndex = []
+                for i in self.group_inputs:
+                    if i.text():
+                        index = self.group_inputs.index(i)
+                        listIndex.append(index)
+                for l in listIndex:
+                    line = self.group_inputs[l]
+                    text = line.text()
+                    self.front.save_data(l, text)
+                    self.front.search_area[l].append([text])
+                    self.front.set_all_tables(self.front.search_area)
+                    line.clear()
+                    self.reminder.hide()
+                print(1)
+        pass
 
+    '''
     def button_yes_reminder(self):
         # self.front.save_data(self.interface.lineSymptom,'（需要变化）',box_id)
         """
@@ -204,35 +251,55 @@ class Control:
         #print(text)
         
         #print(index)
+    ''''''
+    def buttonRelationDelete_clicked(self):
+        for i in range(3):
+            if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
+                for l in self.front.search_area[i]:
+                    for m in self.front.search_area[i+1]:
+                        self.front.back.drop_relation(i, l[0], m[0])
+        for list0 in self.front.search_area:
+                list0.clear()
+        pass
 
-    #def buttonDelete_clicked(self):
-        
+
+    def buttonDelete_clicked(self):
+        for i in self.group_inputs:
+            #if i clicked:
+                text = str(option.selectedItems()[0].text())
+                index = self.group_options.index(i)
+
+                #self.front.search_area[i].selected.clear
+                #self.group_tables[i].selected.clear
+    pass
+        #self.front.back.deletedate(index,text)
 
 
     def button_no_reminder(self):
         self.reminder.hide()
-        '''
+        """
         self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0, self.interface.lineSymptom,self.reminder))
         self.interface.buttonDisease.clicked.connect(lambda: self.front.save_data(1, self.interface.lineDisease,self.reminder))
         self.interface.buttonPrescription.clicked.connect(lambda: self.front.save_data(2, self.interface.linePrescription,self.reminder))
         self.interface.buttonMedicine.clicked.connect(lambda: self.front.save_data(3, self.interface.lineMedicine,self.reminder))
-        '''
+        """
         pass
+    '''
 
-    def buttonInitial_clicked(self):
+    def initial_button_clicked(self):
+        # 初始化按钮
         for i in self.front.search_area:
             i.clear()
-
         for widget in self.group_tables:
             widget.clear()
         '''
         for j in self.front.widgets:
             j.clear()
-
         for i in self.group_tables:
             i.clear
         '''
     def buttonInput_clicked(self):
+        # 录入按钮
         if self.front.type == 1:
             medicines = self.front.search_area[3]
             if int(len(medicines))%4 == 0:
@@ -244,8 +311,6 @@ class Control:
                 text_all[int(n/4)] += i
                 n+=1
             self.front.set_table(self.group_tables[5], text_all)
-
-
         elif self.front.type == 0:
             for i in range(3):
                 if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
@@ -260,10 +325,8 @@ class Control:
         for rows_index in range(rows):
             # print items[item_index].text()
             print(self.interface.tablewidgetMedicine.item(rows_index, 0).text())
-
         print(rows)
         '''
-        #没写完
         pass
 
 

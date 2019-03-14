@@ -105,6 +105,38 @@ class Backend:
         except Exception as e:
             print(e)
 
+    def drop_relation(self,dbid,left_data,right_data):
+        db_name = self.relations[dbid]
+        front_name = db_name.split("_")[0]
+        back_name = db_name.split("_")[-1]
+        front_id = int(self.search_data(front_name, "id", left_data)[0])
+        back_id = int(self.search_data(back_name, "id", right_data)[0])
+        sql = format(
+            'DELETE FROM %s WHERE %s_id = %s and %s_id = %s' %(db_name, front_name, back_name, front_id, back_id)
+        )
+        try:
+            self.cursor.execute(sql)
+            self.database.commit()
+            return 0
+        except Exception as e:
+            print(e)
+        pass
+
+    def deletedate(self,dbid,text):
+        db_name = self.index[dbid]
+        id = int(self.search_data(db_name, "id", text)[0])
+        sql = format(
+            'DELETE FROM %s WHERE %s = %s' % (db_name, id, text)
+        )
+        try:
+            self.cursor.execute(sql)
+            self.database.commit()
+            return 0
+        except Exception as e:
+            print(e)
+        pass
+
+
     def get_relations(self):
         pass
 
