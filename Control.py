@@ -99,8 +99,6 @@ class Control:
         self.interface.buttonDisease.clicked.connect(lambda: self.button_clicked(self.interface.diseaseOption))
         self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.prescriptionOption))
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.medicineOption))
-        '''
-<<<<<<< HEAD
     
         # 切换模式
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())
