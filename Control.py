@@ -101,19 +101,20 @@ class Control:
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.medicineOption))
         '''
 <<<<<<< HEAD
+    
         # 切换模式
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
         self.interface.buttonInitial.clicked.connect(lambda: self.buttonInitial_clicked())
         self.interface.buttonDelete.clicked.connect(lambda: self.buttonRelationDelete_clicked())
         # self.reminder.show()
-=======
+
         # --- 按钮组 --- #
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())  # 录入
         self.interface.buttonInitial.clicked.connect(lambda: self.initial_button_clicked())  # 初始化
         # self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())  # 删除
->>>>>>> 5cf1c88cf836bf9b71c77afa14e39fbfba97db7a
+        '''
         ''' 以下为界面初始化处理 '''
         for i in range(8):
             # 设定药方区结构
