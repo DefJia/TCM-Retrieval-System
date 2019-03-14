@@ -866,10 +866,29 @@
      <string>开方模式</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="buttonDeleterelation">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>490</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>宋体</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>删除关系</string>
+    </property>
+   </widget>
    <widget class="QPushButton" name="buttonDelete">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>410</x>
       <y>490</y>
       <width>131</width>
       <height>51</height>

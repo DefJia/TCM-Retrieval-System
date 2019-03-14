@@ -112,7 +112,7 @@ class Backend:
         front_id = int(self.search_data(front_name, "id", left_data)[0])
         back_id = int(self.search_data(back_name, "id", right_data)[0])
         sql = format(
-            'DELETE FROM %s WHERE %s_id = %s and %s_id = %s' %(db_name, front_name, back_name, front_id, back_id)
+            'DELETE FROM %s WHERE %s_id = %s and %s_id = %s' %(db_name, front_name, front_id, back_name, back_id)
         )
         try:
             self.cursor.execute(sql)

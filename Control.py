@@ -75,7 +75,7 @@ class Control:
         for input_box in self.group_inputs:  # 输入框输入
             input_box.textChanged.connect(lambda: self.line_text_changed(input_box))
         '''
-        # self.interface.tablewidgetSymptom.clicked.connect(lambda: self.table_option_clicked(0))
+        self.interface.tablewidgetSymptom.clicked.connect(lambda: self.table_option_clicked(0))
         self.interface.tablewidgetDisease.clicked.connect(lambda: self.table_option_clicked(1))
         self.interface.tablewidgetPrescription.clicked.connect(lambda: self.table_option_clicked(2))
         self.interface.tablewidgetMedicine.clicked.connect(lambda: self.table_option_clicked(3))
@@ -100,20 +100,14 @@ class Control:
         self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.prescriptionOption))
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.medicineOption))
         '''
-        '''
-        # 切换模式
-        self.interface.radioButton_2.toggled.connect(lambda: self.change_type())
-        self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())
-        self.interface.buttonInitial.clicked.connect(lambda: self.buttonInitial_clicked())
-        self.interface.buttonDelete.clicked.connect(lambda: self.buttonRelationDelete_clicked())
-        # self.reminder.show()
-        '''
+
         # --- 按钮组 --- #
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())  # 录入
         self.interface.buttonInitial.clicked.connect(lambda: self.initial_button_clicked())  # 初始化
-        # self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())  # 删除
 
+        self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())  # 删除
+        self.interface.buttonDeleterelation.clicked.connect(lambda: self.buttonRelationDelete_clicked())# 删除关系
 
 
         ''' 以下为界面初始化处理 '''
@@ -254,29 +248,33 @@ class Control:
         
         #print(index)
     ''''''
+    '''
     def buttonRelationDelete_clicked(self):
         for i in range(3):
             if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
                 for l in self.front.search_area[i]:
                     for m in self.front.search_area[i+1]:
                         self.front.back.drop_relation(i, l[0], m[0])
-        for list0 in self.front.search_area:
-                list0.clear()
+        for i in self.front.search_area:
+            i.clear()
+        for widget in self.group_tables[0:5]:
+            widget.clear()
         pass
 
 
     def buttonDelete_clicked(self):
-        for i in self.group_inputs:
-            #if i clicked:
-                text = str(option.selectedItems()[0].text())
-                index = self.group_options.index(i)
+        index = self.table_option_clicked().index
+        text = self.table_option_clicked().text
 
+        self.front.back.deletedate(index,text)
+        #for i in self.group_tables[0:5]:
+            #if i clicked:
                 #self.front.search_area[i].selected.clear
                 #self.group_tables[i].selected.clear
     pass
         #self.front.back.deletedate(index,text)
 
-
+    '''
     def button_no_reminder(self):
         self.reminder.hide()
         """
@@ -292,7 +290,7 @@ class Control:
         # 初始化按钮
         for i in self.front.search_area:
             i.clear()
-        for widget in self.group_tables:
+        for widget in self.group_tables[0:5]:
             widget.clear()
         '''
         for j in self.front.widgets:
