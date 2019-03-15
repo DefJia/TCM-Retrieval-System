@@ -255,26 +255,40 @@ class Control:
                 for l in self.front.search_area[i]:
                     for m in self.front.search_area[i+1]:
                         self.front.back.drop_relation(i, l[0], m[0])
+        '''
         for i in self.front.search_area:
             i.clear()
         for widget in self.group_tables[0:5]:
             widget.clear()
+        '''
         pass
 
 
     def buttonDelete_clicked(self):
-        index = self.table_option_clicked().index
-        text = self.table_option_clicked().text
+        #index = self.table_option_clicked().index
+        #text = self.table_option_clicked().text
+        for i in range(4):
+            if self.group_tables[i].selectedItems():
+                text = self.group_tables[i].selectedItems()[0].text()
 
-        self.front.back.deletedate(index,text)
+                for j in self.front.search_area[i]:
+                    if j == text:
+                        self.front.search_area[i][j].remove()
+        self.front.set_all_tables(self.front.search_area)
+
+    '''
+        for widget in self.group_tables[0:5]:
+            widget.clear()
+
+        #self.front.back.deletedate(index,text)
         #for i in self.group_tables[0:5]:
             #if i clicked:
                 #self.front.search_area[i].selected.clear
                 #self.group_tables[i].selected.clear
-    pass
+    
         #self.front.back.deletedate(index,text)
 
-    '''
+   
     def button_no_reminder(self):
         self.reminder.hide()
         """

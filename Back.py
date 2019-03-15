@@ -126,7 +126,7 @@ class Backend:
         db_name = self.index[dbid]
         id = int(self.search_data(db_name, "id", text)[0])
         sql = format(
-            'DELETE FROM %s WHERE %s = %s' % (db_name, id, text)
+            'DELETE FROM %s WHERE id = %s' % (db_name, id)
         )
         try:
             self.cursor.execute(sql)
