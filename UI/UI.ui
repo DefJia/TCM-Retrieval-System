@@ -30,7 +30,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>80</y>
+      <y>70</y>
       <width>211</width>
       <height>411</height>
      </rect>
@@ -38,7 +38,7 @@
     <property name="font">
      <font>
       <family>宋体</family>
-      <pointsize>16</pointsize>
+      <pointsize>26</pointsize>
      </font>
     </property>
     <property name="title">
@@ -48,7 +48,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>40</y>
        <width>161</width>
        <height>41</height>
       </rect>
@@ -58,7 +58,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
+       <y>90</y>
        <width>161</width>
        <height>321</height>
       </rect>
@@ -117,7 +117,7 @@
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>30</y>
+       <y>40</y>
        <width>41</width>
        <height>41</height>
       </rect>
@@ -130,7 +130,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>70</y>
+       <y>80</y>
        <width>161</width>
        <height>271</height>
       </rect>
@@ -284,16 +284,16 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>10</x>
       <y>-10</y>
-      <width>191</width>
+      <width>221</width>
       <height>91</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>宋体</family>
-      <pointsize>22</pointsize>
+      <pointsize>28</pointsize>
      </font>
     </property>
     <property name="text">
@@ -304,7 +304,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>80</y>
+      <y>70</y>
       <width>241</width>
       <height>411</height>
      </rect>
@@ -312,7 +312,7 @@
     <property name="font">
      <font>
       <family>宋体</family>
-      <pointsize>16</pointsize>
+      <pointsize>26</pointsize>
      </font>
     </property>
     <property name="title">
@@ -322,7 +322,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>40</y>
        <width>161</width>
        <height>41</height>
       </rect>
@@ -332,7 +332,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
+       <y>90</y>
        <width>161</width>
        <height>321</height>
       </rect>
@@ -394,7 +394,7 @@
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>30</y>
+       <y>40</y>
        <width>41</width>
        <height>41</height>
       </rect>
@@ -407,7 +407,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>70</y>
+       <y>80</y>
        <width>161</width>
        <height>271</height>
       </rect>
@@ -433,7 +433,7 @@
     <property name="geometry">
      <rect>
       <x>460</x>
-      <y>80</y>
+      <y>70</y>
       <width>241</width>
       <height>411</height>
      </rect>
@@ -441,7 +441,7 @@
     <property name="font">
      <font>
       <family>宋体</family>
-      <pointsize>16</pointsize>
+      <pointsize>26</pointsize>
      </font>
     </property>
     <property name="title">
@@ -451,7 +451,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>40</y>
        <width>191</width>
        <height>41</height>
       </rect>
@@ -461,7 +461,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
+       <y>90</y>
        <width>191</width>
        <height>321</height>
       </rect>
@@ -520,7 +520,7 @@
      <property name="geometry">
       <rect>
        <x>200</x>
-       <y>30</y>
+       <y>40</y>
        <width>41</width>
        <height>41</height>
       </rect>
@@ -533,7 +533,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>70</y>
+       <y>80</y>
        <width>191</width>
        <height>271</height>
       </rect>
@@ -559,7 +559,7 @@
     <property name="geometry">
      <rect>
       <x>700</x>
-      <y>80</y>
+      <y>70</y>
       <width>251</width>
       <height>411</height>
      </rect>
@@ -567,7 +567,7 @@
     <property name="font">
      <font>
       <family>宋体</family>
-      <pointsize>16</pointsize>
+      <pointsize>26</pointsize>
      </font>
     </property>
     <property name="title">
@@ -577,7 +577,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>40</y>
        <width>191</width>
        <height>41</height>
       </rect>
@@ -587,7 +587,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
+       <y>90</y>
        <width>191</width>
        <height>321</height>
       </rect>
@@ -661,7 +661,7 @@
      <property name="geometry">
       <rect>
        <x>200</x>
-       <y>30</y>
+       <y>40</y>
        <width>41</width>
        <height>41</height>
       </rect>
@@ -674,7 +674,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>70</y>
+       <y>80</y>
        <width>191</width>
        <height>271</height>
       </rect>
@@ -804,16 +804,16 @@
    <widget class="QRadioButton" name="radioButton">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>40</y>
-      <width>131</width>
-      <height>24</height>
+      <x>530</x>
+      <y>30</y>
+      <width>181</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Noto Serif CJK SC</family>
-      <pointsize>14</pointsize>
+      <family>Academy Engraved LET</family>
+      <pointsize>20</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
@@ -828,16 +828,18 @@
    <widget class="QRadioButton" name="radioButton_2">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>40</y>
-      <width>131</width>
-      <height>24</height>
+      <x>760</x>
+      <y>30</y>
+      <width>161</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Noto Serif CJK SC</family>
-      <pointsize>14</pointsize>
+      <family>Academy Engraved LET</family>
+      <pointsize>20</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="text">
@@ -850,16 +852,16 @@
    <widget class="QLabel" name="labelType">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>230</x>
       <y>-10</y>
-      <width>191</width>
+      <width>261</width>
       <height>91</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>宋体</family>
-      <pointsize>22</pointsize>
+      <pointsize>28</pointsize>
      </font>
     </property>
     <property name="text">
@@ -871,7 +873,7 @@
      <rect>
       <x>30</x>
       <y>490</y>
-      <width>131</width>
+      <width>151</width>
       <height>51</height>
      </rect>
     </property>

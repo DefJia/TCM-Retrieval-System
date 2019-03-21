@@ -1,7 +1,9 @@
 from UI.UI import Ui_MainWindow
 from UI.reminder import Ui_reminder
 from UI.property import Ui_Property
+from UI.information import Ui_Information
 from UI.MessageBox import MessageBox
+from UI.inquire import Ui_Inquire
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 import sys
 from Front import Frontend
@@ -20,6 +22,12 @@ class Reminder(QMainWindow, Ui_reminder):
         super(Reminder, self).__init__()
         self.setupUi(self)
 
+class Information(QMainWindow, Ui_Information):
+    def __init__(self):
+        # 修改界面
+        super(Information, self).__init__()
+        self.setupUi(self)
+
 '''
 class ReminderAdvanced(QMainWindow, MessageBox, title, text):
     app = QApplication(sys.argv)
@@ -34,14 +42,23 @@ class Property(QMainWindow, Ui_Property):
         super(Property, self).__init__()
         self.setupUi(self)
 
+class Inquire(QMainWindow, Ui_Inquire):
+    def __init__(self):
+        # 修改界面
+        super(Inquire, self).__init__()
+        self.setupUi(self)
+
 
 class Control:
     def __init__(self):
         app = QApplication(sys.argv)
         self.interface = Interface()
-        self.interface.show()
+        #self.interface.show()
+        self.information = Information()
+        self.information.show()
         self.reminder = Reminder()
         self.property = Property()
+        self.inquire = Inquire()
         # 界面生成
         self.front = Frontend(self.interface, self.reminder, self.property)
         # 定义交互Class
@@ -100,8 +117,19 @@ class Control:
         self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.prescriptionOption))
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.medicineOption))
         '''
+        # --- information按钮组 --- #
+        self.information.IButtonYes.clicked.connect(lambda: self.interface.show())
+        self.information.IButtonInquire.clicked.connect(lambda: self.inquire.show())
+        self.information.IButtonOut.clicked.connect(lambda: self.information.hide())
+        # --- information 触发--- #
+        #self.information.lineSymptom.textChanged.connect(lambda: self.line_text_changed(self.information.lineSymptom))
 
-        # --- 按钮组 --- #
+        # --- inquire按钮组 --- #
+        self.inquire.RButtonOut.clicked.connect(lambda: self.inquire.hide())
+        # --- inquire 触发 --- #
+
+
+        # --- interface按钮组 --- #
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
         self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())  # 录入
         self.interface.buttonInitial.clicked.connect(lambda: self.initial_button_clicked())  # 初始化
@@ -148,16 +176,16 @@ class Control:
             print("当前处于开方模式")
             self.front.type = 1
             self.interface.labelType.setText('开方模式')
-            self.interface.groupboxSymptom.setGeometry(10, 80, 211, 411)
-            self.interface.groupboxDisease.setGeometry(220, 80, 241, 411)
+            self.interface.groupboxSymptom.setGeometry(10, 70, 211, 411)
+            self.interface.groupboxDisease.setGeometry(220, 70, 241, 411)
             for addition in self.group_additions:
                 addition.hide()
         else:
             self.front.type = 0
             self.interface.labelType.setText('录入模式')
 
-            self.interface.groupboxSymptom.setGeometry(220, 80, 241, 411)
-            self.interface.groupboxDisease.setGeometry(10, 80, 211, 411)
+            self.interface.groupboxSymptom.setGeometry(220, 70, 241, 411)
+            self.interface.groupboxDisease.setGeometry(10, 70, 211, 411)
 
             print("当前处于录入模式")
             for addition in self.group_additions:
@@ -183,7 +211,7 @@ class Control:
         # 检测到列表中的选项被选中
         table = self.group_tables[table_id]
         try:
-            if table_id != 3:
+            if table_id != 3 :
                 text = str(table.selectedItems()[0].text())
                 self.front.optioned_data(table_id, text, 1)
         except IndexError:
