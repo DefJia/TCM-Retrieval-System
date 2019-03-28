@@ -347,6 +347,16 @@
      </font>
     </property>
    </widget>
+   <widget class="QListWidget" name="option">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>320</y>
+      <width>241</width>
+      <height>151</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

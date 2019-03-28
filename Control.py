@@ -122,11 +122,12 @@ class Control:
         self.information.IButtonInquire.clicked.connect(lambda: self.inquire.show())
         self.information.IButtonOut.clicked.connect(lambda: self.information.hide())
         # --- information 触发--- #
-        #self.information.lineSymptom.textChanged.connect(lambda: self.line_text_changed(self.information.lineSymptom))
-
+        self.information.lineSymptom.textChanged.connect(lambda: self.i_line_text_changed())
+        self.information.option.hide()
         # --- inquire按钮组 --- #
         self.inquire.RButtonOut.clicked.connect(lambda: self.inquire.hide())
         # --- inquire 触发 --- #
+
 
 
         # --- interface按钮组 --- #
@@ -196,6 +197,12 @@ class Control:
         # 检测到输入框有输入
         index = self.group_inputs.index(input_box)
         self.front.get_input(index, input_box, self.group_options[index])
+        pass
+
+    def i_line_text_changed(self):
+
+        self.front.get_input(0, self.information.lineSymptom, self.information.option)
+
         pass
 
     def option_clicked(self, option):
