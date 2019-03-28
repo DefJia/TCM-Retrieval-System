@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>926</width>
+    <width>960</width>
     <height>841</height>
    </rect>
   </property>
@@ -347,15 +347,24 @@
      </font>
     </property>
    </widget>
-   <widget class="QListWidget" name="option">
+   <widget class="QTableWidget" name="option">
     <property name="geometry">
      <rect>
       <x>50</x>
       <y>320</y>
-      <width>241</width>
-      <height>151</height>
+      <width>256</width>
+      <height>171</height>
      </rect>
     </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <attribute name="horizontalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -363,7 +372,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>926</width>
+     <width>960</width>
      <height>25</height>
     </rect>
    </property>

@@ -124,6 +124,7 @@ class Control:
         # --- information 触发--- #
         self.information.lineSymptom.textChanged.connect(lambda: self.i_line_text_changed())
         self.information.option.hide()
+        self.information.option.clicked.connect(lambda: self.i_option_clicked(option))
         # --- inquire按钮组 --- #
         self.inquire.RButtonOut.clicked.connect(lambda: self.inquire.hide())
         # --- inquire 触发 --- #
@@ -199,10 +200,10 @@ class Control:
         self.front.get_input(index, input_box, self.group_options[index])
         pass
 
+
     def i_line_text_changed(self):
-
+        #information界面的方法
         self.front.get_input(0, self.information.lineSymptom, self.information.option)
-
         pass
 
     def option_clicked(self, option):
@@ -212,6 +213,15 @@ class Control:
         self.group_inputs[index].setText("")
         option.hide()
         self.front.optioned_data(index, text, 0)
+        pass
+
+    def i_option_clicked(self, option):
+        text = str(option.selectedItems()[0].text())
+        print(text)
+        print("1")
+        self.information.option.clean()
+        option.hide()
+        self.front.optioned_data(0, text, 0, 1)
         pass
 
     def table_option_clicked(self, table_id):

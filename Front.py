@@ -38,15 +38,18 @@ class Frontend:
         if text:
             data = self.back.query_similar_data(box_id, text)
             if data:
+                #print("测试1")
                 option_box.show()
                 self.set_table(option_box, data)
+
             else:
                 option_box.hide()
+                #print("测试")
         else:
             option_box.hide()
         return 0
 
-    def optioned_data(self, box_id, text, mode=0):
+    def optioned_data(self, box_id, text, mode=0, aaa=0):
         # 任意模式下，当option被选中时，显示相关数据
         # mode为0时只显示右边
         #self.search_area = [list() for i in range(4)]
@@ -57,24 +60,45 @@ class Frontend:
         '''
 
         # 初始化
-        target_indexs = list()
-        if [text] not in self.search_area[box_id]:
-            self.search_area[box_id].append([text])
-        if mode == 0 and box_id != 3:
-            target_indexs.append(box_id + 1)
-        elif mode == 1:
-            #left = box_id - 1
-            right = box_id + 1
-            #for i in (left, right):
-            if 0 <= right <= 3:
-                target_indexs.append(right)
-        for index in target_indexs:
-            sub_data = self.back.union_query(box_id, index, text)
-            if sub_data:
-                self.search_area[index] = sub_data
-        self.set_all_tables(self.search_area)
-        # print(self.search_area)
-        return 0
+        if aaa ==0:
+            target_indexs = list()
+            if [text] not in self.search_area[box_id]:
+                self.search_area[box_id].append([text])
+            if mode == 0 and box_id != 3:
+                target_indexs.append(box_id + 1)
+            elif mode == 1:
+                #left = box_id - 1
+                right = box_id + 1
+                #for i in (left, right):
+                if 0 <= right <= 3:
+                    target_indexs.append(right)
+            for index in target_indexs:
+                sub_data = self.back.union_query(box_id, index, text)
+                if sub_data:
+                    self.search_area[index] = sub_data
+            self.set_all_tables(self.search_area)
+            # print(self.search_area)
+            return 0
+        else:
+            target_indexs = list()
+            if [text] not in self.search_area[box_id]:
+                self.search_area[box_id].append([text])
+            '''
+            if mode == 0 and box_id != 3:
+                target_indexs.append(box_id + 1)
+            elif mode == 1:
+                # left = box_id - 1
+                right = box_id + 1
+                # for i in (left, right):
+                if 0 <= right <= 3:
+                    target_indexs.append(right)
+            '''
+            for index in target_indexs:
+                sub_data = self.back.union_query(box_id, index, text)
+                if sub_data:
+                    self.search_area[index] = sub_data
+            self.set_all_tables(self.search_area)
+            return 0
 
     def get_data(self, box_id=1, content=1):
         # 录入模式下，当添加按钮被触发时，将输入的内容添加到数据库
