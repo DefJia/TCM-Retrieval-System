@@ -123,7 +123,7 @@ class Frontend:
                 print('该名称已存在')
             else:
                 print('录入成功')
-
+    
 
     # 新加方法
     def add_item(self, box_id, text):
@@ -156,6 +156,8 @@ class Frontend:
                 for c in range(columnCurrentRow):               
                     table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
                     
+                        
+           
 
     def set_all_tables(self, data):
         cnt = 0
@@ -168,7 +170,9 @@ class Frontend:
     def deletedata(self,text,index):
         self.back.deletedate(text,index)
         pass
-
+    
+        
+        
 
 if __name__ == '__main__':
     pass
