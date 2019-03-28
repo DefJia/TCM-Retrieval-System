@@ -182,6 +182,23 @@ class Backend:
             for item in elem:
                 tmp[-1].append(str(item))
         return tmp
+    
+    def getPatientID(self,column,text):
+        self.cursor.execute('select id from patient where %s = ?' % column, (text, ))
+        # 先查询关系号
+        patientID = self.cursor.fetchone()
+        return patientID[0]
+    def get_full_patient_info(self,patientID):
+        self.cursor.execute('select name,gender,age,phone,identitynum,address from patient where id = ?' , (patientID, ))
+        # 先查询关系号
+        data = self.cursor.fetchone()
+        name = data[0]
+        gender = data[1]
+        age = data[2]
+        phone = data[3]
+        idcard = data[4] 
+        address = data[5]
+        return name,gender,age,phone,idcard,address 
 
 
 if __name__ == '__main__':

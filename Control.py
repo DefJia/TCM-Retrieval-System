@@ -133,7 +133,8 @@ class Control:
         # --- information 触发--- #
         self.information.lineSymptom.textChanged.connect(lambda: self.i_line_text_changed())
         self.information.option.hide()
-        self.information.option.clicked.connect(lambda: self.i_option_clicked(option))
+
+        self.information.option.clicked.connect(lambda: self.i_option_clicked(self.information.option))
 
         # --- inquire按钮组 --- #
         self.inquire.RButtonOut.clicked.connect(lambda: self.inquire.hide())
@@ -226,11 +227,13 @@ class Control:
         pass
 
     def i_option_clicked(self, option):
+
         # 检测到下拉框被点击
+
         text = str(option.selectedItems()[0].text())
         print(text)
         print("1")
-        self.information.option.clean()
+        self.information.option.clear()
         option.hide()
         self.front.optioned_data(0, text, 0, 1)
         pass
@@ -398,7 +401,30 @@ class Control:
         print(rows)
         '''
         pass
+    def get_history(self):
+        if self.information.linePhone != "" :
+            patientID = self.back.getPatientID('phone',self.information.linePhone.text())
+            if len(patientID) == 0 :
+                self.show_reminder("注意","查无此人！")
+                return 0
+        elif self.information.lineIdcard != "":
+            patientID = self.back.getPatientID('identitynum',self.information.lineIdcard.text())
+            if len(patientID) == 0 :
+                self.show_reminder("注意","查无此人！")
+                return 0
+        else:
+            self.show_reminder("注意","请输入手机或身份证！")
 
+            
+    def set_patient_info(self,patientID):
+        name,gender,age,phone,idcard,address = self.back.get_full_patient_info(patientID)
+        self.information.lineName.setText(name)
+        self.information.lineGender.setText(gender)
+        self.information.lineage.setText(age)
+        self.information.linePhone.setText(phone)
+        self.information.lineIdcard.setText(idcard)
+        self.information.lineAddress.setText(address)
+        
 
 #information 面板
     def i_buttonInput_clicked(self):
