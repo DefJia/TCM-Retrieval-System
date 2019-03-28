@@ -220,7 +220,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineAdress">
+      <widget class="QLineEdit" name="lineAddress">
        <property name="font">
         <font>
          <pointsize>20</pointsize>

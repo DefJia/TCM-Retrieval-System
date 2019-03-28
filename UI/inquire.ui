@@ -131,16 +131,6 @@
      <string>检索条件</string>
     </property>
    </widget>
-   <widget class="QTableView" name="tableView">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>270</y>
-      <width>661</width>
-      <height>321</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="RButtonYes">
     <property name="geometry">
      <rect>
@@ -175,6 +165,16 @@
     </property>
     <property name="text">
      <string>退出</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>270</y>
+      <width>681</width>
+      <height>291</height>
+     </rect>
     </property>
    </widget>
   </widget>

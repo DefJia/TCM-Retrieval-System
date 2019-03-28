@@ -4,6 +4,7 @@ from UI.property import Ui_Property
 from UI.information import Ui_Information
 from UI.MessageBox import MessageBox
 from UI.inquire import Ui_Inquire
+from UI.wrong import Ui_Wrong
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 import sys
 from Front import Frontend
@@ -26,6 +27,12 @@ class Information(QMainWindow, Ui_Information):
     def __init__(self):
         # 修改界面
         super(Information, self).__init__()
+        self.setupUi(self)
+
+class Wrong(QMainWindow, Ui_Wrong):
+    def __init__(self):
+        # 修改界面
+        super(Wrong, self).__init__()
         self.setupUi(self)
 
 '''
@@ -56,6 +63,7 @@ class Control:
         #self.interface.show()
         self.information = Information()
         self.information.show()
+        self.interface.show()
         self.reminder = Reminder()
         self.property = Property()
         self.inquire = Inquire()
@@ -118,6 +126,7 @@ class Control:
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.medicineOption))
         '''
         # --- information按钮组 --- #
+        self.information.IButtonYes.clicked.connect(lambda: self.i_buttonInput_clicked())
         self.information.IButtonYes.clicked.connect(lambda: self.interface.show())
         self.information.IButtonInquire.clicked.connect(lambda: self.inquire.show())
         self.information.IButtonOut.clicked.connect(lambda: self.information.hide())
@@ -125,6 +134,7 @@ class Control:
         self.information.lineSymptom.textChanged.connect(lambda: self.i_line_text_changed())
         self.information.option.hide()
         self.information.option.clicked.connect(lambda: self.i_option_clicked(option))
+
         # --- inquire按钮组 --- #
         self.inquire.RButtonOut.clicked.connect(lambda: self.inquire.hide())
         # --- inquire 触发 --- #
@@ -216,6 +226,7 @@ class Control:
         pass
 
     def i_option_clicked(self, option):
+        # 检测到下拉框被点击
         text = str(option.selectedItems()[0].text())
         print(text)
         print("1")
@@ -388,6 +399,28 @@ class Control:
         '''
         pass
 
+
+#information 面板
+    def i_buttonInput_clicked(self):
+        name = self.information.lineName.text()
+        gender = self.information.lineGender.text()
+        age = self.information.lineage.text()
+        phone = self.information.linephone.text()
+        identitynum = self.information.lineidentitynum.text()
+        address = self.information.lineaddress.text()
+
+        #inquirydate = line
+        look = self.information.linelook.text()
+        listen = self.information.linelisten.text()
+        question = self.information.linequestion.text()
+        feel = self.information.linefeel.text()
+        menstruation = self.information.linemenstruation.text()
+        leucorrhoea = self.information.lineleucorrhoea.text()
+        prescription = self.information.lineprescription.text()
+        mainsymptom = self.information.lineprescription.text()
+        self.front.back.i_save_data(self.information.linephone,name,gender,age,phone,
+                                    identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
+        pass
 
 if __name__ == "__main__":
     test = Control()

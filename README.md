@@ -63,6 +63,12 @@
 - [ ] 修改medicine表结构，添加属性
 - [ ] 新建药方表
 
+### information 界面
+- [ ] 添加过程可能有bug
+- [ ] 主诉，点击option出现bug
+- [ ] 查询功能没有测试
+- [ ] 界面，6个框
+
 ------
 
 Collaborators: [Alanlinzy](https://github.com/alanlinzy), [Brahamack](https://github.com/brahamack), [Defjia](https://github.com/DefJia)

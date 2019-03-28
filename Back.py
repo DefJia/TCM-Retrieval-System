@@ -1,6 +1,7 @@
 from configparser import ConfigParser
 import sqlite3
-
+#import UI.Wrong
+import time
 
 class Backend:
     def __init__(self):
@@ -83,6 +84,36 @@ class Backend:
             return 0
         except sqlite3.IntegrityError:
             return 1
+
+    def i_save_data(self,linephone,name,gender,age,phone,
+                    identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom):
+        if linephone.text() == "" and identitynum.text() == "":
+            UI.Wrong.show()#不知道行不行
+        else:
+            if identitynum.text() =="":
+                identitynum.settext(000000000000000000)
+                id = 000000000000000000 + linephone.text()
+            else:
+                id =identitynum.text() + linephone.text()
+
+                inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+
+            sql1 = format('insert into patient (name,gender,age,phone,identitynum,address,id) '
+                     'values ("%s","%s","%s","%s","%s","%s","%s")' % (name,gender,age,phone,identitynum,address,id))
+
+            sql2 = format('insert into history (id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom) '
+                     'values ("%s","%s","%s","%s","%s","%s","%s","%s","%s","%s")'
+                         % (id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom))
+
+            try:
+                self.cursor.execute(sql1)
+                #self.database.commit()
+                self.cursor.execute(sql2)
+                self.database.commit()
+                return 0
+            except sqlite3.IntegrityError:
+                return 1
+
     def search_data(self,dbname,column,data):
         try:
             sql = 'select ' + column + ' from ' + dbname + " where name = '" + data +"'"
