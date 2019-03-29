@@ -4,24 +4,32 @@ from PyQt5.QtWidgets import QTableWidgetItem
 
 
 class Frontend:
-    def __init__(self, interface, reminder=None, property=None):
+    def __init__(self, interface, reminder=None, information = None,property=None) :
         config = ConfigParser()
         config.read('.config.ini')
         self.index = config.get('Setting', 'index').split(',')
         # 读取配置文件
         self.interface = interface
         self.reminder = reminder
-
+        self.information = information
         self.property = property
         self.type = 1  # 模式
         self.location = tuple()  # 当前位置
         self.search_area = [list(), list(), list(), list()]  # 检索区
+        self.mainSymptom = list()
         self.work_area = dict()  # 药方工作区
         self.widgets = list(range(4))
         self.widgets[0] = self.interface.tablewidgetSymptom
         self.widgets[1] = self.interface.tablewidgetDisease
         self.widgets[2] = self.interface.tablewidgetPrescription
         self.widgets[3] = self.interface.tablewidgetMedicine
+        self.viceSymptoms = list(range(6))
+        self.viceSymptoms[0] =self.information.lineLook 
+        self.viceSymptoms[1] =self.information.lineListen
+        self.viceSymptoms[2] =self.information.lineQuestion  
+        self.viceSymptoms[3] =self.information.lineFeel 
+        self.viceSymptoms[4] =self.information.lineMenstruation  
+        self.viceSymptoms[5] =self.information.lineLeucorrhoea
         # Global Variable
         self.back = Backend()
         # Import function
@@ -60,19 +68,23 @@ class Frontend:
             widget.clear()
         '''
 
-        # 初始化
+        # 初始化 
         if aaa ==0:
             target_indexs = list()
             if [text] not in self.search_area[box_id]:
                 self.search_area[box_id].append([text])
-            if mode == 0 and box_id != 3:
+            if mode == 1 and box_id != 3:
                 target_indexs.append(box_id + 1)
-            elif mode == 1:
-                #left = box_id - 1
+                print(target_indexs)
+                pass
+            '''
+            elif mode == 0:
                 right = box_id + 1
-                #for i in (left, right):
                 if 0 <= right <= 3:
                     target_indexs.append(right)
+                 #不需要关系
+                pass
+            '''
             for index in target_indexs:
                 sub_data = self.back.union_query(box_id, index, text)
                 if sub_data:
@@ -80,25 +92,18 @@ class Frontend:
             self.set_all_tables(self.search_area)
             # print(self.search_area)
             return 0
-        else:
-            target_indexs = list()
-            if [text] not in self.search_area[box_id]:
-                self.search_area[box_id].append([text])
-            '''
-            if mode == 0 and box_id != 3:
-                target_indexs.append(box_id + 1)
-            elif mode == 1:
-                # left = box_id - 1
-                right = box_id + 1
-                # for i in (left, right):
-                if 0 <= right <= 3:
-                    target_indexs.append(right)
+        elif aaa == 1:
+            #target_indexs = list()
+            if [text] not in self.mainSymptom:
+                self.mainSymptom.append([text])
             '''
             for index in target_indexs:
                 sub_data = self.back.union_query(box_id, index, text)
                 if sub_data:
-                    self.search_area[index] = sub_data
-            self.set_all_tables(self.search_area)
+                    self.mainSymptom = sub_data
+            '''
+            self.set_table(self.information.tablewidgetMainSymptom,self.mainSymptom)
+            # self.mainSymptom.clear()
             return 0
 
     def get_data(self, box_id=1, content=1):

@@ -68,7 +68,7 @@ class Control:
         self.property = Property()
         self.inquire = Inquire()
         # 界面生成
-        self.front = Frontend(self.interface, self.reminder, self.property)
+        self.front = Frontend(self.interface, self.reminder, self.information, self.property)
         # 定义交互Class
         self.group_inputs = list()
         self.group_inputs.append(self.interface.lineSymptom)
@@ -223,16 +223,15 @@ class Control:
         text = str(option.selectedItems()[0].text())
         self.group_inputs[index].setText("")
         option.hide()
-        self.front.optioned_data(index, text, 0)
+        mode = self.front.type
+        self.front.optioned_data(index, text, mode)
         pass
 
     def i_option_clicked(self, option):
-
         # 检测到下拉框被点击
-
         text = str(option.selectedItems()[0].text())
         print(text)
-        print("1")
+        #print("1")
         self.information.option.clear()
         option.hide()
         self.front.optioned_data(0, text, 0, 1)
@@ -241,10 +240,11 @@ class Control:
     def table_option_clicked(self, table_id):
         # 检测到列表中的选项被选中
         table = self.group_tables[table_id]
+        mode = self.front.type
         try:
             if table_id != 3 :
                 text = str(table.selectedItems()[0].text())
-                self.front.optioned_data(table_id, text, 1)
+                self.front.optioned_data(table_id, text, mode)
         except IndexError:
             pass
 
@@ -329,10 +329,10 @@ class Control:
         for i in range(4):
             if self.group_tables[i].selectedItems():
                 text = self.group_tables[i].selectedItems()[0].text()
+                self.front.search_area[i].remove([text])
 
-                for j in self.front.search_area[i]:
-                    if j == text:
-                        self.front.search_area[i][j].remove()
+        for widget in self.group_tables[0:4]:
+            widget.clear()
         self.front.set_all_tables(self.front.search_area)
 
     '''
@@ -403,12 +403,12 @@ class Control:
         pass
     def get_history(self):
         if self.information.linePhone != "" :
-            patientID = self.back.getPatientID('phone',self.information.linePhone.text())
+            patientID = self.front.back.getPatientID('phone',self.information.linePhone.text())
             if len(patientID) == 0 :
                 self.show_reminder("注意","查无此人！")
                 return 0
         elif self.information.lineIdcard != "":
-            patientID = self.back.getPatientID('identitynum',self.information.lineIdcard.text())
+            patientID = self.front.back.getPatientID('identitynum',self.information.lineIdentitynum.text())
             if len(patientID) == 0 :
                 self.show_reminder("注意","查无此人！")
                 return 0
@@ -417,12 +417,12 @@ class Control:
 
             
     def set_patient_info(self,patientID):
-        name,gender,age,phone,idcard,address = self.back.get_full_patient_info(patientID)
+        name,gender,age,phone,identitynum,address = self.front.back.get_full_patient_info(patientID)
         self.information.lineName.setText(name)
         self.information.lineGender.setText(gender)
-        self.information.lineage.setText(age)
+        self.information.lineAge.setText(age)
         self.information.linePhone.setText(phone)
-        self.information.lineIdcard.setText(idcard)
+        self.information.lineIdentitynum.setText(idcard)
         self.information.lineAddress.setText(address)
         
 
@@ -430,22 +430,22 @@ class Control:
     def i_buttonInput_clicked(self):
         name = self.information.lineName.text()
         gender = self.information.lineGender.text()
-        age = self.information.lineage.text()
-        phone = self.information.linephone.text()
-        identitynum = self.information.lineidentitynum.text()
-        address = self.information.lineaddress.text()
+        age = self.information.lineAge.text()
+        phone = self.information.linePhone.text()
+        identitynum = self.information.lineIdentitynum.text()
+        address = self.information.lineAddress.text()
 
         #inquirydate = line
-        look = self.information.linelook.text()
-        listen = self.information.linelisten.text()
-        question = self.information.linequestion.text()
-        feel = self.information.linefeel.text()
-        menstruation = self.information.linemenstruation.text()
+        look = self.information.lineLook.text()
+        listen = self.information.lineListen.text()
+        question = self.information.lineQuestion.text()
+        feel = self.information.lineFeel.text()
+        menstruation = self.information.lineMenstruation.text()
         leucorrhoea = self.information.lineleucorrhoea.text()
-        prescription = self.information.lineprescription.text()
-        mainsymptom = self.information.lineprescription.text()
-        self.front.back.i_save_data(self.information.linephone,name,gender,age,phone,
-                                    identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
+        #prescription = self.information.linePrescription.text()
+        mainsymptom = self.information.linePrescription.text()
+        self.front.back.i_save_data(self.information.linephone,name,gender,age,
+        phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)                                                
         pass
 
 if __name__ == "__main__":

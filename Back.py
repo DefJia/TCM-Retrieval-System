@@ -87,8 +87,10 @@ class Backend:
 
     def i_save_data(self,linephone,name,gender,age,phone,
                     identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom):
+                    
         if linephone.text() == "" and identitynum.text() == "":
-            UI.Wrong.show()#不知道行不行
+            #UI.Wrong.show()#不知道行不行
+            print("wrong")
         else:
             if identitynum.text() =="":
                 identitynum.settext(000000000000000000)
@@ -114,7 +116,7 @@ class Backend:
             except sqlite3.IntegrityError:
                 return 1
 
-    def search_data(self,dbname,column,data):
+    def search_data(self, dbname, column, data):
         try:
             sql = 'select ' + column + ' from ' + dbname + " where name = '" + data +"'"
             self.cursor.execute(sql)
@@ -196,9 +198,9 @@ class Backend:
         gender = data[1]
         age = data[2]
         phone = data[3]
-        idcard = data[4] 
+        identitynum = data[4] 
         address = data[5]
-        return name,gender,age,phone,idcard,address 
+        return name,gender,age,phone,identitynum,address 
 
 
 if __name__ == '__main__':
