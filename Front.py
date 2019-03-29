@@ -11,6 +11,7 @@ class Frontend:
         # 读取配置文件
         self.interface = interface
         self.reminder = reminder
+
         self.property = property
         self.type = 1  # 模式
         self.location = tuple()  # 当前位置

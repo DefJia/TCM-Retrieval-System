@@ -32,29 +32,11 @@
      <string>确定</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_8">
+   <widget class="QLineEdit" name="tablewidgetMainSymptom">
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>510</y>
-      <width>198</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>望闻问切经带</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_9">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>320</y>
+      <y>250</y>
       <width>461</width>
       <height>171</height>
      </rect>
@@ -102,7 +84,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>80</y>
+      <y>60</y>
       <width>241</width>
       <height>71</height>
      </rect>
@@ -135,7 +117,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>160</y>
+      <y>120</y>
       <width>241</width>
       <height>71</height>
      </rect>
@@ -201,7 +183,7 @@
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>80</y>
+      <y>60</y>
       <width>241</width>
       <height>71</height>
      </rect>
@@ -234,7 +216,7 @@
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>160</y>
+      <y>120</y>
       <width>351</width>
       <height>71</height>
      </rect>
@@ -267,7 +249,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>240</y>
+      <y>180</y>
       <width>241</width>
       <height>71</height>
      </rect>
@@ -332,26 +314,11 @@
      <string>退出</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_16">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>550</y>
-      <width>461</width>
-      <height>161</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-   </widget>
    <widget class="QTableWidget" name="option">
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>320</y>
+      <y>250</y>
       <width>256</width>
       <height>171</height>
      </rect>
@@ -365,6 +332,144 @@
     <attribute name="verticalHeaderVisible">
      <bool>false</bool>
     </attribute>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>440</y>
+      <width>841</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>望</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineEdit_16">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_15">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>闻</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lineEdit_17">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_16">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>问</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="lineEdit_18">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_17">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>切</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="lineEdit_19">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_18">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>经</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="lineEdit_20">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_19">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>带</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="lineEdit_21">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
