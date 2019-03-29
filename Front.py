@@ -75,7 +75,6 @@ class Frontend:
                 self.search_area[box_id].append([text])
             if mode == 1 and box_id != 3:
                 target_indexs.append(box_id + 1)
-                print(target_indexs)
                 pass
             '''
             elif mode == 0:
