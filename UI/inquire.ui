@@ -131,7 +131,7 @@
      <string>检索条件</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="RButtonYes">
+   <widget class="QPushButton" name="ButtonYes">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -149,7 +149,7 @@
      <string>确定</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="RButtonOut">
+   <widget class="QPushButton" name="ButtonOut">
     <property name="geometry">
      <rect>
       <x>440</x>

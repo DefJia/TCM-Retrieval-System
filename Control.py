@@ -35,6 +35,8 @@ class Wrong(QMainWindow, Ui_Wrong):
         super(Wrong, self).__init__()
         self.setupUi(self)
 
+
+
 '''
 class ReminderAdvanced(QMainWindow, MessageBox, title, text):
     app = QApplication(sys.argv)
@@ -137,7 +139,7 @@ class Control:
         self.information.option.clicked.connect(lambda: self.i_option_clicked(self.information.option))
 
         # --- inquire按钮组 --- #
-        self.inquire.RButtonOut.clicked.connect(lambda: self.inquire.hide())
+        self.inquire.ButtonYes.clicked.connect(lambda: self.inquire.hide())
         # --- inquire 触发 --- #
 
 
@@ -149,6 +151,9 @@ class Control:
 
         self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())  # 删除
         self.interface.buttonDeleterelation.clicked.connect(lambda: self.buttonRelationDelete_clicked())# 删除关系
+
+        # --- Inquire按钮组 --- #
+        self.inquire.ButtonYes.clicked.connect(lambda: self.iq_buttonYes_clicked())  # 查询
 
 
         ''' 以下为界面初始化处理 '''
@@ -234,7 +239,9 @@ class Control:
         #print("1")
         self.information.option.clear()
         option.hide()
+        print("1")
         self.front.optioned_data(0, text, 0, 1)
+        self.information.lineSymptom.clear()
         pass
 
     def table_option_clicked(self, table_id):
@@ -441,11 +448,20 @@ class Control:
         question = self.information.lineQuestion.text()
         feel = self.information.lineFeel.text()
         menstruation = self.information.lineMenstruation.text()
-        leucorrhoea = self.information.lineleucorrhoea.text()
+        leucorrhoea = self.information.lineLeucorrhoea.text()
         #prescription = self.information.linePrescription.text()
-        mainsymptom = self.information.linePrescription.text()
-        self.front.back.i_save_data(self.information.linephone,name,gender,age,
-        phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)                                                
+        mainsymptom = self.information.lineSymptom.text()
+        prescription= "null"
+        self.front.back.i_save_data(self.information.linePhone,name,gender,age,
+        phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
+        pass
+
+#iinquire 面板
+    def iq_buttonYes_clicked(self):
+        name = self.inquire.lineName.text()
+        phone = self.inquire.linePhone.text()
+        idcard = self.inquire.lineIdcard.text()
+        self.front.back.iq_inquire(name,phone,idcard)
         pass
 
 if __name__ == "__main__":

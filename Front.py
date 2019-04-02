@@ -92,17 +92,34 @@ class Frontend:
             # print(self.search_area)
             return 0
         elif aaa == 1:
-            #target_indexs = list()
-            if [text] not in self.mainSymptom:
-                self.mainSymptom.append([text])
+            target_indexs = list()
+            if [text] not in self.search_area[box_id]:
+                self.search_area[box_id].append([text])
+            if mode == 1 and box_id != 3:
+                target_indexs.append(box_id + 1)
+                pass
+            '''
+            elif mode == 0:
+                right = box_id + 1
+                if 0 <= right <= 3:
+                    target_indexs.append(right)
+                 #不需要关系
+                pass
             '''
             for index in target_indexs:
                 sub_data = self.back.union_query(box_id, index, text)
                 if sub_data:
-                    self.mainSymptom = sub_data
-            '''
+                    self.search_area[index] = sub_data
+            self.set_all_tables(self.search_area)
+
+            #target_indexs = list()
+            if [text] not in self.mainSymptom:
+                self.mainSymptom.append([text])
+
+            print(self.mainSymptom)
             self.set_table(self.information.tablewidgetMainSymptom,self.mainSymptom)
             # self.mainSymptom.clear()
+
             return 0
 
     def get_data(self, box_id=1, content=1):
@@ -146,7 +163,7 @@ class Frontend:
     def set_table(table, data_list):
         # data_list: [[item, item], [item, item]]
         if data_list:
-            # print(data_list)
+            print(data_list)
             row = len(data_list)
             '''
             if row > 1:
@@ -158,7 +175,7 @@ class Frontend:
             table.setColumnCount(column)
             for r in range(row):
                 columnCurrentRow = len(data_list[r])
-                for c in range(columnCurrentRow):               
+                for c in range(columnCurrentRow):
                     table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
                     
                         

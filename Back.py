@@ -51,6 +51,7 @@ class Backend:
         data = self.convert_raw_to_data(names) if names else list()
         return data
 
+
     def union_query(self, box_id, index, text):
         """
         :param box_id: 输入的id
@@ -75,6 +76,13 @@ class Backend:
             raw = self.cursor.fetchall()
             return self.convert_raw_to_data(raw)
 
+    def iq_inquire(self, name, phone, idcard):
+
+        self.cursor.execute('select * from name where name = %s' % name)
+
+
+        pass
+
     def save_data(self, db_name, name):
         sql = format('insert into %s (name) values ("%s")' % (db_name, name))
         try:
@@ -87,7 +95,7 @@ class Backend:
 
     def i_save_data(self,linephone,name,gender,age,phone,
                     identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom):
-                    
+
         if linephone.text() == "" and identitynum.text() == "":
             #UI.Wrong.show()#不知道行不行
             print("wrong")
@@ -97,12 +105,11 @@ class Backend:
                 id = 000000000000000000 + linephone.text()
             else:
                 id =identitynum.text() + linephone.text()
-
                 inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 
             sql1 = format('insert into patient (name,gender,age,phone,identitynum,address,id) '
                      'values ("%s","%s","%s","%s","%s","%s","%s")' % (name,gender,age,phone,identitynum,address,id))
-
+            print(sql1)
             sql2 = format('insert into history (id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom) '
                      'values ("%s","%s","%s","%s","%s","%s","%s","%s","%s","%s")'
                          % (id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom))
