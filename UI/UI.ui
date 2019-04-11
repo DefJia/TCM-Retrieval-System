@@ -271,7 +271,7 @@
       <x>990</x>
       <y>100</y>
       <width>361</width>
-      <height>741</height>
+      <height>711</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -782,7 +782,7 @@
      <string>典籍</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="buttonClean_2">
+   <widget class="QPushButton" name="buttonSave">
     <property name="geometry">
      <rect>
       <x>750</x>
@@ -904,6 +904,24 @@
     </property>
     <property name="text">
      <string>删除</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonOut">
+    <property name="geometry">
+     <rect>
+      <x>1180</x>
+      <y>820</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>退出</string>
     </property>
    </widget>
   </widget>

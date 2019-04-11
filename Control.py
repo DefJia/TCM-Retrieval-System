@@ -5,6 +5,7 @@ from UI.information import Ui_Information
 from UI.MessageBox import MessageBox
 from UI.inquire import Ui_Inquire
 from UI.wrong import Ui_Wrong
+from UI.final import Ui_final
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 import sys
 from Front import Frontend
@@ -57,6 +58,12 @@ class Inquire(QMainWindow, Ui_Inquire):
         super(Inquire, self).__init__()
         self.setupUi(self)
 
+class Final(QMainWindow, Ui_final):
+    def __init__(self):
+        # 修改界面
+        super(Final, self).__init__()
+        self.setupUi(self)
+
 
 class Control:
     def __init__(self):
@@ -69,6 +76,7 @@ class Control:
         self.reminder = Reminder()
         self.property = Property()
         self.inquire = Inquire()
+        self.final = Final()
         # 界面生成
         self.front = Frontend(self.interface, self.reminder, self.information, self.property)
         # 定义交互Class
@@ -94,6 +102,8 @@ class Control:
         self.group_tables.append(self.interface.tablewidgetMedicine)
         self.group_tables.append(self.interface.tablewidgetBook)
         self.group_tables.append(self.interface.tablewidgetPrescribe)
+
+        self.id = 0
         # 定义组件组
         ''' 以下为信号操作 '''
         '''
@@ -129,7 +139,7 @@ class Control:
         '''
         # --- information按钮组 --- #
         self.information.IButtonYes.clicked.connect(lambda: self.i_buttonInput_clicked())
-        self.information.IButtonYes.clicked.connect(lambda: self.interface.show())
+        #self.information.IButtonYes.clicked.connect(lambda: self.interface.show())
         self.information.IButtonInquire.clicked.connect(lambda: self.inquire.show())
         self.information.IButtonOut.clicked.connect(lambda: self.information.hide())
         # --- information 触发--- #
@@ -139,7 +149,7 @@ class Control:
         self.information.option.clicked.connect(lambda: self.i_option_clicked(self.information.option))
 
         # --- inquire按钮组 --- #
-        self.inquire.ButtonYes.clicked.connect(lambda: self.inquire.hide())
+        #self.inquire.ButtonYes.clicked.connect(lambda: self.inquire.hide())
         # --- inquire 触发 --- #
 
 
@@ -151,9 +161,11 @@ class Control:
 
         self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())  # 删除
         self.interface.buttonDeleterelation.clicked.connect(lambda: self.buttonRelationDelete_clicked())# 删除关系
-
+        self.interface.buttonOut.clicked.connect(lambda: self.interface.hide())  # 删除
+        self.interface.buttonSave.clicked.connect(lambda: self.buttonSave_clicked())  # 最终保存
         # --- Inquire按钮组 --- #
         self.inquire.ButtonYes.clicked.connect(lambda: self.iq_buttonYes_clicked())  # 查询
+        self.inquire.ButtonOut.clicked.connect(lambda: self.inquire.hide())
 
 
         ''' 以下为界面初始化处理 '''
@@ -261,7 +273,7 @@ class Control:
         text = line.text()
         if text != '':
             # self.reminder.show()
-            result = self.show_reminder('', '等等')
+            result = self.show_reminder('', '添加成功')
             print(text)  # test
             if result:
                 # 点击yes
@@ -281,6 +293,18 @@ class Control:
                 print(1)
         pass
 
+
+    def buttonSave_clicked(self):
+        '''
+        for i in 7:
+            for j in 8:
+                if self.interface.tablewidgetPrescribe(i, j) != "null":
+                    self.prescription_area.append(self.interface.tablewidgetPrescribe(i, j))
+        '''
+        #print(id)
+        #待测试
+        self.final.show()
+        pass
     '''
     def button_yes_reminder(self):
         # self.front.save_data(self.interface.lineSymptom,'（需要变化）',box_id)
@@ -391,6 +415,7 @@ class Control:
                 text_all[int(n/4)] += i
                 n+=1
             self.front.set_table(self.group_tables[5], text_all)
+
         elif self.front.type == 0:
             for i in range(3):
                 if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
@@ -450,10 +475,21 @@ class Control:
         menstruation = self.information.lineMenstruation.text()
         leucorrhoea = self.information.lineLeucorrhoea.text()
         #prescription = self.information.linePrescription.text()
-        mainsymptom = self.information.lineSymptom.text()
+        #mainsymptom = self.information.lineSymptom.text()
+        mainsymptom = self.front.search_area[0]
+        print (self.front.search_area[0])
         prescription= "null"
-        self.front.back.i_save_data(self.information.linePhone,name,gender,age,
+
+        print(name,gender,age,
         phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
+
+        self.front.back.i_save_data(name,gender,age,
+        phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
+        self.interface.show()
+        self.id =self.front.back.i_save_data(name,gender,age,
+        phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
+        print(id)
+        self.information.hide()
         pass
 
 #iinquire 面板
@@ -461,7 +497,9 @@ class Control:
         name = self.inquire.lineName.text()
         phone = self.inquire.linePhone.text()
         idcard = self.inquire.lineIdcard.text()
-        self.front.back.iq_inquire(name,phone,idcard)
+
+        data = self.front.back.iq_inquire(name,phone,idcard)
+        self.front.set_table(self.inquire.tableWidget, data)
         pass
 
 if __name__ == "__main__":

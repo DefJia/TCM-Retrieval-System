@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Information(object):
     def setupUi(self, Information):
         Information.setObjectName("Information")
-        Information.resize(960, 841)
+        Information.resize(960, 831)
         self.centralwidget = QtWidgets.QWidget(Information)
         self.centralwidget.setObjectName("centralwidget")
         self.IButtonYes = QtWidgets.QPushButton(self.centralwidget)

@@ -77,10 +77,33 @@ class Backend:
             return self.convert_raw_to_data(raw)
 
     def iq_inquire(self, name, phone, idcard):
+        try:
+            sqlname = 'select * from history where name = ?'
+            sqlphone = 'select * from history where phone = %s'
+            sqlidcard = 'select * from history where idcard = %s'
 
-        self.cursor.execute('select * from name where name = %s' % name)
+            if name and phone =='' and idcard =='':
+                print (sqlname +'(name)')
+               # ('select id from patient where %s = ?' % column, (text,))
+                self.cursor.execute(sqlname +' (name)')
+            elif name =='' and phone and idcard =='':
+                self.cursor.execute(sqlphone % name)
+            elif name =='' and phone =='' and idcard:
+                self.cursor.execute(sqlphone % name)
+            elif name and phone and idcard =='':
+                'select * from'+ sqlname + 'where phone' + phone
+            elif name and phone  == '' and idcard:
+                'select * from' + sqlname + 'where idcard' + idcard
+            elif name == '' and phone  and idcard:
+                'select * from' + sqlphone + 'where idcard' + idcard
+            elif name and phone and idcard:
+                'select* from select * from' + sqlphone + 'where idcard' + idcard  +'where name ='+ name
+            #self.cursor.execute(  )
+            data = self.cursor.fetchall()
+            return data
 
-
+        except Exception as e:
+            print(e)
         pass
 
     def save_data(self, db_name, name):
@@ -93,20 +116,22 @@ class Backend:
         except sqlite3.IntegrityError:
             return 1
 
-    def i_save_data(self,linephone,name,gender,age,phone,
+    def i_save_data(self,name,gender,age,phone,
                     identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom):
 
-        if linephone.text() == "" and identitynum.text() == "":
+        if phone == "" and identitynum == "":
             #UI.Wrong.show()#不知道行不行
             print("wrong")
         else:
-            if identitynum.text() =="":
+            if identitynum =="":
                 identitynum.settext(000000000000000000)
-                id = 000000000000000000 + linephone.text()
-            else:
-                id =identitynum.text() + linephone.text()
-                inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                # 这里有错
+                id = '000000000000000000' + phone
 
+            else:
+                id =identitynum + phone
+                inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                print(id)
             sql1 = format('insert into patient (name,gender,age,phone,identitynum,address,id) '
                      'values ("%s","%s","%s","%s","%s","%s","%s")' % (name,gender,age,phone,identitynum,address,id))
             print(sql1)
@@ -119,7 +144,8 @@ class Backend:
                 #self.database.commit()
                 self.cursor.execute(sql2)
                 self.database.commit()
-                return 0
+                return id
+            #这里如何把ID弄到control里面
             except sqlite3.IntegrityError:
                 return 1
 
