@@ -117,21 +117,22 @@ class Backend:
             return 1
 
     def i_save_data(self,name,gender,age,phone,
-                    identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom):
+                    identitynum,address,id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom):
 
         if phone == "" and identitynum == "":
-            #UI.Wrong.show()#不知道行不行
+            # UI.Wrong.show()#不知道行不行
             print("wrong")
         else:
-            if identitynum =="":
+            if identitynum == "":
                 identitynum.settext(000000000000000000)
                 # 这里有错
                 id = '000000000000000000' + phone
 
             else:
-                id =identitynum + phone
+                id = identitynum + phone
                 inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                 print(id)
+
             sql1 = format('insert into patient (name,gender,age,phone,identitynum,address,id) '
                      'values ("%s","%s","%s","%s","%s","%s","%s")' % (name,gender,age,phone,identitynum,address,id))
             print(sql1)
@@ -157,6 +158,7 @@ class Backend:
             return data[0]
         except Exception as e:
             print(e)
+
     def save_relation(self,dbid,left_data,right_data):
         db_name = self.relations[dbid]
         left_name = db_name.split("_")[0]
@@ -234,6 +236,10 @@ class Backend:
         identitynum = data[4] 
         address = data[5]
         return name,gender,age,phone,identitynum,address 
+
+
+    def final_save(self):
+        self.cursor.execute()
 
 
 if __name__ == '__main__':

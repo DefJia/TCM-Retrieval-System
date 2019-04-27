@@ -13,6 +13,7 @@ class Frontend:
         self.reminder = reminder
         self.information = information
         self.property = property
+        self.id = 0
         self.type = 1  # 模式
         self.location = tuple()  # 当前位置
         self.search_area = [list(), list(), list(), list()]  # 检索区

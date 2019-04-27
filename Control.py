@@ -5,11 +5,12 @@ from UI.information import Ui_Information
 from UI.MessageBox import MessageBox
 from UI.inquire import Ui_Inquire
 from UI.wrong import Ui_Wrong
-from UI.final import Ui_final
+from UI.final import Ui_final_2
+from UI.yes import Ui_Yes
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 import sys
 from Front import Frontend
-
+import time
 
 class Interface(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -58,12 +59,17 @@ class Inquire(QMainWindow, Ui_Inquire):
         super(Inquire, self).__init__()
         self.setupUi(self)
 
-class Final(QMainWindow, Ui_final):
+class Final(QMainWindow, Ui_final_2):
     def __init__(self):
         # 修改界面
         super(Final, self).__init__()
         self.setupUi(self)
 
+class Yes(QMainWindow, Ui_Yes):
+    def __init__(self):
+        # 修改界面
+        super(Yes, self).__init__()
+        self.setupUi(self)
 
 class Control:
     def __init__(self):
@@ -77,6 +83,8 @@ class Control:
         self.property = Property()
         self.inquire = Inquire()
         self.final = Final()
+        #self.final.show()
+        self.yes = Yes()
         # 界面生成
         self.front = Frontend(self.interface, self.reminder, self.information, self.property)
         # 定义交互Class
@@ -103,7 +111,6 @@ class Control:
         self.group_tables.append(self.interface.tablewidgetBook)
         self.group_tables.append(self.interface.tablewidgetPrescribe)
 
-        self.id = 0
         # 定义组件组
         ''' 以下为信号操作 '''
         '''
@@ -156,18 +163,24 @@ class Control:
 
         # --- interface按钮组 --- #
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
-        self.interface.buttonInput.clicked.connect(lambda: self.buttonInput_clicked())  # 录入
+        self.interface.buttonInput.clicked.connect(lambda: self.yes.show())  # 录入
+        self.yes.yesButton.clicked.connect(lambda: self.buttonInput_clicked())
         self.interface.buttonInitial.clicked.connect(lambda: self.initial_button_clicked())  # 初始化
+        self.interface.buttonClean.clicked.connect(lambda: self.buttonClean_clicked())
 
         self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())  # 删除
         self.interface.buttonDeleterelation.clicked.connect(lambda: self.buttonRelationDelete_clicked())# 删除关系
         self.interface.buttonOut.clicked.connect(lambda: self.interface.hide())  # 删除
-        self.interface.buttonSave.clicked.connect(lambda: self.buttonSave_clicked())  # 最终保存
+        self.interface.buttonSave.clicked.connect(lambda: self.final.show())  # 最终保存
+
+
         # --- Inquire按钮组 --- #
         self.inquire.ButtonYes.clicked.connect(lambda: self.iq_buttonYes_clicked())  # 查询
         self.inquire.ButtonOut.clicked.connect(lambda: self.inquire.hide())
-
-
+        # --- Final按钮组 --- #
+        #self.interface.buttonSave.clicked.connect(lambda: self.buttonSave_clicked())
+        self.final.buttonContinue.clicked.connect(lambda: self.buttonContinue_click())
+        self.final.buttonOut.clicked.connect(lambda: self.buttonOut_click())
         ''' 以下为界面初始化处理 '''
         for i in range(8):
             # 设定药方区结构
@@ -242,6 +255,7 @@ class Control:
         option.hide()
         mode = self.front.type
         self.front.optioned_data(index, text, mode)
+
         pass
 
     def i_option_clicked(self, option):
@@ -301,8 +315,13 @@ class Control:
                 if self.interface.tablewidgetPrescribe(i, j) != "null":
                     self.prescription_area.append(self.interface.tablewidgetPrescribe(i, j))
         '''
-        #print(id)
+
+        print("输出id" + self.front.id)
+
+        self.front.id = 0
         #待测试
+
+
         self.final.show()
         pass
     '''
@@ -405,6 +424,7 @@ class Control:
     def buttonInput_clicked(self):
         # 录入按钮
         if self.front.type == 1:
+            #开方模式
             medicines = self.front.search_area[3]
             if int(len(medicines))%4 == 0:
                 row = int(len(medicines) / 4)
@@ -415,8 +435,10 @@ class Control:
                 text_all[int(n/4)] += i
                 n+=1
             self.front.set_table(self.group_tables[5], text_all)
+            #print("测试" + self.group_table[5])
 
         elif self.front.type == 0:
+            #录入模式
             for i in range(3):
                 if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
                     for l in self.front.search_area[i]:
@@ -424,6 +446,7 @@ class Control:
                             self.front.back.save_relation(i,l[0],m[0])
             for list0 in self.front.search_area:
                 list0.clear()
+        self.yes.hide()
         '''
         rows = self.interface.tablewidgetMedicine.rowCount()
 
@@ -456,7 +479,10 @@ class Control:
         self.information.linePhone.setText(phone)
         self.information.lineIdentitynum.setText(idcard)
         self.information.lineAddress.setText(address)
-        
+
+    def buttonClean_clicked(self):
+        self.group_tables[5].clear
+        self.front.set_table(self.group_tables[5], " ")
 
 #information 面板
     def i_buttonInput_clicked(self):
@@ -477,19 +503,29 @@ class Control:
         #prescription = self.information.linePrescription.text()
         #mainsymptom = self.information.lineSymptom.text()
         mainsymptom = self.front.search_area[0]
-        print (self.front.search_area[0])
+        #print (self.front.search_area[0])
         prescription= "null"
+        #print(name,gender,age,
+        #phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
 
-        print(name,gender,age,
-        phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
+        if phone == "" and identitynum == "":
+            print("wrong")
+        else:
+            if identitynum == "":
+                identitynum.settext(000000000000000000)
+                # 这里有错
+                id = '000000000000000000' + phone
 
+            else:
+                id = identitynum + phone
+                inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                print(id)
+        self.front.id = id
         self.front.back.i_save_data(name,gender,age,
-        phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
+        phone,identitynum,address,id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
         self.interface.show()
-        self.id =self.front.back.i_save_data(name,gender,age,
-        phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
-        print(id)
         self.information.hide()
+        print(id)
         pass
 
 #iinquire 面板
@@ -501,6 +537,23 @@ class Control:
         data = self.front.back.iq_inquire(name,phone,idcard)
         self.front.set_table(self.inquire.tableWidget, data)
         pass
+#final面板
+    def buttonContinue_click(self):
+        self.interface.hide()
+        self.information.show()
+        self.final.hide()
+        self.front.back.final_save()
+
+
+        self.front.id = 0
+
+
+    def buttonOut_click(self):
+        self.final.hide()
+        self.information.hide()
+        self.interface.hide()
+        self.front.back.final_save()
+
 
 if __name__ == "__main__":
     test = Control()
