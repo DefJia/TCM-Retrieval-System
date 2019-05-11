@@ -11,6 +11,8 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableW
 import sys
 from Front import Frontend
 import time
+from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Interface(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -76,6 +78,8 @@ class Control:
         app = QApplication(sys.argv)
         self.interface = Interface()
         #self.interface.show()
+        #self.inquire.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+
         self.information = Information()
         self.information.show()
         self.interface.show()
@@ -110,6 +114,8 @@ class Control:
         self.group_tables.append(self.interface.tablewidgetMedicine)
         self.group_tables.append(self.interface.tablewidgetBook)
         self.group_tables.append(self.interface.tablewidgetPrescribe)
+
+
 
         # 定义组件组
         ''' 以下为信号操作 '''
@@ -252,6 +258,7 @@ class Control:
         index = self.group_options.index(option)
         text = str(option.selectedItems()[0].text())
         self.group_inputs[index].setText("")
+        #清空line里面的内容
         option.hide()
         mode = self.front.type
         self.front.optioned_data(index, text, mode)
@@ -430,6 +437,7 @@ class Control:
                 row = int(len(medicines) / 4)
             else: row = int(len(medicines) / 4) + 1
             text_all = [list() for i in range(row)]
+            #这句什么意思
             n = 0
             for i in medicines:
                 text_all[int(n/4)] += i
@@ -535,17 +543,49 @@ class Control:
         idcard = self.inquire.lineIdcard.text()
 
         data = self.front.back.iq_inquire(name,phone,idcard)
+        print(data)
         self.front.set_table(self.inquire.tableWidget, data)
         pass
+
 #final面板
     def buttonContinue_click(self):
         self.interface.hide()
         self.information.show()
         self.final.hide()
-        self.front.back.final_save()
+        #print(self.front.id)
 
+        D = self.interface.tablewidgetPrescribe.item(0, 0).text()
+        for i in range(8):
+            for j in range(7):
 
+                #8和7是row和column,怎么从front中抽取row和column
+                if self.interface.tablewidgetPrescribe.item(i, j).text() != "NULL":
+                    print(self.interface.tablewidgetPrescribe.item(i, j).text())
+                    print(self.interface.tablewidgetPrescribe.item(2, 2).text())
+                    self.front.prescription_list.append(self.interface.tablewidgetPrescribe.item(i, j).text())
+
+        print("测试")
+        print(self.front.prescription_list)
         self.front.id = 0
+
+        '''
+        S = self.interface.tablewidgetPrescribe.item(0, 1)
+        H = self.interface.tablewidgetPrescribe.item(1, 0)
+        
+        for r in range(row):
+            columnCurrentRow = len(data_list[r])
+                for c in range(columnCurrentRow):
+                    table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
+        
+        
+        
+        '''
+
+        #data = 遍历开方区里面的内容
+        #self.front.back.final_save(self.front.id,data)
+
+
+
 
 
     def buttonOut_click(self):

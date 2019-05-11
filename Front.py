@@ -13,10 +13,14 @@ class Frontend:
         self.reminder = reminder
         self.information = information
         self.property = property
+        self.row = 0
+        self.column = 0
         self.id = 0
         self.type = 1  # 模式
         self.location = tuple()  # 当前位置
         self.search_area = [list(), list(), list(), list()]  # 检索区
+        # self.search_area_symptom = list()
+        self.prescription_list =list()
         self.mainSymptom = list()
         self.work_area = dict()  # 药方工作区
         self.widgets = list(range(4))
@@ -86,12 +90,20 @@ class Frontend:
                 pass
             '''
             for index in target_indexs:
-                sub_data = self.back.union_query(box_id, index, text)
-                if sub_data:
-                    self.search_area[index] = sub_data
+                if box_id != 0:
+                    sub_data = self.back.union_query(box_id, index, text)
+                    if sub_data:
+                        self.search_area[index] = sub_data
+                else:
+                    self.back.search_disease(self.search_area[0])
+                    #获取serach_area[0]里面的每一个元素，并启动查询方法传入（search_area[0]），查询里面每一个数
+                    #在back里面写方法  Select 病名 from 表 where 病症名 = line.text1 or 病症名 = line.text2 order by xxx
+                    #settable()
+                    pass
             self.set_all_tables(self.search_area)
             # print(self.search_area)
             return 0
+        '''
         elif aaa == 1:
             target_indexs = list()
             if [text] not in self.search_area[box_id]:
@@ -99,14 +111,6 @@ class Frontend:
             if mode == 1 and box_id != 3:
                 target_indexs.append(box_id + 1)
                 pass
-            '''
-            elif mode == 0:
-                right = box_id + 1
-                if 0 <= right <= 3:
-                    target_indexs.append(right)
-                 #不需要关系
-                pass
-            '''
             for index in target_indexs:
                 sub_data = self.back.union_query(box_id, index, text)
                 if sub_data:
@@ -120,9 +124,8 @@ class Frontend:
             print(self.mainSymptom)
             self.set_table(self.information.tablewidgetMainSymptom,self.mainSymptom)
             # self.mainSymptom.clear()
-
             return 0
-
+        '''
     def get_data(self, box_id=1, content=1):
         # 录入模式下，当添加按钮被触发时，将输入的内容添加到数据库
         # 如果当前位置不为空，还要添加关系
@@ -160,17 +163,18 @@ class Frontend:
             if self.type == 0:
                 self.save_data(box_id, text)
 
+
     @staticmethod
     def set_table(table, data_list):
         # data_list: [[item, item], [item, item]]
         if data_list:
             print(data_list)
+
+            '''
+            for elem in data_list:
+                elem.append('克')
+            '''
             row = len(data_list)
-            '''
-            if row > 1:
-                for elem in data_list:
-                    elem.append('克')
-            '''
             column = len(data_list[0])
             table.setRowCount(row)
             table.setColumnCount(column)
@@ -178,8 +182,7 @@ class Frontend:
                 columnCurrentRow = len(data_list[r])
                 for c in range(columnCurrentRow):
                     table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
-                    
-                        
+
            
 
     def set_all_tables(self, data):
@@ -194,7 +197,10 @@ class Frontend:
         self.back.deletedate(text,index)
         pass
     
-        
+    def final_save(self):
+
+        self.back.final_save()
+        pass
         
 
 if __name__ == '__main__':

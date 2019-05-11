@@ -78,28 +78,31 @@ class Backend:
 
     def iq_inquire(self, name, phone, idcard):
         try:
-            sqlname = 'select * from history where name = ?'
-            sqlphone = 'select * from history where phone = %s'
-            sqlidcard = 'select * from history where idcard = %s'
+            print(name+phone+idcard)
+            #七种方案，三种只在一个框中输入，三种在两个框中输入，一种在三个框中输入
+            #没有简便方法的话就只能写全7种了
+            if name != "" and phone != "" and idcard !="":
+                self.cursor.execute('select * from patient where name = %s and phone = %s and identitynum = %s' %(name, phone, idcard))
 
-            if name and phone =='' and idcard =='':
-                print (sqlname +'(name)')
-               # ('select id from patient where %s = ?' % column, (text,))
-                self.cursor.execute(sqlname +' (name)')
-            elif name =='' and phone and idcard =='':
-                self.cursor.execute(sqlphone % name)
-            elif name =='' and phone =='' and idcard:
-                self.cursor.execute(sqlphone % name)
-            elif name and phone and idcard =='':
-                'select * from'+ sqlname + 'where phone' + phone
-            elif name and phone  == '' and idcard:
-                'select * from' + sqlname + 'where idcard' + idcard
-            elif name == '' and phone  and idcard:
-                'select * from' + sqlphone + 'where idcard' + idcard
-            elif name and phone and idcard:
-                'select* from select * from' + sqlphone + 'where idcard' + idcard  +'where name ='+ name
-            #self.cursor.execute(  )
+            if name == "" and phone != "" and idcard !="":
+                self.cursor.execute('select * from patient where phone = %s and identitynum = %s' % (phone, idcard))
+            if name != "" and phone == "" and idcard !="":
+                self.cursor.execute('select * from patient where name = %s and identitynum = %s' % (name, idcard))
+            if name != "" and phone != "" and idcard =="":
+                self.cursor.execute('select * from patient where name = %s and phone = %s ' %(name, phone))
+
+            if name == "" and phone != "" and idcard =="":
+                self.cursor.execute('select * from patient where phone = %s' %phone)
+            if name != "" and phone == "" and idcard =="":
+                print('select * from patient where name = %s'  %name)
+                self.cursor.execute('select * from patient where name = %s'  %'name')
+            if name == "" and phone == "" and idcard !="":
+                self.cursor.execute('select * from patient where identitynum = %s ' % idcard)
+
+            # sql = "SELECT * FROM EMPLOYEE WHERE INCOME > %s" % (1000)
+
             data = self.cursor.fetchall()
+            print(data)
             return data
 
         except Exception as e:
@@ -158,7 +161,10 @@ class Backend:
             return data[0]
         except Exception as e:
             print(e)
+    def search_disease(self,search_area):
+        #查询
 
+        pass
     def save_relation(self,dbid,left_data,right_data):
         db_name = self.relations[dbid]
         left_name = db_name.split("_")[0]
@@ -238,8 +244,14 @@ class Backend:
         return name,gender,age,phone,identitynum,address 
 
 
-    def final_save(self):
-        self.cursor.execute()
+    def final_save(self,id,data):
+        db_name = 'prescription'
+        #data = 界面里的内容
+        self.cursor.execute('insert into history (%s) values (%s) where id = %s' % (db_name,data,id))
+        #这里面要存储开方区域中的所有信息
+        #1.把开方遍历一遍
+        #2.存储到与id关联的history表里
+        pass
 
 
 if __name__ == '__main__':
