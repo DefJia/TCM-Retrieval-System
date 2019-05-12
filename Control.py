@@ -555,13 +555,16 @@ class Control:
         #print(self.front.id)
 
         D = self.interface.tablewidgetPrescribe.item(0, 0).text()
-        for i in range(8):
-            for j in range(7):
-
+        #self.front.final_save(self.interface.tablewidgetPrescribe)
+        row = self.interface.tablewidgetPrescribe.rowCount()
+        column = self.interface.tablewidgetPrescribe.columnCount()
+        print(column)
+        for i in range(row):
+            for j in range(column):
                 #8和7是row和column,怎么从front中抽取row和column
                 if self.interface.tablewidgetPrescribe.item(i, j).text() != "NULL":
                     print(self.interface.tablewidgetPrescribe.item(i, j).text())
-                    print(self.interface.tablewidgetPrescribe.item(2, 2).text())
+                    #print(self.interface.tablewidgetPrescribe.item(2, 2).text())
                     self.front.prescription_list.append(self.interface.tablewidgetPrescribe.item(i, j).text())
 
         print("测试")

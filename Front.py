@@ -176,6 +176,7 @@ class Frontend:
             '''
             row = len(data_list)
             column = len(data_list[0])
+            print(row,column)
             table.setRowCount(row)
             table.setColumnCount(column)
             for r in range(row):
@@ -183,7 +184,7 @@ class Frontend:
                 for c in range(columnCurrentRow):
                     table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
 
-           
+        #如果table是开方区的则
 
     def set_all_tables(self, data):
         cnt = 0
@@ -197,8 +198,8 @@ class Frontend:
         self.back.deletedate(text,index)
         pass
     
-    def final_save(self):
-
+    def final_save(self,table):
+        self.set_table(table)
         self.back.final_save()
         pass
         
