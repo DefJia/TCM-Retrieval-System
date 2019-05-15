@@ -80,6 +80,7 @@ class Frontend:
                 self.search_area[box_id].append([text])
             if mode == 1 and box_id != 3:
                 target_indexs.append(box_id + 1)
+
                 pass
             '''
             elif mode == 0:
@@ -198,8 +199,8 @@ class Frontend:
         self.back.deletedate(text,index)
         pass
     
-    def final_save(self,table):
-        self.set_table(table)
+    def final_save(self,table,data):
+
         self.back.final_save()
         pass
         

@@ -244,13 +244,16 @@ class Backend:
         return name,gender,age,phone,identitynum,address 
 
 
-    def final_save(self,id,data):
+    def final_save(self,data,id):
         db_name = 'prescription'
         #data = 界面里的内容
-        self.cursor.execute('insert into history (%s) values (%s) where id = %s' % (db_name,data,id))
+        print('update history set %s = \'%s\' where id = %s' % (db_name,data,id))
+        self.cursor.execute('update history set %s = \"%s\" where id = %s' % (db_name,data,id))
+        self.database.commit()
         #这里面要存储开方区域中的所有信息
         #1.把开方遍历一遍
         #2.存储到与id关联的history表里
+
         pass
 
 

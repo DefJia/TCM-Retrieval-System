@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableW
 import sys
 from Front import Frontend
 import time
+from UI.quantity import Ui_quantity
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -73,13 +74,21 @@ class Yes(QMainWindow, Ui_Yes):
         super(Yes, self).__init__()
         self.setupUi(self)
 
+class Quantity(QMainWindow, Ui_quantity):
+    def __init__(self):
+        # 修改界面
+        super(Quantity, self).__init__()
+        self.setupUi(self)
+
+
 class Control:
     def __init__(self):
         app = QApplication(sys.argv)
         self.interface = Interface()
         #self.interface.show()
         #self.inquire.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-
+        self.quantity = Quantity()
+        #self.quantity.show()
         self.information = Information()
         self.information.show()
         self.interface.show()
@@ -114,7 +123,7 @@ class Control:
         self.group_tables.append(self.interface.tablewidgetMedicine)
         self.group_tables.append(self.interface.tablewidgetBook)
         self.group_tables.append(self.interface.tablewidgetPrescribe)
-
+        #self.front.back.final_save()
 
 
         # 定义组件组
@@ -187,6 +196,12 @@ class Control:
         #self.interface.buttonSave.clicked.connect(lambda: self.buttonSave_clicked())
         self.final.buttonContinue.clicked.connect(lambda: self.buttonContinue_click())
         self.final.buttonOut.clicked.connect(lambda: self.buttonOut_click())
+
+        # --- quantity按钮组件 ---#
+        self.quantity.pushButton.clicked.connect(lambda: self.quantity_button_clicked())
+
+
+
         ''' 以下为界面初始化处理 '''
         for i in range(8):
             # 设定药方区结构
@@ -292,10 +307,11 @@ class Control:
         # 录入模式中，当+按钮被点击
         # self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0))
         text = line.text()
-        if text != '':
+        index = self.group_additions.index(line)
+        if text != '' and  index != 3:
             # self.reminder.show()
             result = self.show_reminder('', '添加成功')
-            print(text)  # test
+            #print(text)  # test
             if result:
                 # 点击yes
                 listIndex = []
@@ -312,8 +328,39 @@ class Control:
                     line.clear()
                     self.reminder.hide()
                 print(1)
+
+        if text != '' and index == 3:
+            self.quantity.show()
+            # self.reminder.show()
+            result = self.show_reminder('', '添加成功')
+            # print(text)  # test
+            if result:
+                # 点击yes
+                listIndex = []
+                for i in self.group_inputs:
+                    if i.text():
+                        index = self.group_inputs.index(i)
+                        listIndex.append(index)
+                for l in listIndex:
+                    line = self.group_inputs[l]
+                    text = line.text()
+                    self.front.save_data(l, text)
+                    self.front.search_area[l].append([text])
+                    self.front.set_all_tables(self.front.search_area)
+                    line.clear()
+                    self.reminder.hide()
+                print(1)
+        #这个怎么搞？self.group_additions
         pass
 
+    def quantity_button_clicked(self):
+        text = self.quantity.lineQuantity.text()
+        print(text)
+        self.front.search_area[3].append([text])
+
+        self.quantity.hide()
+
+        pass
 
     def buttonSave_clicked(self):
         '''
@@ -325,7 +372,7 @@ class Control:
 
         print("输出id" + self.front.id)
 
-        self.front.id = 0
+        #self.front.id = 0
         #待测试
 
 
@@ -554,7 +601,7 @@ class Control:
         self.final.hide()
         #print(self.front.id)
 
-        D = self.interface.tablewidgetPrescribe.item(0, 0).text()
+        #D = self.interface.tablewidgetPrescribe.item(0, 0).text()
         #self.front.final_save(self.interface.tablewidgetPrescribe)
         row = self.interface.tablewidgetPrescribe.rowCount()
         column = self.interface.tablewidgetPrescribe.columnCount()
@@ -569,7 +616,11 @@ class Control:
 
         print("测试")
         print(self.front.prescription_list)
+        print(self.front.id)
+        self.front.back.final_save(self.front.prescription_list,self.front.id)
         self.front.id = 0
+
+
 
         '''
         S = self.interface.tablewidgetPrescribe.item(0, 1)
