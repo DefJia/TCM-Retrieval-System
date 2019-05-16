@@ -307,9 +307,10 @@ class Control:
         # 录入模式中，当+按钮被点击
         # self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0))
         text = line.text()
-        index = self.group_additions.index(line)
+        index = self.group_inputs.index(line)
+
         if text != '' and  index != 3:
-            # self.reminder.show()
+            #self.reminder.show()
             result = self.show_reminder('', '添加成功')
             #print(text)  # test
             if result:
@@ -319,6 +320,7 @@ class Control:
                     if i.text():
                         index = self.group_inputs.index(i)
                         listIndex.append(index)
+                        #把group_inputs里面所有有数据的line都捕捉一遍
                 for l in listIndex:
                     line = self.group_inputs[l]
                     text = line.text()
@@ -332,34 +334,39 @@ class Control:
         if text != '' and index == 3:
             self.quantity.show()
             # self.reminder.show()
-            result = self.show_reminder('', '添加成功')
+            #result = self.show_reminder('', '添加成功')
             # print(text)  # test
-            if result:
                 # 点击yes
-                listIndex = []
-                for i in self.group_inputs:
-                    if i.text():
-                        index = self.group_inputs.index(i)
-                        listIndex.append(index)
-                for l in listIndex:
-                    line = self.group_inputs[l]
-                    text = line.text()
-                    self.front.save_data(l, text)
-                    self.front.search_area[l].append([text])
-                    self.front.set_all_tables(self.front.search_area)
-                    line.clear()
-                    self.reminder.hide()
-                print(1)
+
         #这个怎么搞？self.group_additions
         pass
 
     def quantity_button_clicked(self):
-        text = self.quantity.lineQuantity.text()
+        quantity = self.quantity.lineQuantity.text()
+        text = self.interface.lineMedicine.text()
+        self.front.save_data_quantity( quantity,text)
         print(text)
-        self.front.search_area[3].append([text])
-
+        self.front.search_area[3].append([text,quantity]) #测试
+        print(self.front.search_area[3])
+        self.front.set_table(self.interface.tablewidgetSymptom,self.front.search_area[3])
+        #self.front.set_table(self.symptomOption,self.front.search_area[3])
+        '''
+        listIndex = []
+        for i in self.group_inputs:
+            if i.text():
+                index = self.group_inputs.index(i)
+                listIndex.append(index)
+        for l in listIndex:
+            line = self.group_inputs[l]
+            text = line.text()
+            self.front.save_data(l, text)
+            self.front.search_area[l].append([text])
+            self.front.set_all_tables(self.front.search_area)
+            line.clear()
+            self.reminder.hide()
+        print(1)
+        '''
         self.quantity.hide()
-
         pass
 
     def buttonSave_clicked(self):

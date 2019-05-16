@@ -119,6 +119,18 @@ class Backend:
         except sqlite3.IntegrityError:
             return 1
 
+    def save_data_quantity(self,quantity,name):
+        sql = format('update medicine set property = %s where name = %s ' % (quantity, name) )
+        #'update history set %s = \"%s\" where id = %s' % (db_name, data, id)
+        try:
+            self.cursor.execute(sql)
+            self.database.commit()
+
+            return 0
+        except sqlite3.IntegrityError:
+            return 1
+        pass
+
     def i_save_data(self,name,gender,age,phone,
                     identitynum,address,id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom):
 

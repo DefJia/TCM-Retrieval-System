@@ -76,10 +76,14 @@ class Frontend:
         # 初始化 
         if aaa ==0:
             target_indexs = list()
+
+
             if [text] not in self.search_area[box_id]:
                 self.search_area[box_id].append([text])
             if mode == 1 and box_id != 3:
                 target_indexs.append(box_id + 1)
+
+
 
                 pass
             '''
@@ -150,7 +154,17 @@ class Frontend:
                 print('该名称已存在')
             else:
                 print('录入成功')
-    
+
+    def save_data_quantity(self,quantity,text):
+        if text and quantity:
+            name = "symptom"
+            res = self.back.save_data(name,text)
+            self.back.save_data_quantity(quantity,text)
+            if res:
+                print('该名称已存在')
+            else:
+                print('录入成功')
+
 
     # 新加方法
     def add_item(self, box_id, text):
