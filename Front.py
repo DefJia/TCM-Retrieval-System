@@ -67,24 +67,17 @@ class Frontend:
         # 任意模式下，当option被选中时，显示相关数据
         # mode为0时只显示右边
         #self.search_area = [list() for i in range(4)]
-
         '''
         for widget in self.widgets:
             widget.clear()
         '''
-
         # 初始化 
         if aaa ==0:
             target_indexs = list()
-
-
             if [text] not in self.search_area[box_id]:
                 self.search_area[box_id].append([text])
             if mode == 1 and box_id != 3:
                 target_indexs.append(box_id + 1)
-
-
-
                 pass
             '''
             elif mode == 0:
@@ -100,7 +93,10 @@ class Frontend:
                     if sub_data:
                         self.search_area[index] = sub_data
                 else:
-                    self.back.search_disease(self.search_area[0])
+                    self.search_area[1]= self.back.search_disease(self.search_area[0])
+                    #往search_area[1]里写数据
+
+
                     #获取serach_area[0]里面的每一个元素，并启动查询方法传入（search_area[0]），查询里面每一个数
                     #在back里面写方法  Select 病名 from 表 where 病症名 = line.text1 or 病症名 = line.text2 order by xxx
                     #settable()
