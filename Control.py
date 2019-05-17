@@ -309,7 +309,7 @@ class Control:
         text = line.text()
         index = self.group_inputs.index(line)
 
-        if text != '' and  index != 3:
+        if text != '' :#and  index != 3:
             #self.reminder.show()
             result = self.show_reminder('', '添加成功')
             #print(text)  # test
@@ -331,8 +331,8 @@ class Control:
                     self.reminder.hide()
                 print(1)
 
-        if text != '' and index == 3:
-            self.quantity.show()
+        #if text != '' and index == 3:
+            #self.quantity.show()
             # self.reminder.show()
             #result = self.show_reminder('', '添加成功')
             # print(text)  # test
@@ -342,13 +342,17 @@ class Control:
         pass
 
     def quantity_button_clicked(self):
+        pass
         quantity = self.quantity.lineQuantity.text()
         text = self.interface.lineMedicine.text()
-        self.front.save_data_quantity( quantity,text)
+        #self.front.save_data_quantity(quantity,text)
         print(text)
         self.front.search_area[3].append([text,quantity]) #测试
-        print(self.front.search_area[3])
-        self.front.set_table(self.interface.tablewidgetSymptom,self.front.search_area[3])
+        #print(self.front.search_area[3])
+        self.front.set_table(self.interface.tablewidgetMedicine,self.front.search_area[3])
+        self.interface.medicineOption.hide()
+        self.interface.lineMedicine.clear()
+        self.quantity.hide()
         #self.front.set_table(self.symptomOption,self.front.search_area[3])
         '''
         listIndex = []
@@ -366,7 +370,7 @@ class Control:
             self.reminder.hide()
         print(1)
         '''
-        self.quantity.hide()
+
         pass
 
     def buttonSave_clicked(self):
@@ -505,7 +509,11 @@ class Control:
                 if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
                     for l in self.front.search_area[i]:
                         for m in self.front.search_area[i+1]:
+                            #if i != 2:
                             self.front.back.save_relation(i,l[0],m[0])
+                            #else:
+                                #self.front.back.save_relation(i, l[0], m[0],1,m[1])
+                                #self.front.back.save_relation(i, l[0], m[0])
             for list0 in self.front.search_area:
                 list0.clear()
         self.yes.hide()

@@ -120,7 +120,7 @@ class Backend:
             return 1
 
     def save_data_quantity(self,quantity,name):
-        sql = format('update medicine set property = %s where name = %s ' % (quantity, name) )
+        sql = format('update prescription_medicine set property = %s where name = \"%s\" '% (quantity, name) )
         #'update history set %s = \"%s\" where id = %s' % (db_name, data, id)
         try:
             self.cursor.execute(sql)
@@ -173,17 +173,43 @@ class Backend:
             return data[0]
         except Exception as e:
             print(e)
+
     def search_disease(self,search_area):
         #查询
-
+        sql01 = 'select disease.name from ('
+        sql0 = 'left join disease on disease.id = c.disease_id '
+        sql1 = 'select distinct disease_id ,count(*) from ('
+        sql2 = ' )Group by disease_id Order by count(*) desc) c '
+        for i in range(len(search_area[0])):
+            print(search_area[0][i])
+            symptom_id = self.search_data("symptom","id",search_area[0][i])[0]
+            ss = '(select disease_id from symptom_disease where symptom_id = '+ str(symptom_id) +') full join '
+            sql1 += ss
+            print(sql1)
+            if i == len(search_area[0])-1:
+                sql1 = sql1[:-10]
+        SQL= sql01 + sql1 + sql2 +sql0
+        print(SQL)
+        try:
+            self.cursor.execute(SQL)
+            data = self.cursor.fetchall()
+            #print(data)
+            return data#[0]
+        except Exception as e:
+            print(e)
         pass
+
+
     def save_relation(self,dbid,left_data,right_data):
+        #def save_relation(self,dbid,left_data,right_data,c=0,gram=None): if c=0 else garm:
         db_name = self.relations[dbid]
         left_name = db_name.split("_")[0]
         right_name = db_name.split("_")[-1]
         left_id = int(self.search_data(left_name,"id",left_data)[0])
         right_id = int(self.search_data(right_name,"id",right_data)[0])
-        sql = format('insert into %s (%s_id,%s_id) values (%s,%s)' % (db_name,left_name,right_name,left_id, right_id))
+        #if c == 1:
+        sql = format('insert into %s (%s_id,%s_id) values (%s,%s)' % (db_name, left_name, right_name, left_id, right_id))
+        #print(sql)
         try:
             self.cursor.execute(sql)
             self.database.commit()
