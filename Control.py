@@ -242,12 +242,15 @@ class Control:
             self.interface.labelType.setText('开方模式')
             self.interface.groupboxSymptom.setGeometry(10, 70, 211, 411)
             self.interface.groupboxDisease.setGeometry(220, 70, 241, 411)
+            self.interface.tablewidgetMedicine.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+
             for addition in self.group_additions:
                 addition.hide()
         else:
             self.front.type = 0
             self.interface.labelType.setText('录入模式')
 
+            self.interface.tablewidgetMedicine.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked)
             self.interface.groupboxSymptom.setGeometry(220, 70, 241, 411)
             self.interface.groupboxDisease.setGeometry(10, 70, 211, 411)
 
@@ -277,8 +280,9 @@ class Control:
         option.hide()
         mode = self.front.type
         self.front.optioned_data(index, text, mode)
-
         pass
+
+
 
     def i_option_clicked(self, option):
         # 检测到下拉框被点击
@@ -506,7 +510,7 @@ class Control:
         elif self.front.type == 0:
             #录入模式
             for i in range(3):
-                if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
+                if i < 2 and len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
                     for l in self.front.search_area[i]:
                         for m in self.front.search_area[i+1]:
                             #if i != 2:
@@ -514,6 +518,15 @@ class Control:
                             #else:
                                 #self.front.back.save_relation(i, l[0], m[0],1,m[1])
                                 #self.front.back.save_relation(i, l[0], m[0])
+
+                if i == 2 and len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
+                    #get_table
+                    self.get_table_data(self.interface.tablewidgetMedicine,self.front.medicinelist)
+                    for l in self.front.search_area[i]:
+                        for m in self.front.medicinelist:
+                            #if i != 2:
+                            self.front.back.save_relation(i,l[0],m[0])
+
             for list0 in self.front.search_area:
                 list0.clear()
         self.yes.hide()
@@ -590,6 +603,7 @@ class Control:
                 id = identitynum + phone
                 inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                 print(id)
+
         self.front.id = id
         self.front.back.i_save_data(name,gender,age,
         phone,identitynum,address,id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
@@ -610,24 +624,27 @@ class Control:
         pass
 
 #final面板
+    def get_table_data(self,table,list):
+        row = table.rowCount()
+        column = table.columnCount()
+        print(column)
+        for i in range(row):
+            for j in range(column):
+                # 8和7是row和column,怎么从front中抽取row和column
+                if self.interface.tablewidgetPrescribe.item(i, j).text() != "NULL":
+                    print(self.interface.tablewidgetPrescribe.item(i, j).text())
+                    # print(self.interface.tablewidgetPrescribe.item(2, 2).text())
+                    list.append(self.interface.tablewidgetPrescribe.item(i, j).text())
+
     def buttonContinue_click(self):
         self.interface.hide()
         self.information.show()
         self.final.hide()
         #print(self.front.id)
-
+        self.get_table_data(self.interface.tablewidgetPrescribe,self.front.prescription_list)
         #D = self.interface.tablewidgetPrescribe.item(0, 0).text()
         #self.front.final_save(self.interface.tablewidgetPrescribe)
-        row = self.interface.tablewidgetPrescribe.rowCount()
-        column = self.interface.tablewidgetPrescribe.columnCount()
-        print(column)
-        for i in range(row):
-            for j in range(column):
-                #8和7是row和column,怎么从front中抽取row和column
-                if self.interface.tablewidgetPrescribe.item(i, j).text() != "NULL":
-                    print(self.interface.tablewidgetPrescribe.item(i, j).text())
-                    #print(self.interface.tablewidgetPrescribe.item(2, 2).text())
-                    self.front.prescription_list.append(self.interface.tablewidgetPrescribe.item(i, j).text())
+
 
         print("测试")
         print(self.front.prescription_list)

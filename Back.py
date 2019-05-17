@@ -201,21 +201,24 @@ class Backend:
 
 
     def save_relation(self,dbid,left_data,right_data):
-        #def save_relation(self,dbid,left_data,right_data,c=0,gram=None): if c=0 else garm:
-        db_name = self.relations[dbid]
-        left_name = db_name.split("_")[0]
-        right_name = db_name.split("_")[-1]
-        left_id = int(self.search_data(left_name,"id",left_data)[0])
-        right_id = int(self.search_data(right_name,"id",right_data)[0])
-        #if c == 1:
-        sql = format('insert into %s (%s_id,%s_id) values (%s,%s)' % (db_name, left_name, right_name, left_id, right_id))
-        #print(sql)
-        try:
-            self.cursor.execute(sql)
-            self.database.commit()
-            return 0
-        except Exception as e:
-            print(e)
+        if dbid != 2:
+            #def save_relation(self,dbid,left_data,right_data,c=0,gram=None): if c=0 else garm:
+            db_name = self.relations[dbid]
+            left_name = db_name.split("_")[0]
+            right_name = db_name.split("_")[-1]
+            left_id = int(self.search_data(left_name,"id",left_data)[0])
+            right_id = int(self.search_data(right_name,"id",right_data)[0])
+            #if c == 1:
+            sql = format('insert into %s (%s_id,%s_id) values (%s,%s)' % (db_name, left_name, right_name, left_id, right_id))
+            #print(sql)
+            try:
+                self.cursor.execute(sql)
+                self.database.commit()
+                return 0
+            except Exception as e:
+                print(e)
+
+
 
     def drop_relation(self,dbid,left_data,right_data):
         db_name = self.relations[dbid]
