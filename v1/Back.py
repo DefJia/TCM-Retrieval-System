@@ -69,7 +69,7 @@ class Backend:
             # db_name = self.relations[int((box_id + index - 1) / 2)]
             t = self.index[index]
             s = self.index[box_id]
-            a = self.index[min(index, box_id)]
+            a = self.index[min(index, box_id)]#@
             b = self.index[max(index, box_id)]
             #sql = format('select name from %s inner join %s_%s on %s.id = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
             sql = format('select name from %s inner join %s_%s on %s.name = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
@@ -174,7 +174,7 @@ class Backend:
         db_name = self.relations[dbid]
         left_name = db_name.split("_")[0]
         right_name = db_name.split("_")[-1]
-        #left_id = int(self.search_data(left_name,"id",left_data)[0])
+        #left_id = int(self.search_data(left_name,"id",left_data)[0])@
         #right_id = int(self.search_data(right_name,"id",right_data)[0])
         left_id = int(self.search_data(left_name,"name",left_data)[0])
         right_id = int(self.search_data(right_name,"name",right_data)[0])
@@ -190,7 +190,7 @@ class Backend:
         db_name = self.relations[dbid]
         front_name = db_name.split("_")[0]
         back_name = db_name.split("_")[-1]
-        #front_id = int(self.search_data(front_name, "id", left_data)[0])
+        #front_id = int(self.search_data(front_name, "id", left_data)[0])@
         #back_id = int(self.search_data(back_name, "id", right_data)[0])
         front_id = int(self.search_data(front_name, "name", left_data)[0])
         back_id = int(self.search_data(back_name, "name", right_data)[0])
@@ -207,7 +207,7 @@ class Backend:
 
     def deletedate(self,dbid,text):
         db_name = self.index[dbid]
-        #id = int(self.search_data(db_name, "id", text)[0])
+        #id = int(self.search_data(db_name, "id", text)[0])@
         
         sql = format(
             'DELETE FROM %s WHERE name = %s' % (db_name, text)
