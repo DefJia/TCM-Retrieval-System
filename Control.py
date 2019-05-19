@@ -249,7 +249,6 @@ class Control:
         else:
             self.front.type = 0
             self.interface.labelType.setText('录入模式')
-
             self.interface.tablewidgetMedicine.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked)
             self.interface.groupboxSymptom.setGeometry(220, 70, 241, 411)
             self.interface.groupboxDisease.setGeometry(10, 70, 211, 411)
@@ -621,6 +620,7 @@ class Control:
         data = self.front.back.iq_inquire(name,phone,idcard)
         print(data)
         self.front.set_table(self.inquire.tableWidget, data)
+
         pass
 
 #final面板

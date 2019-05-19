@@ -185,7 +185,6 @@ class Frontend:
         # data_list: [[item, item], [item, item]]
         if data_list:
             print(data_list)
-
             '''
             for elem in data_list:
                 elem.append('克')
@@ -199,7 +198,6 @@ class Frontend:
                 columnCurrentRow = len(data_list[r])
                 for c in range(columnCurrentRow):
                     table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
-
         #如果table是开方区的则
 
     def set_all_tables(self, data):
@@ -214,10 +212,10 @@ class Frontend:
         self.back.deletedate(text,index)
         pass
     
-    def final_save(self,table,data):
+    #def final_save(self,table,data):
 
-        self.back.final_save()
-        pass
+        #self.back.final_save()
+        #pass
         
 
 if __name__ == '__main__':

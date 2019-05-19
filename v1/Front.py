@@ -16,6 +16,7 @@ class Frontend:
         self.row = 0
         self.column = 0
         self.id = 0
+        self.time = 0
         self.type = 1  # 模式
         self.location = tuple()  # 当前位置
         self.search_area = [list(), list(), list(), list()]  # 检索区

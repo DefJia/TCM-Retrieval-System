@@ -82,20 +82,20 @@ class Backend:
             #七种方案，三种只在一个框中输入，三种在两个框中输入，一种在三个框中输入
             #没有简便方法的话就只能写全7种了
             if name != "" and phone != "" and idcard !="":
-                self.cursor.execute('select * from patient where name = %s and phone = %s and identitynum = %s' %(name, phone, idcard))
+                self.cursor.execute('select * from patient where name = "%s" and phone = %s and identitynum = %s' %(name, phone, idcard))
 
             if name == "" and phone != "" and idcard !="":
                 self.cursor.execute('select * from patient where phone = %s and identitynum = %s' % (phone, idcard))
             if name != "" and phone == "" and idcard !="":
-                self.cursor.execute('select * from patient where name = %s and identitynum = %s' % (name, idcard))
+                self.cursor.execute('select * from patient where name = "%s" and identitynum = %s' % (name, idcard))
             if name != "" and phone != "" and idcard =="":
-                self.cursor.execute('select * from patient where name = %s and phone = %s ' %(name, phone))
+                self.cursor.execute('select * from patient where name = "%s" and phone = %s ' %(name, phone))
 
             if name == "" and phone != "" and idcard =="":
                 self.cursor.execute('select * from patient where phone = %s' %phone)
             if name != "" and phone == "" and idcard =="":
-                print('select * from patient where name = %s'  %name)
-                self.cursor.execute('select * from patient where name = %s'  %'name')
+                print('select * from patient where name = "%s"'  %name)
+                self.cursor.execute('select * from patient where name = "%s"'  %'name')
             if name == "" and phone == "" and idcard !="":
                 self.cursor.execute('select * from patient where identitynum = %s ' % idcard)
 
@@ -285,11 +285,12 @@ class Backend:
         return name,gender,age,phone,identitynum,address 
 
 
-    def final_save(self,data,id):
+    def final_save(self,data,id,time):
         db_name = 'prescription'
+
         #data = 界面里的内容
         print('update history set %s = \'%s\' where id = %s' % (db_name,data,id))
-        self.cursor.execute('update history set %s = \"%s\" where id = %s' % (db_name,data,id))
+        self.cursor.execute('update history set %s = \"%s\" where id = %s and inquirydate = %s' % (db_name,data,id,time))
         self.database.commit()
         #这里面要存储开方区域中的所有信息
         #1.把开方遍历一遍

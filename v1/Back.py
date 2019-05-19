@@ -87,20 +87,20 @@ class Backend:
             #七种方案，三种只在一个框中输入，三种在两个框中输入，一种在三个框中输入
             #没有简便方法的话就只能写全7种了
             if name != "" and phone != "" and idcard !="":
-                self.cursor.execute('select * from patient where name = %s and phone = %s and identitynum = %s' %(name, phone, idcard))
+                self.cursor.execute('select * from patient where name = "%s" and phone = %s and identitynum = %s' %(name, phone, idcard))
 
             if name == "" and phone != "" and idcard !="":
                 self.cursor.execute('select * from patient where phone = %s and identitynum = %s' % (phone, idcard))
             if name != "" and phone == "" and idcard !="":
-                self.cursor.execute('select * from patient where name = %s and identitynum = %s' % (name, idcard))
+                self.cursor.execute('select * from patient where name = "%s" and identitynum = %s' % (name, idcard))
             if name != "" and phone != "" and idcard =="":
-                self.cursor.execute('select * from patient where name = %s and phone = %s ' %(name, phone))
+                self.cursor.execute('select * from patient where name = "%s" and phone = %s ' %(name, phone))
 
             if name == "" and phone != "" and idcard =="":
                 self.cursor.execute('select * from patient where phone = %s' %phone)
             if name != "" and phone == "" and idcard =="":
-                print('select * from patient where name = %s'  %name)
-                self.cursor.execute('select * from patient where name = %s'  %'name')
+                print('select * from patient where name = "%s"'  %name)
+                self.cursor.execute('select * from patient where name = "%s"'  %name)
             if name == "" and phone == "" and idcard !="":
                 self.cursor.execute('select * from patient where identitynum = %s ' % idcard)
 
@@ -140,16 +140,20 @@ class Backend:
                 id = identitynum + phone
                 inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                 print(id)
-
+            sql0 = format('select * from patient where id = %s' %id )
             sql1 = format('insert into patient (name,gender,age,phone,identitynum,address,id) '
                      'values ("%s","%s","%s","%s","%s","%s","%s")' % (name,gender,age,phone,identitynum,address,id))
-            print(sql1)
+            print("这里是v1")
             sql2 = format('insert into history (id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom) '
                      'values ("%s","%s","%s","%s","%s","%s","%s","%s","%s","%s")'
                          % (id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom))
 
             try:
-                self.cursor.execute(sql1)
+                self.cursor.execute(sql0)
+                data = self.cursor.fetchall()
+                if data == 'NULL':
+                    #是'NULL'还是'None'
+                    self.cursor.execute(sql1)
                 #self.database.commit()
                 self.cursor.execute(sql2)
                 self.database.commit()
@@ -176,9 +180,10 @@ class Backend:
         right_name = db_name.split("_")[-1]
         #left_id = int(self.search_data(left_name,"id",left_data)[0])@
         #right_id = int(self.search_data(right_name,"id",right_data)[0])
-        left_id = int(self.search_data(left_name,"name",left_data)[0])
-        right_id = int(self.search_data(right_name,"name",right_data)[0])
-        sql = format('insert into %s (%s_id,%s_id) values (%s,%s)' % (db_name,left_name,right_name,left_id, right_id))
+        left_id = self.search_data(left_name,"name",left_data)[0]
+        right_id = self.search_data(right_name,"name",right_data)[0]
+        sql = format('insert into %s (%s_id,%s_id) values ("%s","%s")' % (db_name,left_name,right_name,left_id, right_id))
+        print(sql)
         try:
             self.cursor.execute(sql)
             self.database.commit()
@@ -254,18 +259,30 @@ class Backend:
         return name,gender,age,phone,identitynum,address 
 
 
-    def final_save(self,data,id):
+    def final_save(self,data,id,time):
         db_name = 'prescription'
         #data = 界面里的内容
-        print('update history set %s = \'%s\' where id = %s' % (db_name,data,id))
-        self.cursor.execute('update history set %s = \"%s\" where id = %s' % (db_name,data,id))
+        print('update history set %s = \"%s\" where id = %s and inquirydate = \"%s\"'  % (db_name,data,id,time))
+        self.cursor.execute('update history set %s = \"%s\" where id = %s and inquirydate = \"%s\"'  % (db_name,data,id,time))
         self.database.commit()
         #这里面要存储开方区域中的所有信息
         #1.把开方遍历一遍
         #2.存储到与id关联的history表里
-
         pass
 
+    def get_click_result(self,id):
+        sql = 'select inquirydate,prescription from history where id = %s' %id
+        self.cursor.execute('select inquirydate,prescription,mainsymptom,look,listen,question,feel,menstruation,leucorrhoea from history where id = %s' %id)
+        data = self.cursor.fetchall()
+        return data
+
+    def result_UI_show(self,time):
+        self.cursor.execute('select prescription from history where inquirydate = \"%s\"'  %time)
+        print('select prescription from history where inquirydate = \"%s\"' %time)
+        data = self.cursor.fetchall()
+        print("重要")
+        print(data)
+        return data
 
 if __name__ == '__main__':
     test = Backend()

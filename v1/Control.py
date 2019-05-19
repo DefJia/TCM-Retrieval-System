@@ -12,6 +12,7 @@ import sys
 from Front import Frontend
 import time
 from UI.quantity import Ui_quantity
+from UI.result import Ui_result
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -39,8 +40,6 @@ class Wrong(QMainWindow, Ui_Wrong):
         # 修改界面
         super(Wrong, self).__init__()
         self.setupUi(self)
-
-
 
 '''
 class ReminderAdvanced(QMainWindow, MessageBox, title, text):
@@ -80,6 +79,10 @@ class Quantity(QMainWindow, Ui_quantity):
         super(Quantity, self).__init__()
         self.setupUi(self)
 
+class Result(QMainWindow, Ui_result):
+    def __init__(self):
+        super(Result, self).__init__()
+        self.setupUi(self)
 
 class Control:
     def __init__(self):
@@ -91,13 +94,15 @@ class Control:
         #self.quantity.show()
         self.information = Information()
         self.information.show()
-        self.interface.show()
+        #self.interface.show()
         self.reminder = Reminder()
         self.property = Property()
         self.inquire = Inquire()
         self.final = Final()
         #self.final.show()
         self.yes = Yes()
+        self.result = Result()
+        #self.result.show()
         # 界面生成
         self.front = Frontend(self.interface, self.reminder, self.information, self.property)
         # 定义交互Class
@@ -200,7 +205,13 @@ class Control:
         # --- quantity按钮组件 ---#
         self.quantity.pushButton.clicked.connect(lambda: self.quantity_button_clicked())
 
-
+        # --- result按钮组件 ---#
+        self.inquire.tableWidget.doubleClicked.connect(lambda: self.inquire_widget_double_clicked(self.inquire.tableWidget))
+        self.result.ButtonOut.clicked.connect(lambda: self.buttonOut_clicked())
+        self.result.tableWidget.doubleClicked.connect(lambda: self.result_widget_double_clicked(self.result.tableWidget))
+        #self.interface.tablewidgetPrescription.clicked.connect(lambda: self.table_option_clicked(2))
+        self.inquire.show()
+        #self.interface.tablewidgetSymptom.clicked.connect(lambda: self.table_option_clicked(0))
 
         ''' 以下为界面初始化处理 '''
         for i in range(8):
@@ -277,7 +288,6 @@ class Control:
         option.hide()
         mode = self.front.type
         self.front.optioned_data(index, text, mode)
-
         pass
 
     def i_option_clicked(self, option):
@@ -307,8 +317,8 @@ class Control:
         # 录入模式中，当+按钮被点击
         # self.interface.buttonSymptom.clicked.connect(lambda: self.front.save_data(0))
         text = line.text()
-        index = self.group_additions.index(line)
-        if text != '' and  index != 3:
+        index = self.group_inputs.index(line)
+        if text != '':
             # self.reminder.show()
             result = self.show_reminder('', '添加成功')
             #print(text)  # test
@@ -328,7 +338,7 @@ class Control:
                     line.clear()
                     self.reminder.hide()
                 print(1)
-
+        '''
         if text != '' and index == 3:
             self.quantity.show()
             # self.reminder.show()
@@ -350,8 +360,10 @@ class Control:
                     line.clear()
                     self.reminder.hide()
                 print(1)
+        
         #这个怎么搞？self.group_additions
         pass
+        '''
 
     def quantity_button_clicked(self):
         text = self.quantity.lineQuantity.text()
@@ -576,6 +588,8 @@ class Control:
                 inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                 print(id)
         self.front.id = id
+        self.front.time = inquirydate
+
         self.front.back.i_save_data(name,gender,age,
         phone,identitynum,address,id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
         self.interface.show()
@@ -617,10 +631,10 @@ class Control:
         print("测试")
         print(self.front.prescription_list)
         print(self.front.id)
-        self.front.back.final_save(self.front.prescription_list,self.front.id)
+        print(self.front.time)
+        self.front.back.final_save(self.front.prescription_list, self.front.id, self.front.time)
         self.front.id = 0
-
-
+        self.front.time = 0
 
         '''
         S = self.interface.tablewidgetPrescribe.item(0, 1)
@@ -630,17 +644,10 @@ class Control:
             columnCurrentRow = len(data_list[r])
                 for c in range(columnCurrentRow):
                     table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
-        
-        
-        
         '''
 
         #data = 遍历开方区里面的内容
         #self.front.back.final_save(self.front.id,data)
-
-
-
-
 
     def buttonOut_click(self):
         self.final.hide()
@@ -648,6 +655,39 @@ class Control:
         self.interface.hide()
         self.front.back.final_save()
 
+    def inquire_widget_double_clicked(self,table):
+        #text = str(table.selectedIteams().text())
+        id = str(table.selectedItems()[6].text())
+        print(id)
+        if id:
+            data = self.front.back.get_click_result(id)
+            print(data)
+            self.front.set_table(self.result.tableWidget,data)
+            self.result.show()
+        pass
+
+    def buttonOut_clicked(self):
+        self.result.hide()
+
+    def result_widget_double_clicked(self,table):
+        time = str(table.selectedItems()[0].text())
+        data = self.front.back.result_UI_show(time)
+        '''
+        if int(len(data)) % 4 == 0:
+            row = int(len(data) / 4)
+        else:
+            row = int(len(data) / 4) + 1
+        text_all = [list() for i in range(row)]
+        print(text_all)
+        # 这句什么意思
+        n = 0
+        for i in data:
+            text_all[int(n / 4)] += i
+            n += 1
+        self.front.set_table(self.interface.tablewidgetPrescribe, text_all)
+        '''
+        self.interface.show()
+        self.front.set_table(self.interface.tablewidgetPrescribe, data)
 
 if __name__ == "__main__":
     test = Control()
