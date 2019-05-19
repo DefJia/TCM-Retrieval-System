@@ -24,7 +24,7 @@ class Frontend:
         self.prescription_list =list()
         self.mainSymptom = list()
         self.work_area = dict()  # 药方工作区
-        self.prescription_list = list() 
+        self.prescription_list = list()
         self.widgets = list(range(4))
         self.widgets[0] = self.interface.tablewidgetSymptom
         self.widgets[1] = self.interface.tablewidgetDisease

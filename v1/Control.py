@@ -627,9 +627,10 @@ class Control:
         self.final.hide()
         #print(self.front.id)
         self.get_table_data(self.interface.tablewidgetPrescribe, self.front.prescription_list)
-
+        print(self.front.prescription_list)
         #D = self.interface.tablewidgetPrescribe.item(0, 0).text()
         #self.front.final_save(self.interface.tablewidgetPrescribe)
+        '''
         row = self.interface.tablewidgetPrescribe.rowCount()
         column = self.interface.tablewidgetPrescribe.columnCount()
         print(column)
@@ -640,7 +641,7 @@ class Control:
                     print(self.interface.tablewidgetPrescribe.item(i, j).text())
                     #print(self.interface.tablewidgetPrescribe.item(2, 2).text())
                     self.front.prescription_list.append(self.interface.tablewidgetPrescribe.item(i, j).text())
-
+        '''
         print("测试")
         print(self.front.prescription_list)
         print(self.front.id)
