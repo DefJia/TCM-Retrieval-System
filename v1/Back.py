@@ -171,9 +171,38 @@ class Backend:
         except Exception as e:
             print(e)
     def search_disease(self,search_area):
+        print(search_area)
         #查询
+        # 查询
+        #sql01 = 'select disease.name from ('
+        #sql0 = 'left join disease on disease.name = c.disease_id '
+        sql1 = 'select distinct disease_id ,count(*) from ('
+        sql2 = ' )Group by disease_id Order by count(*) desc  '
+        for i in range(len(search_area)):
+            print(search_area[i])
+            symptom_id = search_area[i][0]
+            ss = 'select disease_id from symptom_disease where symptom_id = \"' + str(symptom_id) + '\" union all '
+            sql1 += ss
+            #print(sql1)
+            if i == len(search_area) - 1:
+                sql1 = sql1[:-10]
+        SQL =  sql1 + sql2
+        print("前方高能")
+        print(SQL)
+        try:
+            self.cursor.execute(SQL)
+            data = self.cursor.fetchall()
 
+            #print(data)
+            data1 =[]
+            for d in data:
+                data1.append([d[0]])
+            print(data1)
+            return data1  # [0]
+        except Exception as e:
+            print(e)
         pass
+
     def save_relation(self,dbid,left_data,right_data):
         db_name = self.relations[dbid]
         left_name = db_name.split("_")[0]

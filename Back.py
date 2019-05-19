@@ -182,18 +182,20 @@ class Backend:
         sql2 = ' )Group by disease_id Order by count(*) desc) c '
         for i in range(len(search_area[0])):
             print(search_area[0][i])
-            symptom_id = self.search_data("symptom","id",search_area[0][i])[0]
-            ss = '(select disease_id from symptom_disease where symptom_id = '+ str(symptom_id) +') full join '
+            #symptom_id = self.search_data("symptom","name",search_area[0][i])[0]
+            symptom_id = search_area[0][i]
+            ss = '(select disease_id from symptom_disease where symptom_id = \"'+str(symptom_id) +'\") full join '
             sql1 += ss
-            print(sql1)
+            #print(sql1)
             if i == len(search_area[0])-1:
                 sql1 = sql1[:-10]
         SQL= sql01 + sql1 + sql2 +sql0
-        print(SQL)
+        #print(SQL)
         try:
             self.cursor.execute(SQL)
             data = self.cursor.fetchall()
-            #print(data)
+            print("data是")
+            print(data)
             return data#[0]
         except Exception as e:
             print(e)

@@ -94,7 +94,7 @@ class Control:
         #self.quantity.show()
         self.information = Information()
         self.information.show()
-        #self.interface.show()
+        self.interface.show()
         self.reminder = Reminder()
         self.property = Property()
         self.inquire = Inquire()
