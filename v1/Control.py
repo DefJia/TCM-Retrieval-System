@@ -609,11 +609,24 @@ class Control:
         pass
 
 #final面板
+    def get_table_data(self,table,list):
+        row = table.rowCount()
+        column = table.columnCount()
+        print(column)
+        for i in range(row):
+            for j in range(column):
+                # 8和7是row和column,怎么从front中抽取row和column
+                if self.interface.tablewidgetPrescribe.item(i, j).text() != "NULL":
+                    print(self.interface.tablewidgetPrescribe.item(i, j).text())
+                    # print(self.interface.tablewidgetPrescribe.item(2, 2).text())
+                    list.append(self.interface.tablewidgetPrescribe.item(i, j).text())
+
     def buttonContinue_click(self):
         self.interface.hide()
         self.information.show()
         self.final.hide()
         #print(self.front.id)
+        self.get_table_data(self.interface.tablewidgetPrescribe, self.front.prescription_list)
 
         #D = self.interface.tablewidgetPrescribe.item(0, 0).text()
         #self.front.final_save(self.interface.tablewidgetPrescribe)
