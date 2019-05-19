@@ -628,6 +628,7 @@ class Control:
         #print(self.front.id)
         self.get_table_data(self.interface.tablewidgetPrescribe, self.front.prescription_list)
         print(self.front.prescription_list)
+        self.front.back.final_save(self.front.prescription_list, self.front.id)
         #D = self.interface.tablewidgetPrescribe.item(0, 0).text()
         #self.front.final_save(self.interface.tablewidgetPrescribe)
         '''
