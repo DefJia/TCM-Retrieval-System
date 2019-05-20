@@ -151,9 +151,9 @@ class Backend:
             try:
                 self.cursor.execute(sql0)
                 data = self.cursor.fetchall()
-                if data == 'NULL':
+                #if data == "":
                     #是'NULL'还是'None'
-                    self.cursor.execute(sql1)
+                self.cursor.execute(sql1)
                 #self.database.commit()
                 self.cursor.execute(sql2)
                 self.database.commit()

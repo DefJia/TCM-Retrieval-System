@@ -656,7 +656,7 @@ class Control:
         #print(self.front.id)
         self.get_table_data(self.interface.tablewidgetPrescribe, self.front.prescription_list)
         print(self.front.prescription_list)
-        self.front.back.final_save(self.front.prescription_list, self.front.id)
+        #self.front.back.final_save(self.front.prescription_list, self.front.id, self.front.time)
         #D = self.interface.tablewidgetPrescribe.item(0, 0).text()
         #self.front.final_save(self.interface.tablewidgetPrescribe)
         '''
@@ -696,7 +696,7 @@ class Control:
         self.final.hide()
         self.information.hide()
         self.interface.hide()
-        self.front.back.final_save()
+        self.front.back.final_save(self.front.prescription_list, self.front.id, self.front.time)
 
     def inquire_widget_double_clicked(self,table):
         #text = str(table.selectedIteams().text())

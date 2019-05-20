@@ -151,6 +151,7 @@ class Backend:
             sql1 = format('insert into patient (name,gender,age,phone,identitynum,address,id) '
                      'values ("%s","%s","%s","%s","%s","%s","%s")' % (name,gender,age,phone,identitynum,address,id))
             print(sql1)
+
             sql2 = format('insert into history (id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom) '
                      'values ("%s","%s","%s","%s","%s","%s","%s","%s","%s","%s")'
                          % (id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom))
