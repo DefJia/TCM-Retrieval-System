@@ -1,15 +1,15 @@
 -- drop tables
-drop table symptom;
-drop table illness;
-drop table anagraph;
-drop table medicine;
-drop table illness_anagraph;
-drop table symptom_illness;
-drop table anagraph_medicine;
+drop table if exists symptom;
+drop table if exists illness;
+drop table if exists anagraph;
+drop table if exists medicine;
+drop table if exists illness_anagraph;
+drop table if exists symptom_illness;
+drop table if exists anagraph_medicine;
 
 -- create basic tables
 create table symptom(
-  id integer primary key AUTOINCREMENT,
+  id integer primary key AUTOINCREMENT, 
   name varchar(10) not null unique
 );
 create table illness(

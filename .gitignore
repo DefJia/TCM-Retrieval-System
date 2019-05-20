@@ -1,7 +1,4 @@
 test.*
-test2.py
-.idea/
-.vscode/
+.*/
 venv/
 __pycache__/
-Docs/
