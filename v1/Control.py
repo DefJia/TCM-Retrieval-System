@@ -687,20 +687,6 @@ class Control:
     def result_widget_double_clicked(self,table):
         time = str(table.selectedItems()[0].text())
         data = self.front.back.result_UI_show(time)
-        '''
-        if int(len(data)) % 4 == 0:
-            row = int(len(data) / 4)
-        else:
-            row = int(len(data) / 4) + 1
-        text_all = [list() for i in range(row)]
-        print(text_all)
-        # 这句什么意思
-        n = 0
-        for i in data:
-            text_all[int(n / 4)] += i
-            n += 1
-        self.front.set_table(self.interface.tablewidgetPrescribe, text_all)
-        '''
         self.interface.show()
         data = data[0][0][2: -2].split("', '")
         if int(len(data)) % 4 == 0:
