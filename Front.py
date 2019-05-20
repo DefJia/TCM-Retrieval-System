@@ -20,7 +20,8 @@ class Frontend:
         self.location = tuple()  # 当前位置
         self.medicinelist = list()
         self.search_area = [list(), list(), list(), list()]  # 检索区
-        # self.search_area_symptom = list()
+        # self.search_area_symptom = list
+        self.medicine_gram_list = list()
         self.prescription_list =list()
         self.mainSymptom = list()
         self.work_area = dict()  # 药方工作区
