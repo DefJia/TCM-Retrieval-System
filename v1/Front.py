@@ -21,10 +21,11 @@ class Frontend:
         self.location = tuple()  # 当前位置
         self.search_area = [list(), list(), list(), list()]  # 检索区
         # self.search_area_symptom = list()
-        self.prescription_list =list()
+        self.prescription_list = list()
         self.mainSymptom = list()
         self.work_area = dict()  # 药方工作区
         self.prescription_list = list()
+        self.medicine_gram_list = list()
         self.widgets = list(range(4))
         self.widgets[0] = self.interface.tablewidgetSymptom
         self.widgets[1] = self.interface.tablewidgetDisease
@@ -65,7 +66,7 @@ class Frontend:
             option_box.hide()
         return 0
 
-    def optioned_data(self, box_id, text, mode=0, aaa=0):
+    def optioned_data(self, box_id, text, mode=0, data = 0, aaa=0):
         # 任意模式下，当option被选中时，显示相关数据
         # mode为0时只显示右边
         #self.search_area = [list() for i in range(4)]
@@ -79,8 +80,12 @@ class Frontend:
         if aaa ==0:
             target_indexs = list()
             if box_id == 3 and [text] not in self.search_area[box_id]:
-                self.search_area[box_id].append([text," "])
-            if box_id != 3 and [text] not in self.search_area[box_id]:
+                #self.search_area[3] = data
+                self.search_area[3].append([text," "])
+                print("AAAA")
+                print(data)
+
+            if box_id != 3 and [text] not in self.search_area[box_id] :
 
                 self.search_area[box_id].append([text])
 
@@ -209,6 +214,18 @@ class Frontend:
         self.back.final_save()
         pass
         
+    def get_table_data(self,table,list):
+        row = table.rowCount()
+        column = table.columnCount()
+        print(column)
+        for i in range(row):
+            for j in range(column):
+                # 8和7是row和column,怎么从front中抽取row和column
+                if self.interface.tablewidgetPrescribe.item(i, j).text() != "NULL":
+                    print(self.interface.tablewidgetPrescribe.item(i, j).text())
+                    # print(self.interface.tablewidgetPrescribe.item(2, 2).text())
+                    list.append(self.interface.tablewidgetPrescribe.item(i, j).text())
+
 
 if __name__ == '__main__':
     pass

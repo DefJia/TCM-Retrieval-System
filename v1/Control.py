@@ -253,12 +253,13 @@ class Control:
             self.interface.labelType.setText('开方模式')
             self.interface.groupboxSymptom.setGeometry(10, 70, 211, 411)
             self.interface.groupboxDisease.setGeometry(220, 70, 241, 411)
+            self.interface.tablewidgetMedicine.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
             for addition in self.group_additions:
                 addition.hide()
         else:
             self.front.type = 0
             self.interface.labelType.setText('录入模式')
-
+            self.interface.tablewidgetMedicine.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked)
             self.interface.groupboxSymptom.setGeometry(220, 70, 241, 411)
             self.interface.groupboxDisease.setGeometry(10, 70, 211, 411)
 
@@ -283,11 +284,16 @@ class Control:
         # 检测到下拉框被点击
         index = self.group_options.index(option)
         text = str(option.selectedItems()[0].text())
+        data = "0"
         self.group_inputs[index].setText("")
         #清空line里面的内容
         option.hide()
         mode = self.front.type
-        self.front.optioned_data(index, text, mode)
+
+        #if index == 3:
+            #self.get_table_data(self.interface.tablewidgetMedicine,self.front.medicine_gram_list)
+
+        self.front.optioned_data(index, text, mode, data)
         pass
 
     def i_option_clicked(self, option):
@@ -507,10 +513,26 @@ class Control:
         elif self.front.type == 0:
             #录入模式
             for i in range(3):
-                if len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
+                if i < 2 and len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
                     for l in self.front.search_area[i]:
                         for m in self.front.search_area[i+1]:
                             self.front.back.save_relation(i,l[0],m[0])
+
+                if i == 2 and len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
+                    self.get_table_data(self.interface.tablewidgetMedicine, self.front.medicine_gram_list)
+
+
+                    print("******")
+                    #print(int(len(self.front.medicine_gram_list) / 2))
+
+                    for i in range(int(len(self.front.medicine_gram_list) / 2)):
+                        #print(self.front.medicine_gram_list[0])
+                        meidi = self.front.medicine_gram_list[2 * i]
+                        gram = self.front.medicine_gram_list[2 * i+1]
+                        print(self.front.search_area[2][0])
+                        for j in self.front.search_area[2]:
+                            self.front.back.save_relation_gram(j[0],meidi,gram)
+
             for list0 in self.front.search_area:
                 list0.clear()
         self.yes.hide()
@@ -616,10 +638,15 @@ class Control:
         for i in range(row):
             for j in range(column):
                 # 8和7是row和column,怎么从front中抽取row和column
-                if self.interface.tablewidgetPrescribe.item(i, j).text() != "NULL":
-                    print(self.interface.tablewidgetPrescribe.item(i, j).text())
+                '''
+                print(">")
+                print(self.interface.tablewidgetMedicine.item(0, 0).text())
+                print("<")
+                '''
+                if table.item(i, j).text() != "NULL" :#********可能右问题
+                    print(table.item(i, j).text())
                     # print(self.interface.tablewidgetPrescribe.item(2, 2).text())
-                    list.append(self.interface.tablewidgetPrescribe.item(i, j).text())
+                    list.append(table.item(i, j).text())
 
     def buttonContinue_click(self):
         self.interface.hide()
@@ -673,6 +700,7 @@ class Control:
     def inquire_widget_double_clicked(self,table):
         #text = str(table.selectedIteams().text())
         id = str(table.selectedItems()[6].text())
+        self.front.id = id
         print(id)
         if id:
             data = self.front.back.get_click_result(id)
@@ -687,6 +715,7 @@ class Control:
     def result_widget_double_clicked(self,table):
         time = str(table.selectedItems()[0].text())
         data = self.front.back.result_UI_show(time)
+
         '''
         if int(len(data)) % 4 == 0:
             row = int(len(data) / 4)

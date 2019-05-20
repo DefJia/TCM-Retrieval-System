@@ -220,6 +220,22 @@ class Backend:
         except Exception as e:
             print(e)
 
+    def save_relation_gram(self,p,m,g):
+        if g != " " and g != "NULL":
+            sql = format(
+                'insert into prescription_medicine (prescription_id,medicine_id,grams) values ("%s","%s",%s)' % (
+                p, m, g))
+        else:
+            sql = format(
+            'insert into prescription_medicine (prescription_id,medicine_id) values ("%s","%s")' % (p, m))
+        print(sql)
+        try:
+            self.cursor.execute(sql)
+            self.database.commit()
+            return 0
+        except Exception as e:
+            print(e)
+
     def drop_relation(self,dbid,left_data,right_data):
         db_name = self.relations[dbid]
         front_name = db_name.split("_")[0]
@@ -311,6 +327,12 @@ class Backend:
         data = self.cursor.fetchall()
         print("重要")
         print(data)
+        return data
+
+    def result_get_id(self):
+        self.cursor.execute('select prescription from history where inquirydate = \"%s\"' % time)
+        #print('select prescription from history where inquirydate = \"%s\"' % time)
+        data = self.cursor.fetchall()
         return data
 
 if __name__ == '__main__':
