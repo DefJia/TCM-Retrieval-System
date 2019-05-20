@@ -190,7 +190,7 @@ class Control:
 
         self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())  # 删除
         self.interface.buttonDeleterelation.clicked.connect(lambda: self.buttonRelationDelete_clicked())# 删除关系
-        self.interface.buttonOut.clicked.connect(lambda: self.interface.hide())  # 删除
+        self.interface.buttonOut.clicked.connect(lambda: self.interface.hide())  # 退出
         self.interface.buttonSave.clicked.connect(lambda: self.final.show())  # 最终保存
 
 
@@ -490,13 +490,14 @@ class Control:
     def buttonInput_clicked(self):
         # 录入按钮
         if self.front.type == 1:
-            #开方模式
+            # 开方模式
             medicines = self.front.search_area[3]
-            if int(len(medicines))%4 == 0:
+            if int(len(medicines)) % 4 == 0:
                 row = int(len(medicines) / 4)
-            else: row = int(len(medicines) / 4) + 1
+            else:
+                row = int(len(medicines) / 4) + 1
             text_all = [list() for i in range(row)]
-            #这句什么意思
+            # 这句什么意思
             n = 0
             for i in medicines:
                 text_all[int(n/4)] += i
@@ -679,7 +680,6 @@ class Control:
             print(data)
             self.front.set_table(self.result.tableWidget,data)
             self.result.show()
-        pass
 
     def buttonOut_clicked(self):
         self.result.hide()
@@ -702,7 +702,19 @@ class Control:
         self.front.set_table(self.interface.tablewidgetPrescribe, text_all)
         '''
         self.interface.show()
-        self.front.set_table(self.interface.tablewidgetPrescribe, data)
+        data = data[0][0][2: -2].split("', '")
+        if int(len(data)) % 4 == 0:
+            row = int(len(data) / 4)
+        else:
+            row = int(len(data) / 4) + 1
+        text_all = [list() for i in range(row)]
+        n = 0
+        for i in data:
+            text_all[int(n / 4)].append(i)
+            text_all[int(n / 4)].append('')
+            n += 1
+        self.front.set_table(self.interface.tablewidgetPrescribe, text_all)
+
 
 if __name__ == "__main__":
     test = Control()
