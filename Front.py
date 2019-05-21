@@ -18,10 +18,8 @@ class Frontend:
         self.id = 0
         self.type = 1  # 模式
         self.location = tuple()  # 当前位置
-        self.medicinelist = list()
         self.search_area = [list(), list(), list(), list()]  # 检索区
-        # self.search_area_symptom = list
-        self.medicine_gram_list = list()
+        # self.search_area_symptom = list()
         self.prescription_list =list()
         self.mainSymptom = list()
         self.work_area = dict()  # 药方工作区
@@ -42,8 +40,6 @@ class Frontend:
         # Import function
         # self.init_data() # 不用一开始显示,而且显示会崩溃，原因未查
         # Init data
-
-
 
     def init_data(self):
         data = self.back.init(self.type)
@@ -71,20 +67,24 @@ class Frontend:
         # 任意模式下，当option被选中时，显示相关数据
         # mode为0时只显示右边
         #self.search_area = [list() for i in range(4)]
+
         '''
         for widget in self.widgets:
             widget.clear()
         '''
+
         # 初始化 
         if aaa ==0:
             target_indexs = list()
-            if box_id == 3 and [text] not in self.search_area[box_id]:
-                self.search_area[box_id].append([text," "])
-            if box_id != 3 and [text] not in self.search_area[box_id]:
-                self.search_area[box_id].append([text])
 
+
+            if [text] not in self.search_area[box_id]:
+                self.search_area[box_id].append([text])
             if mode == 1 and box_id != 3:
                 target_indexs.append(box_id + 1)
+
+
+
                 pass
             '''
             elif mode == 0:
@@ -100,9 +100,7 @@ class Frontend:
                     if sub_data:
                         self.search_area[index] = sub_data
                 else:
-                    self.search_area[1]= self.back.search_disease(self.search_area[0])
-                    #往search_area[1]里写数据
-
+                    self.back.search_disease(self.search_area[0])
                     #获取serach_area[0]里面的每一个元素，并启动查询方法传入（search_area[0]），查询里面每一个数
                     #在back里面写方法  Select 病名 from 表 where 病症名 = line.text1 or 病症名 = line.text2 order by xxx
                     #settable()
@@ -186,6 +184,7 @@ class Frontend:
         # data_list: [[item, item], [item, item]]
         if data_list:
             print(data_list)
+
             '''
             for elem in data_list:
                 elem.append('克')
@@ -199,6 +198,7 @@ class Frontend:
                 columnCurrentRow = len(data_list[r])
                 for c in range(columnCurrentRow):
                     table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
+
         #如果table是开方区的则
 
     def set_all_tables(self, data):
@@ -213,10 +213,10 @@ class Frontend:
         self.back.deletedate(text,index)
         pass
     
-    #def final_save(self,table,data):
+    def final_save(self,table,data):
 
-        #self.back.final_save()
-        #pass
+        self.back.final_save()
+        pass
         
 
 if __name__ == '__main__':

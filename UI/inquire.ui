@@ -185,9 +185,6 @@
     <property name="dragEnabled">
      <bool>false</bool>
     </property>
-    <property name="selectionBehavior">
-     <enum>QAbstractItemView::SelectRows</enum>
-    </property>
     <attribute name="horizontalHeaderDefaultSectionSize">
      <number>112</number>
     </attribute>
@@ -229,7 +226,12 @@
     </row>
     <column>
      <property name="text">
-      <string notr="true">姓名</string>
+      <string notr="true">编号</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>姓名</string>
      </property>
     </column>
     <column>
@@ -239,12 +241,7 @@
     </column>
     <column>
      <property name="text">
-      <string>年龄</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>手机</string>
+      <string>手机号</string>
      </property>
     </column>
     <column>

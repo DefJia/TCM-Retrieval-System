@@ -82,20 +82,20 @@ class Backend:
             #七种方案，三种只在一个框中输入，三种在两个框中输入，一种在三个框中输入
             #没有简便方法的话就只能写全7种了
             if name != "" and phone != "" and idcard !="":
-                self.cursor.execute('select * from patient where name = "%s" and phone = %s and identitynum = %s' %(name, phone, idcard))
+                self.cursor.execute('select * from patient where name = %s and phone = %s and identitynum = %s' %(name, phone, idcard))
 
             if name == "" and phone != "" and idcard !="":
                 self.cursor.execute('select * from patient where phone = %s and identitynum = %s' % (phone, idcard))
             if name != "" and phone == "" and idcard !="":
-                self.cursor.execute('select * from patient where name = "%s" and identitynum = %s' % (name, idcard))
+                self.cursor.execute('select * from patient where name = %s and identitynum = %s' % (name, idcard))
             if name != "" and phone != "" and idcard =="":
-                self.cursor.execute('select * from patient where name = "%s" and phone = %s ' %(name, phone))
+                self.cursor.execute('select * from patient where name = %s and phone = %s ' %(name, phone))
 
             if name == "" and phone != "" and idcard =="":
                 self.cursor.execute('select * from patient where phone = %s' %phone)
             if name != "" and phone == "" and idcard =="":
-                print('select * from patient where name = "%s"'  %name)
-                self.cursor.execute('select * from patient where name = "%s"'  %'name')
+                print('select * from patient where name = %s'  %name)
+                self.cursor.execute('select * from patient where name = %s'  %'name')
             if name == "" and phone == "" and idcard !="":
                 self.cursor.execute('select * from patient where identitynum = %s ' % idcard)
 
@@ -120,7 +120,7 @@ class Backend:
             return 1
 
     def save_data_quantity(self,quantity,name):
-        sql = format('update prescription_medicine set property = %s where name = \"%s\" '% (quantity, name) )
+        sql = format('update medicine set property = %s where name = %s ' % (quantity, name) )
         #'update history set %s = \"%s\" where id = %s' % (db_name, data, id)
         try:
             self.cursor.execute(sql)
@@ -151,7 +151,6 @@ class Backend:
             sql1 = format('insert into patient (name,gender,age,phone,identitynum,address,id) '
                      'values ("%s","%s","%s","%s","%s","%s","%s")' % (name,gender,age,phone,identitynum,address,id))
             print(sql1)
-
             sql2 = format('insert into history (id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom) '
                      'values ("%s","%s","%s","%s","%s","%s","%s","%s","%s","%s")'
                          % (id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom))
@@ -174,54 +173,23 @@ class Backend:
             return data[0]
         except Exception as e:
             print(e)
-
     def search_disease(self,search_area):
         #查询
-        sql01 = 'select disease.name from ('
-        sql0 = 'left join disease on disease.id = c.disease_id '
-        sql1 = 'select distinct disease_id ,count(*) from ('
-        sql2 = ' )Group by disease_id Order by count(*) desc) c '
-        for i in range(len(search_area[0])):
-            print(search_area[0][i])
-            #symptom_id = self.search_data("symptom","name",search_area[0][i])[0]
-            symptom_id = search_area[0][i]
-            ss = '(select disease_id from symptom_disease where symptom_id = \"'+str(symptom_id) +'\") full join '
-            sql1 += ss
-            #print(sql1)
-            if i == len(search_area[0])-1:
-                sql1 = sql1[:-10]
-        SQL= sql01 + sql1 + sql2 +sql0
-        #print(SQL)
+
+        pass
+    def save_relation(self,dbid,left_data,right_data):
+        db_name = self.relations[dbid]
+        left_name = db_name.split("_")[0]
+        right_name = db_name.split("_")[-1]
+        left_id = int(self.search_data(left_name,"id",left_data)[0])
+        right_id = int(self.search_data(right_name,"id",right_data)[0])
+        sql = format('insert into %s (%s_id,%s_id) values (%s,%s)' % (db_name,left_name,right_name,left_id, right_id))
         try:
-            self.cursor.execute(SQL)
-            data = self.cursor.fetchall()
-            print("data是")
-            print(data)
-            return data#[0]
+            self.cursor.execute(sql)
+            self.database.commit()
+            return 0
         except Exception as e:
             print(e)
-        pass
-
-
-    def save_relation(self,dbid,left_data,right_data):
-        if dbid != 2:
-            #def save_relation(self,dbid,left_data,right_data,c=0,gram=None): if c=0 else garm:
-            db_name = self.relations[dbid]
-            left_name = db_name.split("_")[0]
-            right_name = db_name.split("_")[-1]
-            left_id = int(self.search_data(left_name,"id",left_data)[0])
-            right_id = int(self.search_data(right_name,"id",right_data)[0])
-            #if c == 1:
-            sql = format('insert into %s (%s_id,%s_id) values (%s,%s)' % (db_name, left_name, right_name, left_id, right_id))
-            #print(sql)
-            try:
-                self.cursor.execute(sql)
-                self.database.commit()
-                return 0
-            except Exception as e:
-                print(e)
-
-
 
     def drop_relation(self,dbid,left_data,right_data):
         db_name = self.relations[dbid]
@@ -288,12 +256,11 @@ class Backend:
         return name,gender,age,phone,identitynum,address 
 
 
-    def final_save(self,data,id,time):
+    def final_save(self,data,id):
         db_name = 'prescription'
-
         #data = 界面里的内容
         print('update history set %s = \'%s\' where id = %s' % (db_name,data,id))
-        self.cursor.execute('update history set %s = \"%s\" where id = %s and inquirydate = %s' % (db_name,data,id,time))
+        self.cursor.execute('update history set %s = \"%s\" where id = %s' % (db_name,data,id))
         self.database.commit()
         #这里面要存储开方区域中的所有信息
         #1.把开方遍历一遍
