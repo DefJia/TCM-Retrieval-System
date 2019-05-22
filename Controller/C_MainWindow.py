@@ -4,12 +4,13 @@ sys.path.append(dir)
 
 # from Controller.Method import test
 # from Model.test import L
-from Model.Interface import *
+from Model.M_MainWindow import M_MainWindow
 
 
 class Monitor:
     def __init__(self, obj):
         self.interface = obj
+        self.model = M_MainWindow(obj)
         # init
         self.additions()
         self.inputs()
@@ -19,38 +20,40 @@ class Monitor:
         self.buttons()
 
     def additions(self):
-        self.interface.buttonSymptom.clicked.connect(lambda: addition_clicked(0))
-        self.interface.buttonDisease.clicked.connect(lambda: addition_clicked(1))
-        self.interface.buttonPrescription.clicked.connect(lambda: addition_clicked(2))
-        self.interface.buttonMedicine.clicked.connect(lambda: addition_clicked(3))
+        self.interface.buttonSymptom.clicked.connect(lambda: self.model.addition_clicked(0))
+        self.interface.buttonDisease.clicked.connect(lambda: self.model.addition_clicked(1))
+        self.interface.buttonPrescription.clicked.connect(lambda: self.model.addition_clicked(2))
+        self.interface.buttonMedicine.clicked.connect(lambda: self.model.addition_clicked(3))
 
     def inputs(self):
-        self.interface.lineSymptom.textChanged.connect(lambda: input_changed(0, self.interface.lineSymptom.text()))
-        self.interface.lineDisease.textChanged.connect(lambda: input_changed(1, self.interface.lineDisease.text()))
-        self.interface.linePrescription.textChanged.connect(lambda: input_changed(2, self.interface.Prescription.text()))
-        self.interface.lineMedicine.textChanged.connect(lambda: input_changed(3, self.interface.lineMedicine.text()))
+        self.interface.lineSymptom.textChanged.connect(lambda: self.model.input_changed(0, self.interface.lineSymptom.text()))
+        self.interface.lineDisease.textChanged.connect(lambda: self.model.input_changed(1, self.interface.lineDisease.text()))
+        self.interface.linePrescription.textChanged.connect(lambda: self.model.input_changed(2, self.interface.Prescription.text()))
+        self.interface.lineMedicine.textChanged.connect(lambda: self.model.input_changed(3, self.interface.lineMedicine.text()))
         
     def tables(self):
-        self.interface.tablewidgetSymptom.clicked.connect(lambda: table_clicked(0))
-        self.interface.tablewidgetDisease.clicked.connect(lambda: table_clicked(1))
-        self.interface.tablewidgetPrescription.clicked.connect(lambda: table_clicked(2))
-        self.interface.tablewidgetMedicine.clicked.connect(lambda: table_clicked(3))
+        self.interface.tablewidgetSymptom.clicked.connect(lambda: self.model.table_clicked(0))
+        self.interface.tablewidgetDisease.clicked.connect(lambda: self.model.table_clicked(1))
+        self.interface.tablewidgetPrescription.clicked.connect(lambda: self.model.table_clicked(2))
+        self.interface.tablewidgetMedicine.clicked.connect(lambda: self.model.table_clicked(3))
 
     def options(self):
-        self.interface.symptomOption.clicked.connect(lambda: option_clicked(0))
-        self.interface.diseaseOption.clicked.connect(lambda: option_clicked(1))
-        self.interface.prescriptionOption.clicked.connect(lambda: option_clicked(2))
-        self.interface.medicineOption.clicked.connect(lambda: option_clicked(3))
+        self.interface.symptomOption.clicked.connect(lambda: self.model.option_clicked(0))
+        self.interface.diseaseOption.clicked.connect(lambda: self.model.option_clicked(1))
+        self.interface.prescriptionOption.clicked.connect(lambda: self.model.option_clicked(2))
+        self.interface.medicineOption.clicked.connect(lambda: self.model.option_clicked(3))
 
     def radioboxs(self):
-        self.interface.radioButton_2.toggled.connect(lambda: radiobox_changed())
+        self.interface.radioButton_2.toggled.connect(lambda: self.model.radiobox_changed())
 
     def buttons(self):
-        self.interface.buttonDeleterelation.clicked.connect()  # 删除关系
-        self.interface.buttonDelete.clicked.connect()  # 删除
-        self.interface.buttonInput.clicked.connect()  # 录入
-        self.interface.buttonClean.clicked.connect()
-        self.interface.buttonInitial
+        self.interface.buttonDeleterelation.clicked.connect(lambda: self.model.button_clicked(0))  # 删除关系
+        self.interface.buttonDelete.clicked.connect(lambda: self.model.button_clicked(1))  # 删除
+        self.interface.buttonInitial.clicked.connect(lambda: self.model.button_clicked(2))  # 初始化
+        self.interface.buttonInput.clicked.connect(lambda: self.model.button_clicked(3))  # 录入
+        self.interface.buttonClean.clicked.connect(lambda: self.model.button_clicked(4))  # 清空
+        self.interface.buttonSave.clicked.connect(lambda: self.model.button_clicked(5))  # 录入
+        self.interface.buttonOut.clicked.connect(lambda: self.model.button_clicked(6))  # 退出
 
 '''
 # --- information按钮组 --- #
