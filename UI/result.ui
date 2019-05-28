@@ -32,6 +32,9 @@
     <property name="dragEnabled">
      <bool>false</bool>
     </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
+    </property>
     <attribute name="horizontalHeaderDefaultSectionSize">
      <number>112</number>
     </attribute>
@@ -71,6 +74,46 @@
       <string>New Row</string>
      </property>
     </row>
+    <column>
+     <property name="text">
+      <string>就诊时间</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>药方</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>病症</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>望</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>闻</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>问</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>切</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>带</string>
+     </property>
+    </column>
    </widget>
    <widget class="QPushButton" name="ButtonOut">
     <property name="geometry">

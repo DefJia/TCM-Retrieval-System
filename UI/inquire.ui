@@ -86,7 +86,7 @@
       <x>70</x>
       <y>180</y>
       <width>351</width>
-      <height>71</height>
+      <height>80</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -194,9 +194,6 @@
     <attribute name="verticalHeaderVisible">
      <bool>false</bool>
     </attribute>
-    <attribute name="verticalHeaderCascadingSectionResizes">
-     <bool>true</bool>
-    </attribute>
     <row>
      <property name="text">
       <string>New Row</string>
@@ -229,7 +226,7 @@
     </row>
     <column>
      <property name="text">
-      <string notr="true">姓名</string>
+      <string>姓名</string>
      </property>
     </column>
     <column>

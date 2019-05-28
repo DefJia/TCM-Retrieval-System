@@ -16,15 +16,17 @@ class Frontend:
         self.row = 0
         self.column = 0
         self.id = 0
+        self.time = 0
         self.type = 1  # 模式
         self.location = tuple()  # 当前位置
-        self.medicinelist = list()
         self.search_area = [list(), list(), list(), list()]  # 检索区
-        # self.search_area_symptom = list
-        self.medicine_gram_list = list()
-        self.prescription_list =list()
+        # self.search_area_symptom = list()
+        self.result_list = list() #中途存一下双击result之后的列表
+        self.prescription_list = list()
         self.mainSymptom = list()
         self.work_area = dict()  # 药方工作区
+        self.prescription_list = list()
+        self.medicine_gram_list = list()
         self.widgets = list(range(4))
         self.widgets[0] = self.interface.tablewidgetSymptom
         self.widgets[1] = self.interface.tablewidgetDisease
@@ -39,11 +41,28 @@ class Frontend:
         self.viceSymptoms[5] =self.information.lineLeucorrhoea
         # Global Variable
         self.back = Backend()
+        #暂时存储病人的所有信息
+        self.name = "无"
+        self.gender = "无"
+        self.age = 0
+        self.phone = 0
+        self.identitynum = ""
+        self.address = ""
+
+        # inquirydate = line
+        self.look = ""
+        self.listen = ""
+        self.question = ""
+        self.feel = ""
+        self.menstruation = ""
+        self.leucorrhoea = ""
+        # prescription = self.information.linePrescription.text()
+        # mainsymptom = self.information.lineSymptom.text()
+        self.mainsymptom = self.search_area[0]
+
         # Import function
         # self.init_data() # 不用一开始显示,而且显示会崩溃，原因未查
         # Init data
-
-
 
     def init_data(self):
         data = self.back.init(self.type)
@@ -67,47 +86,44 @@ class Frontend:
             option_box.hide()
         return 0
 
-    def optioned_data(self, box_id, text, mode=0, aaa=0):
+    def optioned_data(self, box_id, text, mode=0, data = 0, aaa=0):
         # 任意模式下，当option被选中时，显示相关数据
         # mode为0时只显示右边
         #self.search_area = [list() for i in range(4)]
+
         '''
         for widget in self.widgets:
             widget.clear()
         '''
+
         # 初始化 
         if aaa ==0:
             target_indexs = list()
             if box_id == 3 and [text] not in self.search_area[box_id]:
-                self.search_area[box_id].append([text," "])
-            if box_id != 3 and [text] not in self.search_area[box_id]:
+                #self.search_area[3] = data
+                self.search_area[3].append([text," "])
+                print("AAAA")
+                print(data)
+
+            if box_id != 3 and [text] not in self.search_area[box_id] :
                 self.search_area[box_id].append([text])
 
             if mode == 1 and box_id != 3:
                 target_indexs.append(box_id + 1)
                 pass
-            '''
-            elif mode == 0:
-                right = box_id + 1
-                if 0 <= right <= 3:
-                    target_indexs.append(right)
-                 #不需要关系
-                pass
-            '''
+
             for index in target_indexs:
                 if box_id != 0:
                     sub_data = self.back.union_query(box_id, index, text)
                     if sub_data:
                         self.search_area[index] = sub_data
                 else:
-                    self.search_area[1]= self.back.search_disease(self.search_area[0])
-                    #往search_area[1]里写数据
-
+                    self.search_area[1] = self.back.search_disease(self.search_area[0])
                     #获取serach_area[0]里面的每一个元素，并启动查询方法传入（search_area[0]），查询里面每一个数
                     #在back里面写方法  Select 病名 from 表 where 病症名 = line.text1 or 病症名 = line.text2 order by xxx
                     #settable()
                     pass
-            #self.set_table(self.information.tablewidgetMainSymptom, self.mainSymptom)
+            self.set_table(self.information.tablewidgetMainSymptom, self.search_area[0])
             self.set_all_tables(self.search_area)
             # print(self.search_area)
             return 0
@@ -130,7 +146,7 @@ class Frontend:
                 self.mainSymptom.append([text])
 
             print(self.mainSymptom)
-            self.set_table(self.information.tablewidgetMainSymptom,self.mainSymptom)
+            
             # self.mainSymptom.clear()
             return 0
         '''
@@ -157,17 +173,7 @@ class Frontend:
                 print('该名称已存在')
             else:
                 print('录入成功')
-
-    def save_data_quantity(self,quantity,text):
-        if text and quantity:
-            name = "symptom"
-            res = self.back.save_data(name,text)
-            self.back.save_data_quantity(quantity,text)
-            if res:
-                print('该名称已存在')
-            else:
-                print('录入成功')
-
+    
 
     # 新加方法
     def add_item(self, box_id, text):
@@ -187,6 +193,7 @@ class Frontend:
         # data_list: [[item, item], [item, item]]
         if data_list:
             print(data_list)
+
             '''
             for elem in data_list:
                 elem.append('克')
@@ -200,6 +207,7 @@ class Frontend:
                 columnCurrentRow = len(data_list[r])
                 for c in range(columnCurrentRow):
                     table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
+
         #如果table是开方区的则
 
     def set_all_tables(self, data):
@@ -214,11 +222,29 @@ class Frontend:
         self.back.deletedate(text,index)
         pass
     
-    #def final_save(self,table,data):
-
-        #self.back.final_save()
-        #pass
+    def final_save(self,list,id,time):
+        look = self.look
+        listen =self.listen
+        question = self.question
+        feel = self.feel
+        menstruation = self.menstruation
+        leucorrhoea = self.leucorrhoea
+        mainsymptom = self.mainsymptom
+        self.back.final_save(look,listen,question,feel,menstruation,leucorrhoea,mainsymptom,list,id,time)
+        pass
         
+    def get_table_data(self,table,list):
+        row = table.rowCount()
+        column = table.columnCount()
+        print(column)
+        for i in range(row):
+            for j in range(column):
+                # 8和7是row和column,怎么从front中抽取row和column
+                if self.interface.tablewidgetPrescribe.item(i, j).text() != "NULL":
+                    print(self.interface.tablewidgetPrescribe.item(i, j).text())
+                    # print(self.interface.tablewidgetPrescribe.item(2, 2).text())
+                    list.append(self.interface.tablewidgetPrescribe.item(i, j).text())
+
 
 if __name__ == '__main__':
     pass
