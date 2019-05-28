@@ -21,6 +21,7 @@ class Frontend:
         self.location = tuple()  # 当前位置
         self.search_area = [list(), list(), list(), list()]  # 检索区
         # self.search_area_symptom = list()
+        self.result_list = list() #中途存一下双击result之后的列表
         self.prescription_list = list()
         self.mainSymptom = list()
         self.work_area = dict()  # 药方工作区
@@ -40,6 +41,25 @@ class Frontend:
         self.viceSymptoms[5] =self.information.lineLeucorrhoea
         # Global Variable
         self.back = Backend()
+        #暂时存储病人的所有信息
+        self.name = "无"
+        self.gender = "无"
+        self.age = 0
+        self.phone = 0
+        self.identitynum = ""
+        self.address = ""
+
+        # inquirydate = line
+        self.look = ""
+        self.listen = ""
+        self.question = ""
+        self.feel = ""
+        self.menstruation = ""
+        self.leucorrhoea = ""
+        # prescription = self.information.linePrescription.text()
+        # mainsymptom = self.information.lineSymptom.text()
+        self.mainsymptom = self.search_area[0]
+
         # Import function
         # self.init_data() # 不用一开始显示,而且显示会崩溃，原因未查
         # Init data
@@ -86,20 +106,12 @@ class Frontend:
                 print(data)
 
             if box_id != 3 and [text] not in self.search_area[box_id] :
-
                 self.search_area[box_id].append([text])
 
             if mode == 1 and box_id != 3:
                 target_indexs.append(box_id + 1)
                 pass
-            '''
-            elif mode == 0:
-                right = box_id + 1
-                if 0 <= right <= 3:
-                    target_indexs.append(right)
-                 #不需要关系
-                pass
-            '''
+
             for index in target_indexs:
                 if box_id != 0:
                     sub_data = self.back.union_query(box_id, index, text)
@@ -111,6 +123,7 @@ class Frontend:
                     #在back里面写方法  Select 病名 from 表 where 病症名 = line.text1 or 病症名 = line.text2 order by xxx
                     #settable()
                     pass
+            self.set_table(self.information.tablewidgetMainSymptom, self.search_area[0])
             self.set_all_tables(self.search_area)
             # print(self.search_area)
             return 0
@@ -133,7 +146,7 @@ class Frontend:
                 self.mainSymptom.append([text])
 
             print(self.mainSymptom)
-            self.set_table(self.information.tablewidgetMainSymptom,self.mainSymptom)
+            
             # self.mainSymptom.clear()
             return 0
         '''
@@ -209,9 +222,15 @@ class Frontend:
         self.back.deletedate(text,index)
         pass
     
-    def final_save(self,table,data):
-
-        self.back.final_save()
+    def final_save(self,list,id,time):
+        look = self.look
+        listen =self.listen
+        question = self.question
+        feel = self.feel
+        menstruation = self.menstruation
+        leucorrhoea = self.leucorrhoea
+        mainsymptom = self.mainsymptom
+        self.back.final_save(look,listen,question,feel,menstruation,leucorrhoea,mainsymptom,list,id,time)
         pass
         
     def get_table_data(self,table,list):

@@ -107,6 +107,7 @@ class Frontend:
                     #在back里面写方法  Select 病名 from 表 where 病症名 = line.text1 or 病症名 = line.text2 order by xxx
                     #settable()
                     pass
+            #self.set_table(self.information.tablewidgetMainSymptom, self.mainSymptom)
             self.set_all_tables(self.search_area)
             # print(self.search_area)
             return 0

@@ -290,9 +290,11 @@ class Backend:
 
     def final_save(self,data,id,time):
         db_name = 'prescription'
-
         #data = 界面里的内容
-        print('update history set %s = \'%s\' where id = %s' % (db_name,data,id))
+        #print('update history set %s = \'%s\' where id = %s' % (db_name,data,id))
+        self.cursor.execute('select inquirydate from history where id = ?', (patientID,))
+        # 先查询关系号
+        data = self.cursor.fetchall()
         self.cursor.execute('update history set %s = \"%s\" where id = %s and inquirydate = %s' % (db_name,data,id,time))
         self.database.commit()
         #这里面要存储开方区域中的所有信息

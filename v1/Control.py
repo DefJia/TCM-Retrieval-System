@@ -10,11 +10,12 @@ from UI.yes import Ui_Yes
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 import sys
 from Front import Frontend
+from UI.missPhone import Ui_missPhone
 import time
 from UI.quantity import Ui_quantity
 from UI.result import Ui_result
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import time
 
 class Interface(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -84,6 +85,11 @@ class Result(QMainWindow, Ui_result):
         super(Result, self).__init__()
         self.setupUi(self)
 
+class MissPhone(QMainWindow, Ui_missPhone):
+    def __init__(self):
+        super(MissPhone, self).__init__()
+        self.setupUi(self)
+
 class Control:
     def __init__(self):
         app = QApplication(sys.argv)
@@ -102,7 +108,8 @@ class Control:
         #self.final.show()
         self.yes = Yes()
         self.result = Result()
-        #self.result.show()
+        self.missPhone = MissPhone()
+        #self.missPhone.show()
         # 界面生成
         self.front = Frontend(self.interface, self.reminder, self.information, self.property)
         # 定义交互Class
@@ -179,8 +186,6 @@ class Control:
         #self.inquire.ButtonYes.clicked.connect(lambda: self.inquire.hide())
         # --- inquire 触发 --- #
 
-
-
         # --- interface按钮组 --- #
         self.interface.radioButton_2.toggled.connect(lambda: self.change_type())  # 切换模式
         self.interface.buttonInput.clicked.connect(lambda: self.yes.show())  # 录入
@@ -190,9 +195,8 @@ class Control:
 
         self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())  # 删除
         self.interface.buttonDeleterelation.clicked.connect(lambda: self.buttonRelationDelete_clicked())# 删除关系
-        self.interface.buttonOut.clicked.connect(lambda: self.interface.hide())  # 退出
+        self.interface.buttonOut.clicked.connect(lambda: self.interface_out())  # 退出
         self.interface.buttonSave.clicked.connect(lambda: self.final.show())  # 最终保存
-
 
         # --- Inquire按钮组 --- #
         self.inquire.ButtonYes.clicked.connect(lambda: self.iq_buttonYes_clicked())  # 查询
@@ -212,6 +216,9 @@ class Control:
         #self.interface.tablewidgetPrescription.clicked.connect(lambda: self.table_option_clicked(2))
         self.inquire.show()
         #self.interface.tablewidgetSymptom.clicked.connect(lambda: self.table_option_clicked(0))
+
+        # --- 缺失手机按钮组件 ---#
+        self.missPhone.yesButton.clicked.connect(lambda: self.missPhone_clicked())
 
         ''' 以下为界面初始化处理 '''
         for i in range(8):
@@ -289,18 +296,12 @@ class Control:
         #清空line里面的内容
         option.hide()
         mode = self.front.type
-
-        #if index == 3:
-            #self.get_table_data(self.interface.tablewidgetMedicine,self.front.medicine_gram_list)
-
         self.front.optioned_data(index, text, mode, data)
         pass
 
     def i_option_clicked(self, option):
         # 检测到下拉框被点击
         text = str(option.selectedItems()[0].text())
-        print(text)
-        #print("1")
         self.information.option.clear()
         option.hide()
         print("1")
@@ -498,19 +499,75 @@ class Control:
         if self.front.type == 1:
             # 开方模式
             medicines = self.front.search_area[3]
-            if int(len(medicines)) % 4 == 0:
-                row = int(len(medicines) / 4)
+            print(medicines)
+            list_1 =self.front.result_list #list_1获取双击result之后的数据
+            list_2 =list()
+            list_3 =list()
+            if list_1:
+                for i in range(len(list_1)):
+                    #print(list_10))
+                    list_2 += list_1[i]
+                    #这里是把list_1中的结构改变
+                for j in range(len(medicines)):
+                    list_3 += medicines[j]
+                    print(list_3)
+                    #同理，改变结构
+                print(list_2)
+                list_1 = list_2 + list_3
+                #把两个列表合成一个列表
+                print(list_1)
             else:
-                row = int(len(medicines) / 4) + 1
+                for j in range(len(medicines)):
+                    list_1 += medicines[j]
+                #list_1 = self.front.search_area[3]
+                #print(list_1)
+            if int(len(list_1)) % 8 == 0:
+                row = int(len(list_1) / 8)
+            else:
+                row = int(len(list_1) / 8) + 1
+            print(row)
+            list_4 = [list() for i in range(row)]
+            n = 0
+            for i in list_1:
+                list_4[int(n / 8)].append(i)
+                # self.group_tables[5][int(n / 4)].append('')
+                n += 1
+                print(list_4)
+            self.front.set_table(self.group_tables[5], list_4)
+
+            #self.front.set_table(self.group_tables[5], text_all)
+            #self.front.result_list.clear()
+            #print(self.front.result_list)
+            '''
+            if int(len(list_1)) % 4 == 0:
+                row = int(len(list_1) / 4)
+            else:
+                row = int(len(list_1) / 4) + 1
             text_all = [list() for i in range(row)]
+            print(text_all)
             # 这句什么意思
             n = 0
-            for i in medicines:
+            for i in list_1:
                 text_all[int(n/4)] += i
                 n+=1
-            self.front.set_table(self.group_tables[5], text_all)
+                print(text_all)
+            '''
+            '''
+            #加一个方法，让如果list里面有，则把text_all加载list后面，否则直接用
+            print(self.front.result_list)
+            if self.front.result_list:
+                list1 = self.front.result_list[-1]
+                if len(list1) <= 6:
+                print(list1[-1])
+                text_all_add = list()
+                text_all_add = self.front.result_list + text_all
+                self.front.set_table(self.group_tables[5], text_all_add)
+            #下面的不应该用text_all应该用
+            else:
+                self.front.set_table(self.group_tables[5], text_all)
+            self.front.result_list.clear()
             #print("测试" + self.group_table[5])
-
+            '''
         elif self.front.type == 0:
             #录入模式
             for i in range(3):
@@ -574,7 +631,7 @@ class Control:
         self.group_tables[5].clear
         self.front.set_table(self.group_tables[5], " ")
 
-#information 面板
+#information 病人信息录入面板
     def i_buttonInput_clicked(self):
         name = self.information.lineName.text()
         gender = self.information.lineGender.text()
@@ -584,40 +641,62 @@ class Control:
         address = self.information.lineAddress.text()
 
         #inquirydate = line
-        look = self.information.lineLook.text()
-        listen = self.information.lineListen.text()
-        question = self.information.lineQuestion.text()
-        feel = self.information.lineFeel.text()
-        menstruation = self.information.lineMenstruation.text()
-        leucorrhoea = self.information.lineLeucorrhoea.text()
+        self.front.look = self.information.lineLook.text()
+        self.front.listen = self.information.lineListen.text()
+        self.front.question = self.information.lineQuestion.text()
+        self.front.feel = self.information.lineFeel.text()
+        self.front.menstruation = self.information.lineMenstruation.text()
+        self.front.leucorrhoea = self.information.lineLeucorrhoea.text()
         #prescription = self.information.linePrescription.text()
         #mainsymptom = self.information.lineSymptom.text()
-        mainsymptom = self.front.search_area[0]
+        self.front.mainsymptom = self.front.search_area[0]
         #print (self.front.search_area[0])
         prescription= "null"
         #print(name,gender,age,
         #phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
+        print(phone)
+        print(identitynum)
+        while phone == "" and identitynum == "":
+            #phone = self.information.linePhone.text()
+            #identitynum = self.information.lineIdentitynum.text()
+            #self.missPhone.show()
+            phone = 0
 
-        if phone == "" and identitynum == "":
-            print("wrong")
         else:
             if identitynum == "":
-                identitynum.settext(000000000000000000)
+                print(identitynum)
+                identitynum = "000000000000000000"
                 # 这里有错
-                id = '000000000000000000' + phone
+                id = "000000000000000000" + phone
 
             else:
                 id = identitynum + phone
-                inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                #inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                 print(id)
         self.front.id = id
-        self.front.time = inquirydate
-
-        self.front.back.i_save_data(name,gender,age,
-        phone,identitynum,address,id,inquirydate,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
+        #self.front.time = inquirydate
+        self.front.back.i_save_data(name,gender,age,phone,identitynum,address,id)
         self.interface.show()
         self.information.hide()
-        print(id)
+
+        #清除所有的空
+        self.information.lineName.clear()
+        self.information.lineGender.clear()
+        self.information.lineAge.clear()
+        self.information.linePhone.clear()
+        self.information.lineIdentitynum.clear()
+        self.information.lineAddress.clear()
+
+        # inquirydate = line
+        self.information.lineLook.clear()
+        self.information.lineListen.clear()
+        self.information.lineQuestion.clear()
+        self.information.lineFeel.clear()
+        self.information.lineMenstruation.clear()
+        self.information.lineLeucorrhoea.clear()
+        # prescription = self.information.linePrescription.text()
+        # mainsymptom = self.information.lineSymptom.text()
+        self.front.mainsymptom = self.front.search_area[0]
         pass
 
 #iinquire 面板
@@ -638,65 +717,54 @@ class Control:
         print(column)
         for i in range(row):
             for j in range(column):
-                # 8和7是row和column,怎么从front中抽取row和column
-                '''
-                print(">")
-                print(self.interface.tablewidgetMedicine.item(0, 0).text())
-                print("<")
-                '''
-                if table.item(i, j).text() != "NULL" :#********可能右问题
+                try:
+                    print(table.item(i, j))
                     print(table.item(i, j).text())
-                    # print(self.interface.tablewidgetPrescribe.item(2, 2).text())
+                except Exception as e:
+                    print(e)
+                if table.item(i, j) is not None and table.item(i, j).text() != "NULL" :#********可能有问题
                     list.append(table.item(i, j).text())
+                    print(list)
 
-    def buttonContinue_click(self):
+    def interface_out(self):
         self.interface.hide()
-        self.information.show()
-        self.final.hide()
-        #print(self.front.id)
-        self.get_table_data(self.interface.tablewidgetPrescribe, self.front.prescription_list)
-        print(self.front.prescription_list)
-        #self.front.back.final_save(self.front.prescription_list, self.front.id, self.front.time)
-        #D = self.interface.tablewidgetPrescribe.item(0, 0).text()
-        #self.front.final_save(self.interface.tablewidgetPrescribe)
-        '''
-        row = self.interface.tablewidgetPrescribe.rowCount()
-        column = self.interface.tablewidgetPrescribe.columnCount()
-        print(column)
-        for i in range(row):
-            for j in range(column):
-                #8和7是row和column,怎么从front中抽取row和column
-                if self.interface.tablewidgetPrescribe.item(i, j).text() != "NULL":
-                    print(self.interface.tablewidgetPrescribe.item(i, j).text())
-                    #print(self.interface.tablewidgetPrescribe.item(2, 2).text())
-                    self.front.prescription_list.append(self.interface.tablewidgetPrescribe.item(i, j).text())
-        '''
-        print("测试")
-        print(self.front.prescription_list)
-        print(self.front.id)
-        print(self.front.time)
-        self.front.back.final_save(self.front.prescription_list, self.front.id, self.front.time)
-        self.front.id = 0
-        self.front.time = 0
-
-        '''
-        S = self.interface.tablewidgetPrescribe.item(0, 1)
-        H = self.interface.tablewidgetPrescribe.item(1, 0)
-        
-        for r in range(row):
-            columnCurrentRow = len(data_list[r])
-                for c in range(columnCurrentRow):
-                    table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
-        '''
-
-        #data = 遍历开方区里面的内容
-        #self.front.back.final_save(self.front.id,data)
+        self.front.result_list.clear()
 
     def buttonOut_click(self):
         self.final.hide()
         self.information.hide()
         self.interface.hide()
-        self.front.back.final_save(self.front.prescription_list, self.front.id, self.front.time)
+        self.get_table_data(self.interface.tablewidgetPrescribe, self.front.prescription_list)
+        print(self.front.prescription_list)
+        self.front.time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+        self.front.final_save(self.front.prescription_list, self.front.id, self.front.time)
+        self.front.id = 0
+        self.front.time = 0
+        self.initial_button_clicked()
+        self.front.prescription_list.clear()
+        self.information.tablewidgetMainSymptom.clear()
+        self.front.result_list.clear()
+
+    def buttonContinue_click(self):
+        self.interface.hide()
+        self.information.show()
+        self.final.hide()
+        self.get_table_data(self.interface.tablewidgetPrescribe, self.front.prescription_list)
+        print(self.front.prescription_list)
+        self.front.time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+        self.front.final_save(self.front.prescription_list, self.front.id, self.front.time)
+        self.front.id = 0
+        self.front.time = 0
+        self.initial_button_clicked()
+        self.information.tablewidgetMainSymptom.clear()
+        self.front.result_list.clear()
+        #print(self.front.prescription_list)
+        print("====")
+        self.front.prescription_list.clear()
+        print("====清空后")
+        print(self.front.prescription_list)
+        #data = 遍历开方区里面的内容
+        #self.front.back.final_save(self.front.id,data)
 
     def inquire_widget_double_clicked(self,table):
         #text = str(table.selectedIteams().text())
@@ -711,23 +779,32 @@ class Control:
 
     def buttonOut_clicked(self):
         self.result.hide()
+        self.initial_button_clicked()
 
     def result_widget_double_clicked(self,table):
         time = str(table.selectedItems()[0].text())
-        data = self.front.back.result_UI_show(time)
+        data = self.front.back.result_UI_show(time) #得到之前的开方
         self.interface.show()
+        print(data)
         data = data[0][0][2: -2].split("', '")
-        if int(len(data)) % 4 == 0:
-            row = int(len(data) / 4)
+        print(data)
+        if int(len(data)) % 8 == 0:
+            row = int(len(data) / 8)
         else:
-            row = int(len(data) / 4) + 1
-        text_all = [list() for i in range(row)]
+            row = int(len(data) / 8) + 1
+        print(self.front.result_list)
+        self.front.result_list = [list() for i in range(row)]
         n = 0
         for i in data:
-            text_all[int(n / 4)].append(i)
-            text_all[int(n / 4)].append('')
+            self.front.result_list[int(n / 8)].append(i) #往result_list里面添加数据
+            #self.group_tables[5][int(n / 4)].append('')
             n += 1
-        self.front.set_table(self.interface.tablewidgetPrescribe, text_all)
+            print(self.front.result_list)
+        self.front.set_table(self.interface.tablewidgetPrescribe, self.front.result_list)
+        print(self.front.result_list)
+
+    def missPhone_clicked(self):
+        self.missPhone.hide()
 
 
 if __name__ == "__main__":
