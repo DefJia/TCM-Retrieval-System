@@ -119,7 +119,7 @@ class Backend:
             return 1
 
     def i_save_data(self,name,gender,age,phone,identitynum,address,id):
-            sql0 = format('select * from patient where id = %s' %id )
+            sql0 = format('select * from patient where id = \"%s\"' %id )
             sql1 = format('insert into patient (name,gender,age,phone,identitynum,address,id) '
                      'values ("%s","%s","%s","%s","%s","%s","%s")' % (name,gender,age,phone,identitynum,address,id))
             print("这里是v1")
@@ -128,11 +128,11 @@ class Backend:
                 self.cursor.execute(sql0)
                 data = self.cursor.fetchall()
                 print(data)
-                #if data == "":
-                    #是'NULL'还是'None'
-                    #则执行
-                self.cursor.execute(sql1)
-                self.database.commit()
+                if data:
+                    pass
+                else:
+                    self.cursor.execute(sql1)
+                    self.database.commit()
                 return id
             #这里如何把ID弄到control里面
             except sqlite3.IntegrityError:
@@ -146,6 +146,7 @@ class Backend:
             return data[0]
         except Exception as e:
             print(e)
+
     def search_disease(self,search_area):
         print(search_area)
         #查询
@@ -212,17 +213,16 @@ class Backend:
         except Exception as e:
             print(e)
 
-    def drop_relation(self,dbid,left_data,right_data):
+    def drop_relation(self,dbid,name1,name2):
         db_name = self.relations[dbid]
         front_name = db_name.split("_")[0]
         back_name = db_name.split("_")[-1]
-        #front_id = int(self.search_data(front_name, "id", left_data)[0])@
-        #back_id = int(self.search_data(back_name, "id", right_data)[0])
-        front_id = int(self.search_data(front_name, "name", left_data)[0])
-        back_id = int(self.search_data(back_name, "name", right_data)[0])
+        #front_id = int(self.search_data(front_name, "name", left_data)[0])
+        #back_id = int(self.search_data(back_name, "name", right_data)[0])
         sql = format(
-            'DELETE FROM %s WHERE %s_id = %s and %s_id = %s' %(db_name, front_name, front_id, back_name, back_id)
+            'DELETE FROM %s WHERE %s_id = \"%s\" and %s_id = \"%s\" ' %(db_name, front_name, name1, back_name, name2)
         )
+        print(sql)
         try:
             self.cursor.execute(sql)
             self.database.commit()

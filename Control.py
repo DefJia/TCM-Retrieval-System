@@ -14,8 +14,12 @@ from UI.missPhone import Ui_missPhone
 import time
 from UI.quantity import Ui_quantity
 from UI.result import Ui_result
+from UI.relationDelete import Ui_relationDelete
 from PyQt5 import QtCore, QtGui, QtWidgets
+from UI.login import Ui_LogIn
+from UI.logwrong import Ui_LogWrong
 import time
+import getpass
 
 class Interface(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -90,6 +94,21 @@ class MissPhone(QMainWindow, Ui_missPhone):
         super(MissPhone, self).__init__()
         self.setupUi(self)
 
+class RelationDelete(QMainWindow, Ui_relationDelete):
+    def __init__(self):
+        super(RelationDelete, self).__init__()
+        self.setupUi(self)
+
+class LogIn(QMainWindow, Ui_LogIn):
+    def __init__(self):
+        super(LogIn, self).__init__()
+        self.setupUi(self)
+
+class LogWrong(QMainWindow, Ui_LogWrong):
+    def __init__(self):
+        super(LogWrong, self).__init__()
+        self.setupUi(self)
+
 class Control:
     def __init__(self):
         app = QApplication(sys.argv)
@@ -99,8 +118,9 @@ class Control:
         self.quantity = Quantity()
         #self.quantity.show()
         self.information = Information()
-        self.information.show()
-        self.interface.show()
+        #self.information.show()
+        #self.RelationDelete.show()
+        #self.interface.show()
         self.reminder = Reminder()
         self.property = Property()
         self.inquire = Inquire()
@@ -109,6 +129,11 @@ class Control:
         self.yes = Yes()
         self.result = Result()
         self.missPhone = MissPhone()
+        self.relationdelete = RelationDelete()
+        self.login = LogIn()
+        self.logwrong = LogWrong()
+        self.login.show()
+        self.inquire.show()
         #self.missPhone.show()
         # 界面生成
         self.front = Frontend(self.interface, self.reminder, self.information, self.property)
@@ -146,6 +171,12 @@ class Control:
         for input_box in self.group_inputs:  # 输入框输入
             input_box.textChanged.connect(lambda: self.line_text_changed(input_box))
         '''
+        # --- login按钮组 --- #
+        self.login.yesButton.clicked.connect(lambda: self.start())
+        self.login.noButton.clicked.connect(lambda: self.login.close())
+
+
+        # --- interface按钮组 --- #
         self.interface.tablewidgetSymptom.clicked.connect(lambda: self.table_option_clicked(0))
         self.interface.tablewidgetDisease.clicked.connect(lambda: self.table_option_clicked(1))
         self.interface.tablewidgetPrescription.clicked.connect(lambda: self.table_option_clicked(2))
@@ -163,7 +194,8 @@ class Control:
         self.interface.buttonDisease.clicked.connect(lambda: self.button_clicked(self.interface.lineDisease))
         self.interface.buttonPrescription.clicked.connect(lambda: self.button_clicked(self.interface.linePrescription))
         self.interface.buttonMedicine.clicked.connect(lambda: self.button_clicked(self.interface.lineMedicine))
-        # reminder 按钮点击
+        #  按钮隐藏
+        self.interface.buttonDeleterelation.hide()
         # self.reminder.buttonYes.clicked.connect(lambda: self.button_yes_reminder())
         # self.reminder.buttonNo.clicked.connect(lambda: self.button_no_reminder())
         '''
@@ -174,6 +206,7 @@ class Control:
         # --- information按钮组 --- #
         self.information.IButtonYes.clicked.connect(lambda: self.i_buttonInput_clicked())
         #self.information.IButtonYes.clicked.connect(lambda: self.interface.show())
+        self.information.IButtonGetinUI.clicked.connect(lambda: self.interface.show())
         self.information.IButtonInquire.clicked.connect(lambda: self.inquire.show())
         self.information.IButtonOut.clicked.connect(lambda: self.information.hide())
         # --- information 触发--- #
@@ -194,13 +227,17 @@ class Control:
         self.interface.buttonClean.clicked.connect(lambda: self.buttonClean_clicked())
 
         self.interface.buttonDelete.clicked.connect(lambda: self.buttonDelete_clicked())  # 删除
-        self.interface.buttonDeleterelation.clicked.connect(lambda: self.buttonRelationDelete_clicked())# 删除关系
+        self.interface.buttonDeleterelation.clicked.connect(lambda: self.relationdelete.show())# 删除关系
         self.interface.buttonOut.clicked.connect(lambda: self.interface_out())  # 退出
         self.interface.buttonSave.clicked.connect(lambda: self.final.show())  # 最终保存
 
+        # --- RelationDelete按钮组 --- #
+        self.relationdelete.buttonYes.clicked.connect(lambda: self.buttonRelationDelete_clicked())
+        self.relationdelete.buttonNo.clicked.connect(lambda: self.relationdelete.hide())
+
         # --- Inquire按钮组 --- #
         self.inquire.ButtonYes.clicked.connect(lambda: self.iq_buttonYes_clicked())  # 查询
-        self.inquire.ButtonOut.clicked.connect(lambda: self.inquire.hide())
+        self.inquire.ButtonOut.clicked.connect(lambda: self.inquire_button_out())
         # --- Final按钮组 --- #
         #self.interface.buttonSave.clicked.connect(lambda: self.buttonSave_clicked())
         self.final.buttonContinue.clicked.connect(lambda: self.buttonContinue_click())
@@ -214,12 +251,15 @@ class Control:
         self.result.ButtonOut.clicked.connect(lambda: self.buttonOut_clicked())
         self.result.tableWidget.doubleClicked.connect(lambda: self.result_widget_double_clicked(self.result.tableWidget))
         #self.interface.tablewidgetPrescription.clicked.connect(lambda: self.table_option_clicked(2))
-        self.inquire.show()
+        #self.inquire.show()
         #self.interface.tablewidgetSymptom.clicked.connect(lambda: self.table_option_clicked(0))
 
         # --- 缺失手机按钮组件 ---#
         self.missPhone.yesButton.clicked.connect(lambda: self.missPhone_clicked())
 
+        self.logwrong.yesButton.clicked.connect(lambda: self.logwrong.close())
+
+        self.interface.show()
         ''' 以下为界面初始化处理 '''
         for i in range(8):
             # 设定药方区结构
@@ -263,12 +303,14 @@ class Control:
             self.interface.tablewidgetMedicine.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
             for addition in self.group_additions:
                 addition.hide()
+            self.interface.buttonDeleterelation.hide()
         else:
             self.front.type = 0
             self.interface.labelType.setText('录入模式')
             self.interface.tablewidgetMedicine.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked)
             self.interface.groupboxSymptom.setGeometry(220, 70, 241, 411)
             self.interface.groupboxDisease.setGeometry(10, 70, 211, 411)
+            self.interface.buttonDeleterelation.show()
 
             print("当前处于录入模式")
             for addition in self.group_additions:
@@ -437,6 +479,8 @@ class Control:
                 for l in self.front.search_area[i]:
                     for m in self.front.search_area[i+1]:
                         self.front.back.drop_relation(i, l[0], m[0])
+        self.relationdelete.hide()
+        self.initial_button_clicked()
         '''
         for i in self.front.search_area:
             i.clear()
@@ -500,27 +544,33 @@ class Control:
             # 开方模式
             medicines = self.front.search_area[3]
             print(medicines)
-            list_1 =self.front.result_list #list_1获取双击result之后的数据
-            list_2 =list()
-            list_3 =list()
-            if list_1:
-                for i in range(len(list_1)):
-                    #print(list_10))
-                    list_2 += list_1[i]
-                    #这里是把list_1中的结构改变
-                for j in range(len(medicines)):
-                    list_3 += medicines[j]
-                    print(list_3)
+            print("试试")
+            list_1 =list()
+            self.get_table_data(self.interface.tablewidgetPrescribe,list_1) #获取所有输入的药
+            if list_1 == ['', '']:
+                list_1 = []
+            print("******")
+            print(list_1) #每次都获取开方区里的所有数据
+            list_2 =list() #改变list_1里面的结构
+            list_3 =list() #改变medicines里面的结构
+            print("***")
+            print(self.front.result_list)
+
+            for j in range(len(medicines)):
+                list_3 += medicines[j]
+                print(list_3)
                     #同理，改变结构
-                print(list_2)
-                list_1 = list_2 + list_3
+            list_1 = list_1 + list_3
+            print(list_1)
                 #把两个列表合成一个列表
-                print(list_1)
-            else:
-                for j in range(len(medicines)):
-                    list_1 += medicines[j]
-                #list_1 = self.front.search_area[3]
-                #print(list_1)
+            '''
+            for o in range(len(list_1)):
+                if list_1[o] == " ":
+                    del list_1[o]
+            for o in range(len(list_1)):
+                if list_1[o] == "None":
+                    list_1[o] = "0"
+            '''
             if int(len(list_1)) % 8 == 0:
                 row = int(len(list_1) / 8)
             else:
@@ -534,10 +584,11 @@ class Control:
                 n += 1
                 print(list_4)
             self.front.set_table(self.group_tables[5], list_4)
-
-            #self.front.set_table(self.group_tables[5], text_all)
+            self.interface.tablewidgetMedicine.clear()
+            self.front.search_area[3].clear()
             #self.front.result_list.clear()
-            #print(self.front.result_list)
+            #self.front.set_table(self.group_tables[5], text_all)
+
             '''
             if int(len(list_1)) % 4 == 0:
                 row = int(len(list_1) / 4)
@@ -554,7 +605,7 @@ class Control:
             '''
             '''
             #加一个方法，让如果list里面有，则把text_all加载list后面，否则直接用
-            print(self.front.result_list)
+           
             if self.front.result_list:
                 list1 = self.front.result_list[-1]
                 if len(list1) <= 6:
@@ -630,6 +681,7 @@ class Control:
     def buttonClean_clicked(self):
         self.group_tables[5].clear
         self.front.set_table(self.group_tables[5], " ")
+        self.front.prescription_list.clear()
 
 #information 病人信息录入面板
     def i_buttonInput_clicked(self):
@@ -640,7 +692,6 @@ class Control:
         identitynum = self.information.lineIdentitynum.text()
         address = self.information.lineAddress.text()
 
-        #inquirydate = line
         self.front.look = self.information.lineLook.text()
         self.front.listen = self.information.lineListen.text()
         self.front.question = self.information.lineQuestion.text()
@@ -658,10 +709,7 @@ class Control:
         print(identitynum)
         while phone == "" and identitynum == "":
             #phone = self.information.linePhone.text()
-            #identitynum = self.information.lineIdentitynum.text()
-            #self.missPhone.show()
             phone = 0
-
         else:
             if identitynum == "":
                 print(identitynum)
@@ -744,6 +792,8 @@ class Control:
         self.front.prescription_list.clear()
         self.information.tablewidgetMainSymptom.clear()
         self.front.result_list.clear()
+        self.interface.tablewidgetPrescribe.clear()
+
 
     def buttonContinue_click(self):
         self.interface.hide()
@@ -761,8 +811,10 @@ class Control:
         #print(self.front.prescription_list)
         print("====")
         self.front.prescription_list.clear()
+        self.initial_button_clicked()
         print("====清空后")
         print(self.front.prescription_list)
+        self.interface.tablewidgetPrescribe.clear()
         #data = 遍历开方区里面的内容
         #self.front.back.final_save(self.front.id,data)
 
@@ -781,6 +833,13 @@ class Control:
         self.result.hide()
         self.initial_button_clicked()
 
+    def inquire_button_out(self):
+        self.inquire.hide()
+        self.inquire.lineName.clear()
+        self.inquire.lineIdcard.clear()
+        self.inquire.linePhone.clear()
+        self.inquire.tableWidget.clear()
+
     def result_widget_double_clicked(self,table):
         time = str(table.selectedItems()[0].text())
         data = self.front.back.result_UI_show(time) #得到之前的开方
@@ -792,19 +851,29 @@ class Control:
             row = int(len(data) / 8)
         else:
             row = int(len(data) / 8) + 1
-        print(self.front.result_list)
         self.front.result_list = [list() for i in range(row)]
         n = 0
         for i in data:
             self.front.result_list[int(n / 8)].append(i) #往result_list里面添加数据
             #self.group_tables[5][int(n / 4)].append('')
             n += 1
-            print(self.front.result_list)
+            #print(self.front.result_list)
         self.front.set_table(self.interface.tablewidgetPrescribe, self.front.result_list)
         print(self.front.result_list)
 
     def missPhone_clicked(self):
         self.missPhone.hide()
+
+
+    def start(self):
+        user = self.login.lineUser.text()
+        pasw = self.login.linePassword.text()
+        if user == 'abc123' and pasw == '123':
+            self.login.close()
+            self.information.show()
+        else:
+            self.logwrong.show()
+            self.login.linePassword.clear()
 
 
 if __name__ == "__main__":

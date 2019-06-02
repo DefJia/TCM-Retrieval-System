@@ -887,6 +887,24 @@
      <bool>false</bool>
     </attribute>
    </widget>
+   <widget class="QPushButton" name="IButtonGetinUI">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>730</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>开方界面</string>
+    </property>
+   </widget>
    <zorder>IButtonYes</zorder>
    <zorder>horizontalLayoutWidget</zorder>
    <zorder>horizontalLayoutWidget_2</zorder>
@@ -900,6 +918,7 @@
    <zorder>layoutWidget</zorder>
    <zorder>tablewidgetMainSymptom</zorder>
    <zorder>option</zorder>
+   <zorder>IButtonGetinUI</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>LogIn</class>
- <widget class="QMainWindow" name="LogIn">
+ <class>relationDelete</class>
+ <widget class="QMainWindow" name="relationDelete">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>432</width>
-    <height>317</height>
+    <width>509</width>
+    <height>353</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>40</y>
+      <x>150</x>
+      <y>-20</y>
       <width>191</width>
-      <height>81</height>
+      <height>111</height>
      </rect>
     </property>
     <property name="font">
@@ -30,16 +30,16 @@
      </font>
     </property>
     <property name="text">
-     <string>用户名</string>
+     <string>确定删除</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>150</y>
-      <width>101</width>
-      <height>71</height>
+      <x>150</x>
+      <y>120</y>
+      <width>381</width>
+      <height>111</height>
      </rect>
     </property>
     <property name="font">
@@ -49,53 +49,61 @@
      </font>
     </property>
     <property name="text">
-     <string>密码</string>
+     <string>的联系吗</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineUser">
+   <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>60</y>
-      <width>161</width>
-      <height>41</height>
+      <x>60</x>
+      <y>50</y>
+      <width>391</width>
+      <height>111</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QLineEdit" name="linePassword">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>170</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="echoMode">
-     <enum>QLineEdit::Password</enum>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="yesButton">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>240</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
+    <property name="font">
+     <font>
+      <family>Academy Engraved LET</family>
+      <pointsize>28</pointsize>
+     </font>
     </property>
     <property name="text">
-     <string>确定</string>
+     <string>病症-病名-药方-药</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="noButton">
+   <widget class="QPushButton" name="buttonYes">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>240</y>
-      <width>93</width>
-      <height>28</height>
+      <x>80</x>
+      <y>230</y>
+      <width>131</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Academy Engraved LET</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>是的</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonNo">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>230</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Academy Engraved LET</family>
+      <pointsize>20</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>取消</string>
@@ -107,7 +115,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>432</width>
+     <width>509</width>
      <height>25</height>
     </rect>
    </property>

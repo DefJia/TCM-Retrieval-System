@@ -25,7 +25,7 @@ class Frontend:
         self.prescription_list = list()
         self.mainSymptom = list()
         self.work_area = dict()  # 药方工作区
-        self.prescription_list = list()
+        self.prescription_list = list() #把开方区里的数据捕获之后放入的列表
         self.medicine_gram_list = list()
         self.widgets = list(range(4))
         self.widgets[0] = self.interface.tablewidgetSymptom
@@ -90,12 +90,6 @@ class Frontend:
         # 任意模式下，当option被选中时，显示相关数据
         # mode为0时只显示右边
         #self.search_area = [list() for i in range(4)]
-
-        '''
-        for widget in self.widgets:
-            widget.clear()
-        '''
-
         # 初始化 
         if aaa ==0:
             target_indexs = list()
@@ -107,6 +101,13 @@ class Frontend:
 
             if box_id != 3 and [text] not in self.search_area[box_id] :
                 self.search_area[box_id].append([text])
+
+                target_indexs.append(box_id + 1)
+                for index in target_indexs:
+                    if box_id != 0:
+                        sub_data = self.back.union_query(box_id, index, text)
+                        if sub_data:
+                            self.search_area[index] = sub_data
 
             if mode == 1 and box_id != 3:
                 target_indexs.append(box_id + 1)
@@ -206,7 +207,9 @@ class Frontend:
             for r in range(row):
                 columnCurrentRow = len(data_list[r])
                 for c in range(columnCurrentRow):
-                    table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
+                    t = (str(data_list[r][c]))
+                    #table.setItem(r, c, QTableWidgetItem(data_list[r][c]))
+                    table.setItem(r, c, QTableWidgetItem(t))
 
         #如果table是开方区的则
 
