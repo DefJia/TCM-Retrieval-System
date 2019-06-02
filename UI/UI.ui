@@ -100,6 +100,11 @@
        </disabled>
       </palette>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -134,6 +139,11 @@
        <width>161</width>
        <height>271</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="autoFillBackground">
       <bool>false</bool>
@@ -374,6 +384,11 @@
        </disabled>
       </palette>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="autoFillBackground">
       <bool>true</bool>
      </property>
@@ -411,6 +426,11 @@
        <width>161</width>
        <height>271</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -503,6 +523,11 @@
        </disabled>
       </palette>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -537,6 +562,11 @@
        <width>191</width>
        <height>271</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -629,16 +659,30 @@
        </disabled>
       </palette>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
      </attribute>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
      <attribute name="horizontalHeaderDefaultSectionSize">
       <number>93</number>
      </attribute>
+     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+      <bool>false</bool>
+     </attribute>
      <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderCascadingSectionResizes">
       <bool>false</bool>
      </attribute>
      <row>
@@ -656,6 +700,22 @@
        <string>New Column</string>
       </property>
      </column>
+     <item row="0" column="0">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </item>
+     <item row="0" column="1">
+      <property name="text">
+       <string/>
+      </property>
+     </item>
     </widget>
     <widget class="QPushButton" name="buttonMedicine">
      <property name="geometry">
@@ -678,6 +738,13 @@
        <width>191</width>
        <height>271</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
