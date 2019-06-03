@@ -44,3 +44,13 @@ class V_MainWindow:
         self.group_tables.append(self.interface.tablewidgetBook)
         self.group_tables.append(self.interface.tablewidgetPrescribe)
 
+    def init(self):
+        self.clear(self.gou)
+
+    @staticmethod
+    def clear(obj):
+        if type(obj) == list:
+            for elem in obj:
+                elem.clear()
+        else:
+            obj.clear()

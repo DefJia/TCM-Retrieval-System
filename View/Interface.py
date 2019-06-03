@@ -3,7 +3,6 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QMessageBox
 from View.UI.UI import Ui_MainWindow
 from View.UI.information import Ui_Information
 from View.UI.inquire import Ui_Inquire
-from View.UI.Message import MessageBox
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
