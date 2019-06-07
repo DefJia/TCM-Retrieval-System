@@ -211,7 +211,7 @@ class Control:
         # --- information 触发--- #
         self.information.lineSymptom.textChanged.connect(lambda: self.i_line_text_changed())
         self.information.option.hide()
-
+        self.information.DBOutput.clicked.connect(lambda: self.output())
         self.information.option.clicked.connect(lambda: self.i_option_clicked(self.information.option))
 
         # --- inquire按钮组 --- #
@@ -274,6 +274,13 @@ class Control:
         # self.front.set_table(self.interface.tablewidgetMedicine, data)
         # 测试代码
         sys.exit(app.exec_())
+
+    def output(self):
+        import shutil, datetime
+        time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        shutil.copyfile('Data/Main.db', 'Data/%s.bak' % time)
+        self.show_reminder('数据库导出', '导出成功：%s.bak' % time)
+
 
     @staticmethod
     def show_reminder(title, text):

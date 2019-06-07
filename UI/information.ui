@@ -379,14 +379,14 @@
      </layout>
     </item>
     <item row="6" column="3">
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="DBOutput">
       <property name="font">
        <font>
         <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>数据库导入</string>
+       <string>数据库导出</string>
       </property>
      </widget>
     </item>
@@ -831,7 +831,7 @@
    <zorder>IButtonYes</zorder>
    <zorder>IButtonInquire</zorder>
    <zorder>IButtonGetinUI</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>DBOutput</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -328,6 +328,7 @@ class Backend:
         data = self.cursor.fetchall()
         return data
 
+
 if __name__ == '__main__':
     test = Backend()
     # test.query_similar_data(1, '少')
