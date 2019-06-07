@@ -1,0 +1,969 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1383</width>
+    <height>943</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>9999999</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>智能中医开放检索系统</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0" colspan="7">
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>当前位置：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="7" colspan="3">
+     <widget class="QLabel" name="labelType">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>开方模式</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="10">
+     <widget class="QRadioButton" name="radioButton_2">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>20</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>开方模式</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="11">
+     <widget class="QRadioButton" name="radioButton">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>20</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>录入模式</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="12" rowspan="2">
+     <widget class="QLabel" name="labelPosition_2">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>典籍</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="13" rowspan="2">
+     <widget class="QLineEdit" name="lineBook">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2" colspan="2">
+     <widget class="QGroupBox" name="groupboxMedicine">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>26</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>药</string>
+      </property>
+      <widget class="QLineEdit" name="lineMedicine">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>191</width>
+         <height>41</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="tablewidgetMedicine">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>191</width>
+         <height>321</height>
+        </rect>
+       </property>
+       <property name="palette">
+        <palette>
+         <active>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>204</red>
+             <green>255</green>
+             <blue>255</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>204</red>
+             <green>255</green>
+             <blue>255</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>240</red>
+             <green>240</green>
+             <blue>240</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderCascadingSectionResizes">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>93</number>
+       </attribute>
+       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderCascadingSectionResizes">
+        <bool>false</bool>
+       </attribute>
+       <row>
+        <property name="text">
+         <string>New Row</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>New Column</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>New Column</string>
+        </property>
+       </column>
+       <item row="0" column="0">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+       </item>
+       <item row="0" column="1">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+      </widget>
+      <widget class="QPushButton" name="buttonMedicine">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>40</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="medicineOption">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>191</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>191</number>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="2" rowspan="2" colspan="4">
+     <widget class="QGroupBox" name="groupboxPrescription">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>26</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>药方</string>
+      </property>
+      <widget class="QLineEdit" name="linePrescription">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>191</width>
+         <height>41</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="tablewidgetPrescription">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>191</width>
+         <height>321</height>
+        </rect>
+       </property>
+       <property name="palette">
+        <palette>
+         <active>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>204</red>
+             <green>255</green>
+             <blue>204</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>204</red>
+             <green>255</green>
+             <blue>204</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>240</red>
+             <green>240</green>
+             <blue>240</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>191</number>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <row>
+        <property name="text">
+         <string>New Row</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>New Column</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>New Column</string>
+        </property>
+       </column>
+       <item row="0" column="0">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="0" column="1">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+      </widget>
+      <widget class="QPushButton" name="buttonPrescription">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>40</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="prescriptionOption">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>191</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>191</number>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="6" rowspan="2" colspan="2">
+     <widget class="QGroupBox" name="groupboxDisease">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>26</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>病名</string>
+      </property>
+      <widget class="QLineEdit" name="lineDisease">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="tablewidgetDisease">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>161</width>
+         <height>321</height>
+        </rect>
+       </property>
+       <property name="palette">
+        <palette>
+         <active>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>204</red>
+             <green>255</green>
+             <blue>204</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>204</red>
+             <green>255</green>
+             <blue>204</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>240</red>
+             <green>240</green>
+             <blue>240</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>191</number>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+      </widget>
+      <widget class="QPushButton" name="buttonDisease">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>40</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="diseaseOption">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>161</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>191</number>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="8" rowspan="2" colspan="3">
+     <widget class="QGroupBox" name="groupboxSymptom">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>26</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>病症</string>
+      </property>
+      <widget class="QLineEdit" name="lineSymptom">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="tablewidgetSymptom">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>161</width>
+         <height>321</height>
+        </rect>
+       </property>
+       <property name="palette">
+        <palette>
+         <active>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>255</red>
+             <green>255</green>
+             <blue>204</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>255</red>
+             <green>255</green>
+             <blue>204</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>240</red>
+             <green>240</green>
+             <blue>240</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>161</number>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+      </widget>
+      <widget class="QPushButton" name="buttonSymptom">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>40</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="symptomOption">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>161</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Sunken</enum>
+       </property>
+       <property name="midLineWidth">
+        <number>0</number>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>161</number>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+    <item row="2" column="12" colspan="2">
+     <widget class="QTableWidget" name="tablewidgetBook">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="4">
+     <widget class="QPushButton" name="buttonDeleterelation">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>删除关系</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="4" colspan="3">
+     <widget class="QPushButton" name="buttonDelete">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>删除</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="7" colspan="2">
+     <widget class="QPushButton" name="buttonInitial">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>初始化</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="9" colspan="2">
+     <widget class="QPushButton" name="buttonInput">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>录入</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0" colspan="8">
+     <widget class="QTableWidget" name="tablewidgetPrescribe">
+      <property name="sortingEnabled">
+       <bool>false</bool>
+      </property>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderCascadingSectionResizes">
+       <bool>true</bool>
+      </attribute>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>药</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>克数</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>药</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>克数</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>药</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>克数</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>药</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>克数</string>
+       </property>
+      </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item row="3" column="0">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>195</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="1" colspan="2">
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="3" colspan="2">
+     <widget class="QPushButton" name="buttonSave">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>保存</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="5" colspan="2">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>57</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="7">
+     <widget class="QPushButton" name="buttonClean">
+      <property name="font">
+       <font>
+        <family>宋体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>清空</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="12" colspan="2">
+     <widget class="QPushButton" name="buttonOut">
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>退出</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1383</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
