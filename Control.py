@@ -7,7 +7,7 @@ from UI.inquire import Ui_Inquire
 from UI.wrong import Ui_Wrong
 from UI.final import Ui_final_2
 from UI.yes import Ui_Yes
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout, QFileDialog
 import sys
 from Front import Frontend
 from UI.missPhone import Ui_missPhone
@@ -212,6 +212,7 @@ class Control:
         self.information.lineSymptom.textChanged.connect(lambda: self.i_line_text_changed())
         self.information.option.hide()
         self.information.DBOutput.clicked.connect(lambda: self.output())
+        self.information.DBInput.clicked.connect(lambda: self.input())
         self.information.option.clicked.connect(lambda: self.i_option_clicked(self.information.option))
 
         # --- inquire按钮组 --- #
@@ -281,6 +282,13 @@ class Control:
         shutil.copyfile('Data/Main.db', 'Data/%s.bak' % time)
         self.show_reminder('数据库导出', '导出成功：%s.bak' % time)
 
+    def input(self):
+        import shutil
+        file = QFileDialog.getOpenFileName()
+        self.show_reminder('数据库导入', '警告：原有数据库将被覆盖，继续？')
+        self.output()
+        shutil.copyfile(file[0], 'Data/Main.py')
+        self.show_reminder('数据库导入', '导入成功')
 
     @staticmethod
     def show_reminder(title, text):
