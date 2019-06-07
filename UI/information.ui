@@ -40,22 +40,22 @@
       </item>
      </layout>
     </item>
-    <item row="1" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item row="2" column="0" colspan="3">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QLabel" name="label_11">
+       <widget class="QLabel" name="label_13">
         <property name="font">
          <font>
           <pointsize>20</pointsize>
          </font>
         </property>
         <property name="text">
-         <string>手机</string>
+         <string>身份证</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="linePhone">
+       <widget class="QLineEdit" name="lineIdentitynum">
         <property name="font">
          <font>
           <pointsize>20</pointsize>
@@ -65,7 +65,7 @@
       </item>
      </layout>
     </item>
-    <item row="5" column="0" colspan="5">
+    <item row="5" column="0" colspan="7">
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="label_8">
@@ -195,30 +195,17 @@
       </item>
      </layout>
     </item>
-    <item row="2" column="0" colspan="2">
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
-      <item>
-       <widget class="QLabel" name="label_13">
-        <property name="font">
-         <font>
-          <pointsize>20</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>身份证</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineIdentitynum">
-        <property name="font">
-         <font>
-          <pointsize>20</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-     </layout>
+    <item row="6" column="0">
+     <widget class="QPushButton" name="IButtonYes">
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>确定</string>
+      </property>
+     </widget>
     </item>
     <item row="3" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -245,19 +232,7 @@
       </item>
      </layout>
     </item>
-    <item row="6" column="0">
-     <widget class="QPushButton" name="IButtonYes">
-      <property name="font">
-       <font>
-        <pointsize>20</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>确定</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="2">
+    <item row="6" column="4">
      <widget class="QPushButton" name="IButtonGetinUI">
       <property name="font">
        <font>
@@ -269,7 +244,7 @@
       </property>
      </widget>
     </item>
-    <item row="6" column="3" colspan="2">
+    <item row="6" column="5" colspan="2">
      <widget class="QPushButton" name="IButtonOut">
       <property name="font">
        <font>
@@ -281,7 +256,7 @@
       </property>
      </widget>
     </item>
-    <item row="6" column="1">
+    <item row="6" column="2">
      <widget class="QPushButton" name="IButtonInquire">
       <property name="font">
        <font>
@@ -293,32 +268,22 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="0" colspan="2">
-     <widget class="QTableWidget" name="tablewidgetMainSymptom">
-      <attribute name="horizontalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-      <attribute name="verticalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-     </widget>
-    </item>
-    <item row="2" column="2" colspan="3">
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="label_10">
+       <widget class="QLabel" name="label_11">
         <property name="font">
          <font>
           <pointsize>20</pointsize>
          </font>
         </property>
         <property name="text">
-         <string>年龄</string>
+         <string>手机</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineAge">
+       <widget class="QLineEdit" name="linePhone">
         <property name="font">
          <font>
           <pointsize>20</pointsize>
@@ -328,7 +293,17 @@
       </item>
      </layout>
     </item>
-    <item row="1" column="2" colspan="3">
+    <item row="4" column="0" colspan="3">
+     <widget class="QTableWidget" name="tablewidgetMainSymptom">
+      <attribute name="horizontalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+     </widget>
+    </item>
+    <item row="1" column="4" colspan="3">
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
        <widget class="QLabel" name="label_12">
@@ -353,7 +328,32 @@
       </item>
      </layout>
     </item>
-    <item row="0" column="2" colspan="3">
+    <item row="2" column="4" colspan="3">
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <widget class="QLabel" name="label_10">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>年龄</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineAge">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="4" colspan="3">
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
        <widget class="QLabel" name="label_9">
@@ -377,6 +377,18 @@
        </widget>
       </item>
      </layout>
+    </item>
+    <item row="6" column="3">
+     <widget class="QPushButton" name="pushButton">
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>数据库导入</string>
+      </property>
+     </widget>
     </item>
    </layout>
    <widget class="QTableWidget" name="option">
@@ -813,20 +825,13 @@
      <bool>false</bool>
     </attribute>
    </widget>
-   <zorder>horizontalLayoutWidget</zorder>
-   <zorder>horizontalLayoutWidget_2</zorder>
-   <zorder>horizontalLayoutWidget_3</zorder>
-   <zorder>horizontalLayoutWidget_4</zorder>
-   <zorder>horizontalLayoutWidget_5</zorder>
-   <zorder>horizontalLayoutWidget_6</zorder>
-   <zorder>horizontalLayoutWidget_7</zorder>
    <zorder>IButtonOut</zorder>
-   <zorder>layoutWidget</zorder>
    <zorder>tablewidgetMainSymptom</zorder>
    <zorder>option</zorder>
    <zorder>IButtonYes</zorder>
    <zorder>IButtonInquire</zorder>
    <zorder>IButtonGetinUI</zorder>
+   <zorder>pushButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
