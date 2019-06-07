@@ -18,6 +18,12 @@
 
 ![深度截图_Control.py_20181107190137](Backup/深度截图_Control.py_20181107190137.png)
 
+## 打包方法
+
+1. 先安装Pyinstaller，并切换到项目根目录下
+2. `pyinstaller -F -w Control.py`
+3. 生成的文件在根目录dist文件夹下，然后把Data文件夹和.config.ini复制一份到dist中。即可运行。
+
 ## 开发进程
 
 ### UI界面

@@ -5,3 +5,7 @@ test2.py
 venv/
 __pycache__/
 Docs/
+*.spec
+build/
+dist/
+
