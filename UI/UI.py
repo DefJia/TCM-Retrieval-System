@@ -252,6 +252,7 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.tablewidgetMedicine.setFont(font)
         self.tablewidgetMedicine.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tablewidgetMedicine.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.tablewidgetMedicine.setObjectName("tablewidgetMedicine")
         self.tablewidgetMedicine.setColumnCount(2)
         self.tablewidgetMedicine.setRowCount(1)

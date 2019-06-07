@@ -7,132 +7,122 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>551</height>
+    <height>411</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>电子病历</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableWidget" name="tableWidget">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>40</y>
-      <width>681</width>
-      <height>341</height>
-     </rect>
-    </property>
-    <property name="editTriggers">
-     <set>QAbstractItemView::NoEditTriggers</set>
-    </property>
-    <property name="dragEnabled">
-     <bool>false</bool>
-    </property>
-    <property name="selectionBehavior">
-     <enum>QAbstractItemView::SelectRows</enum>
-    </property>
-    <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>112</number>
-    </attribute>
-    <attribute name="verticalHeaderVisible">
-     <bool>false</bool>
-    </attribute>
-    <attribute name="verticalHeaderCascadingSectionResizes">
-     <bool>true</bool>
-    </attribute>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <column>
-     <property name="text">
-      <string>就诊时间</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>药方</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>病症</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>望</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>闻</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>问</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>切</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>带</string>
-     </property>
-    </column>
-   </widget>
-   <widget class="QPushButton" name="ButtonOut">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>420</y>
-      <width>171</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>退出</string>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="dragEnabled">
+       <bool>false</bool>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>112</number>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderCascadingSectionResizes">
+       <bool>true</bool>
+      </attribute>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>就诊时间</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>药方</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>病症</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>望</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>闻</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>问</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>切</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>带</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="ButtonOut">
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>退出</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

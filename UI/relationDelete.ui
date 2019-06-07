@@ -6,116 +6,88 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>509</width>
-    <height>353</height>
+    <width>430</width>
+    <height>335</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>-20</y>
-      <width>191</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Academy Engraved LET</family>
-      <pointsize>28</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>确定删除</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>120</y>
-      <width>381</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Academy Engraved LET</family>
-      <pointsize>28</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>的联系吗</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>50</y>
-      <width>391</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Academy Engraved LET</family>
-      <pointsize>28</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>病症-病名-药方-药</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="buttonYes">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>230</y>
-      <width>131</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Academy Engraved LET</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>是的</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="buttonNo">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>230</y>
-      <width>131</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Academy Engraved LET</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>取消</string>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>      确定删除</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>      的联系吗</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="buttonYes">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>是的</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="buttonNo">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>取消</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QLabel" name="label_3">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>病症-病名-药方-药</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>509</width>
+     <width>430</width>
      <height>25</height>
     </rect>
    </property>

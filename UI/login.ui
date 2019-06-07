@@ -6,108 +6,98 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>432</width>
-    <height>317</height>
+    <width>390</width>
+    <height>263</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>登录界面</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>40</y>
-      <width>191</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Academy Engraved LET</family>
-      <pointsize>28</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>用户名</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>150</y>
-      <width>101</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Academy Engraved LET</family>
-      <pointsize>28</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>密码</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineUser">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>60</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="linePassword">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>170</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="echoMode">
-     <enum>QLineEdit::Password</enum>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="yesButton">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>240</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>确定</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="noButton">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>240</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>取消</string>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>用户名</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="2">
+     <widget class="QLineEdit" name="lineUser">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>密码</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1" colspan="2">
+     <widget class="QLineEdit" name="linePassword">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QPushButton" name="noButton">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>取消</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QPushButton" name="yesButton">
+      <property name="font">
+       <font>
+        <family>Academy Engraved LET</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>确定</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>432</width>
+     <width>390</width>
      <height>25</height>
     </rect>
    </property>

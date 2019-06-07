@@ -101,6 +101,8 @@ class Backend:
                 self.cursor.execute('select * from patient where name = "%s"'  %name)
             if name == "" and phone == "" and idcard !="":
                 self.cursor.execute('select * from patient where identitynum = %s ' % idcard)
+            if name == "" and phone == "" and idcard =="":
+                self.cursor.execute('select * from patient where identitynum = %s ' % idcard)
             # sql = "SELECT * FROM EMPLOYEE WHERE INCOME > %s" % (1000)
             data = self.cursor.fetchall()
             print(data)
@@ -111,6 +113,7 @@ class Backend:
 
     def save_data(self, db_name, name):
         sql = format('insert into %s (name) values ("%s")' % (db_name, name))
+        print(sql)
         try:
             self.cursor.execute(sql)
             self.database.commit()
@@ -129,7 +132,7 @@ class Backend:
                 data = self.cursor.fetchall()
                 print(data)
                 if data:
-                    pass
+                    return 0
                 else:
                     self.cursor.execute(sql1)
                     self.database.commit()

@@ -11,12 +11,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_result(object):
     def setupUi(self, result):
         result.setObjectName("result")
-        result.resize(800, 551)
+        result.resize(800, 411)
         self.centralwidget = QtWidgets.QWidget(result)
         self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout.setObjectName("gridLayout")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setEnabled(True)
-        self.tableWidget.setGeometry(QtCore.QRect(50, 40, 681, 341))
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setDragEnabled(False)
         self.tableWidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
@@ -54,12 +55,13 @@ class Ui_result(object):
         self.tableWidget.horizontalHeader().setDefaultSectionSize(112)
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
+        self.gridLayout.addWidget(self.tableWidget, 0, 0, 1, 1)
         self.ButtonOut = QtWidgets.QPushButton(self.centralwidget)
-        self.ButtonOut.setGeometry(QtCore.QRect(310, 420, 171, 61))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.ButtonOut.setFont(font)
         self.ButtonOut.setObjectName("ButtonOut")
+        self.gridLayout.addWidget(self.ButtonOut, 1, 0, 1, 1)
         result.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(result)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 25))
@@ -74,7 +76,7 @@ class Ui_result(object):
 
     def retranslateUi(self, result):
         _translate = QtCore.QCoreApplication.translate
-        result.setWindowTitle(_translate("result", "MainWindow"))
+        result.setWindowTitle(_translate("result", "电子病历"))
         item = self.tableWidget.verticalHeaderItem(0)
         item.setText(_translate("result", "New Row"))
         item = self.tableWidget.verticalHeaderItem(1)

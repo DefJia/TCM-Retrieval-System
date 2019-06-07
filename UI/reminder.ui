@@ -41,14 +41,20 @@
      <rect>
       <x>80</x>
       <y>130</y>
-      <width>91</width>
-      <height>31</height>
+      <width>101</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
       <family>Academy Engraved LET</family>
-      <pointsize>11</pointsize>
+      <pointsize>20</pointsize>
      </font>
     </property>
     <property name="text">
@@ -58,16 +64,16 @@
    <widget class="QPushButton" name="buttonNo">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>210</x>
       <y>130</y>
       <width>101</width>
-      <height>31</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Academy Engraved LET</family>
-      <pointsize>11</pointsize>
+      <pointsize>20</pointsize>
      </font>
     </property>
     <property name="text">

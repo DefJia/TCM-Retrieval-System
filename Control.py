@@ -27,7 +27,6 @@ class Interface(QMainWindow, Ui_MainWindow):
         super(Interface, self).__init__()
         self.setupUi(self)
 
-
 class Reminder(QMainWindow, Ui_reminder):
     def __init__(self):
         # 修改界面
@@ -133,7 +132,7 @@ class Control:
         self.login = LogIn()
         self.logwrong = LogWrong()
         self.login.show()
-        self.inquire.show()
+        #self.inquire.show()
         #self.missPhone.show()
         # 界面生成
         self.front = Frontend(self.interface, self.reminder, self.information, self.property)
@@ -256,10 +255,9 @@ class Control:
 
         # --- 缺失手机按钮组件 ---#
         self.missPhone.yesButton.clicked.connect(lambda: self.missPhone_clicked())
-
         self.logwrong.yesButton.clicked.connect(lambda: self.logwrong.close())
 
-        self.interface.show()
+        #self.interface.show()
         ''' 以下为界面初始化处理 '''
         for i in range(8):
             # 设定药方区结构
@@ -296,6 +294,7 @@ class Control:
         # 清空当前所有信息
         if self.interface.radioButton_2.isChecked():
             print("当前处于开方模式")
+            self.interface.tablewidgetMedicine.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectItems)
             self.front.type = 1
             self.interface.labelType.setText('开方模式')
             self.interface.groupboxSymptom.setGeometry(10, 70, 211, 411)
@@ -311,7 +310,7 @@ class Control:
             self.interface.groupboxSymptom.setGeometry(220, 70, 241, 411)
             self.interface.groupboxDisease.setGeometry(10, 70, 211, 411)
             self.interface.buttonDeleterelation.show()
-
+            self.interface.tablewidgetMedicine.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
             print("当前处于录入模式")
             for addition in self.group_additions:
                 addition.show()
@@ -369,7 +368,7 @@ class Control:
         index = self.group_inputs.index(line)
         if text != '':
             # self.reminder.show()
-            result = self.show_reminder('', '添加成功')
+            result = self.show_reminder('', '是否添加')
             #print(text)  # test
             if result:
                 # 点击yes
@@ -379,10 +378,12 @@ class Control:
                         index = self.group_inputs.index(i)
                         listIndex.append(index)
                 for l in listIndex:
-                    line = self.group_inputs[l]
-                    text = line.text()
                     self.front.save_data(l, text)
-                    self.front.search_area[l].append([text])
+                    if l == 3:
+                        self.front.search_area[l].append([text," "])
+                        print(self.front.search_area[l])
+                    else:
+                        self.front.search_area[l].append([text])
                     self.front.set_all_tables(self.front.search_area)
                     line.clear()
                     self.reminder.hide()
@@ -480,7 +481,7 @@ class Control:
                     for m in self.front.search_area[i+1]:
                         self.front.back.drop_relation(i, l[0], m[0])
         self.relationdelete.hide()
-        self.initial_button_clicked()
+        #self.initial_button_clicked()
         '''
         for i in self.front.search_area:
             i.clear()
@@ -494,9 +495,19 @@ class Control:
         #index = self.table_option_clicked().index
         #text = self.table_option_clicked().text
         for i in range(4):
-            if self.group_tables[i].selectedItems():
+            if self.group_tables[i].selectedItems() and i != 3:
                 text = self.group_tables[i].selectedItems()[0].text()
+                print(text)
                 self.front.search_area[i].remove([text])
+
+            if self.group_tables[i].selectedItems() and i == 3:
+                text1 = self.group_tables[i].selectedItems()[0].text()
+                text2 = self.group_tables[i].selectedItems()[1].text()
+                if text2:
+                    print(self.front.search_area[i])
+                    self.front.search_area[i].remove([text1,text2])
+                else:
+                    self.front.search_area[i].remove([text])
 
         for widget in self.group_tables[0:4]:
             widget.clear()
@@ -563,14 +574,9 @@ class Control:
             list_1 = list_1 + list_3
             print(list_1)
                 #把两个列表合成一个列表
-            '''
-            for o in range(len(list_1)):
-                if list_1[o] == " ":
-                    del list_1[o]
-            for o in range(len(list_1)):
-                if list_1[o] == "None":
-                    list_1[o] = "0"
-            '''
+            if list_1[0] == " ":
+                del list_1[0]
+
             if int(len(list_1)) % 8 == 0:
                 row = int(len(list_1) / 8)
             else:
@@ -723,8 +729,14 @@ class Control:
                 print(id)
         self.front.id = id
         #self.front.time = inquirydate
-        self.front.back.i_save_data(name,gender,age,phone,identitynum,address,id)
-        self.interface.show()
+        signal = self.front.back.i_save_data(name,gender,age,phone,identitynum,address,id)
+        if signal == 0:
+            data = self.front.back.iq_inquire(name, phone , identitynum)
+            if data != 0:
+                self.front.set_table(self.inquire.tableWidget, data)
+                self.inquire.show()
+        else:
+            self.interface.show()
         self.information.hide()
 
         #清除所有的空
@@ -863,7 +875,6 @@ class Control:
 
     def missPhone_clicked(self):
         self.missPhone.hide()
-
 
     def start(self):
         user = self.login.lineUser.text()

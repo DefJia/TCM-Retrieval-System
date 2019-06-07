@@ -11,19 +11,25 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Yes(object):
     def setupUi(self, Yes):
         Yes.setObjectName("Yes")
-        Yes.resize(383, 163)
+        Yes.resize(383, 173)
         self.centralwidget = QtWidgets.QWidget(Yes)
         self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout.setObjectName("gridLayout")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(90, 0, 221, 81))
         font = QtGui.QFont()
         font.setFamily("Academy Engraved LET")
         font.setPointSize(28)
         self.label.setFont(font)
         self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
         self.yesButton = QtWidgets.QPushButton(self.centralwidget)
-        self.yesButton.setGeometry(QtCore.QRect(140, 80, 93, 28))
+        font = QtGui.QFont()
+        font.setFamily("Academy Engraved LET")
+        font.setPointSize(20)
+        self.yesButton.setFont(font)
         self.yesButton.setObjectName("yesButton")
+        self.gridLayout.addWidget(self.yesButton, 1, 0, 1, 1)
         Yes.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Yes)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 383, 25))
@@ -39,6 +45,6 @@ class Ui_Yes(object):
     def retranslateUi(self, Yes):
         _translate = QtCore.QCoreApplication.translate
         Yes.setWindowTitle(_translate("Yes", "MainWindow"))
-        self.label.setText(_translate("Yes", "操作成功"))
+        self.label.setText(_translate("Yes", "      操作成功"))
         self.yesButton.setText(_translate("Yes", "确定"))
 
