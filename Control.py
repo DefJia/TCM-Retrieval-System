@@ -695,7 +695,7 @@ class Control:
     def set_patient_info(self,patientID):
         name,gender,age,phone,identitynum,address = self.front.back.get_full_patient_info(patientID)
         self.information.lineName.setText(name)
-        self.information.lineGender.setText(gender)
+        self.information.boxGender.setText(gender)
         self.information.lineAge.setText(age)
         self.information.linePhone.setText(phone)
         self.information.lineIdentitynum.setText(identitynum)
@@ -709,8 +709,9 @@ class Control:
 #information 病人信息录入面板
     def i_buttonInput_clicked(self):
         try:
+            print(self.information.boxGender.currentText())
             name = self.information.lineName.text()
-            gender = self.information.lineGender.text()
+            gender = self.information.boxGender.currentText()
             age = self.information.lineAge.text()
             phone = self.information.linePhone.text()
             identitynum = self.information.lineIdentitynum.text()
@@ -759,7 +760,7 @@ class Control:
 
             #清除所有的空
             self.information.lineName.clear()
-            self.information.lineGender.clear()
+            #self.information.boxGender.clear()
             self.information.lineAge.clear()
             self.information.linePhone.clear()
             self.information.lineIdentitynum.clear()

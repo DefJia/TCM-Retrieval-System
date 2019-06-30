@@ -15,75 +15,27 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLabel" name="label_11">
-        <property name="font">
-         <font>
-          <pointsize>20</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>手机</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="linePhone">
-        <property name="font">
-         <font>
-          <pointsize>20</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="4" column="0" colspan="3">
-     <widget class="QTableWidget" name="tablewidgetMainSymptom">
-      <attribute name="horizontalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-      <attribute name="verticalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="3">
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
-      <item>
-       <widget class="QLabel" name="label_13">
-        <property name="font">
-         <font>
-          <pointsize>20</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>身份证</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineIdentitynum">
-        <property name="font">
-         <font>
-          <pointsize>20</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="6" column="2">
-     <widget class="QPushButton" name="IButtonInquire">
+    <item row="6" column="4">
+     <widget class="QPushButton" name="IButtonGetinUI">
       <property name="font">
        <font>
         <pointsize>20</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>    查询    </string>
+       <string> 开方界面  </string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QPushButton" name="IButtonYes">
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>确定</string>
       </property>
      </widget>
     </item>
@@ -124,29 +76,77 @@
       </item>
      </layout>
     </item>
-    <item row="6" column="4">
-     <widget class="QPushButton" name="IButtonGetinUI">
+    <item row="2" column="0" colspan="3">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_13">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>身份证</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineIdentitynum">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="4" column="0" colspan="3">
+     <widget class="QTableWidget" name="tablewidgetMainSymptom">
+      <attribute name="horizontalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+     </widget>
+    </item>
+    <item row="6" column="2">
+     <widget class="QPushButton" name="IButtonInquire">
       <property name="font">
        <font>
         <pointsize>20</pointsize>
        </font>
       </property>
       <property name="text">
-       <string> 开方界面  </string>
+       <string>    查询    </string>
       </property>
      </widget>
     </item>
-    <item row="6" column="0">
-     <widget class="QPushButton" name="IButtonYes">
-      <property name="font">
-       <font>
-        <pointsize>20</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>确定</string>
-      </property>
-     </widget>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_11">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>手机</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="linePhone">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item row="5" column="0" colspan="7">
      <layout class="QFormLayout" name="formLayout">
@@ -303,31 +303,6 @@
       </item>
      </layout>
     </item>
-    <item row="1" column="4" colspan="3">
-     <layout class="QHBoxLayout" name="horizontalLayout_5">
-      <item>
-       <widget class="QLabel" name="label_12">
-        <property name="font">
-         <font>
-          <pointsize>20</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>住址</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineAddress">
-        <property name="font">
-         <font>
-          <pointsize>20</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
     <item row="2" column="4" colspan="3">
      <layout class="QHBoxLayout" name="horizontalLayout_6">
       <item>
@@ -353,22 +328,22 @@
       </item>
      </layout>
     </item>
-    <item row="0" column="4" colspan="3">
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
+    <item row="1" column="4" colspan="3">
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
-       <widget class="QLabel" name="label_9">
+       <widget class="QLabel" name="label_12">
         <property name="font">
          <font>
           <pointsize>20</pointsize>
          </font>
         </property>
         <property name="text">
-         <string>性别</string>
+         <string>住址</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineGender">
+       <widget class="QLineEdit" name="lineAddress">
         <property name="font">
          <font>
           <pointsize>20</pointsize>
@@ -390,6 +365,48 @@
       </property>
      </widget>
     </item>
+    <item row="0" column="4" colspan="3">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>性别</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="boxGender">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>男</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>女</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>       </string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
     <item row="7" column="4">
      <widget class="QPushButton" name="DBInput">
       <property name="font">
@@ -406,8 +423,8 @@
    <widget class="QTableWidget" name="option">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>250</y>
+      <x>10</x>
+      <y>210</y>
       <width>256</width>
       <height>171</height>
      </rect>
@@ -839,7 +856,6 @@
    </widget>
    <zorder>IButtonOut</zorder>
    <zorder>tablewidgetMainSymptom</zorder>
-   <zorder>option</zorder>
    <zorder>IButtonYes</zorder>
    <zorder>IButtonInquire</zorder>
    <zorder>IButtonGetinUI</zorder>
