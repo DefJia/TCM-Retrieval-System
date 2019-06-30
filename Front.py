@@ -19,6 +19,7 @@ class Frontend:
         self.time = 0
         self.type = 1  # 模式
         self.location = tuple()  # 当前位置
+        self.line = "" #为了使用一个提示框替代
         self.search_area = [list(), list(), list(), list()]  # 检索区
         # self.search_area_symptom = list()
         self.result_list = list() #中途存一下双击result之后的列表

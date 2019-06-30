@@ -207,7 +207,7 @@ class Backend:
                 p, m, g))
         else:
             sql = format(
-            'insert into prescription_medicine (prescription_id,medicine_id) values ("%s","%s")' % (p, m))
+            'insert into prescription_medicine (prescription_id,medicine_id,grams) values ("%s","%s",%s)' % (p, m,0))
         print(sql)
         try:
             self.cursor.execute(sql)

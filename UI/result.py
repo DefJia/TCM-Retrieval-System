@@ -106,4 +106,5 @@ class Ui_result(object):
         item = self.tableWidget.horizontalHeaderItem(7)
         item.setText(_translate("result", "带"))
         self.ButtonOut.setText(_translate("result", "退出"))
+        self.ButtonOut.setShortcut(_translate("result", "Esc"))
 

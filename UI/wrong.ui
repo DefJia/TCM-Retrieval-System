@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Wrong</class>
+ <widget class="QMainWindow" name="Wrong">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -38,6 +38,9 @@
     </property>
     <property name="text">
      <string>确定</string>
+    </property>
+    <property name="shortcut">
+     <string>Return</string>
     </property>
    </widget>
   </widget>

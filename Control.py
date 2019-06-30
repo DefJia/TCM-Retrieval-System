@@ -119,7 +119,7 @@ class Control:
         self.information = Information()
         #self.information.show()
         #self.RelationDelete.show()
-        #self.interface.show()
+        self.interface.show()
         self.reminder = Reminder()
         self.property = Property()
         self.inquire = Inquire()
@@ -309,7 +309,7 @@ class Control:
         # 清空当前所有信息
         if self.interface.radioButton_2.isChecked():
             print("当前处于开方模式")
-            self.interface.tablewidgetMedicine.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectItems)
+            self.interface.tablewidgetMedicine.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
             self.front.type = 1
             self.interface.labelType.setText('开方模式')
             self.interface.groupboxSymptom.setGeometry(10, 70, 211, 411)
@@ -496,6 +496,8 @@ class Control:
                     for m in self.front.search_area[i+1]:
                         self.front.back.drop_relation(i, l[0], m[0])
         self.relationdelete.hide()
+        print("###删除关系后")
+        print(self.front.search_area[3])
         #self.initial_button_clicked()
         '''
         for i in self.front.search_area:
@@ -570,7 +572,6 @@ class Control:
             # 开方模式
             medicines = self.front.search_area[3]
             print(medicines)
-            print("试试")
             list_1 =list()
             self.get_table_data(self.interface.tablewidgetPrescribe,list_1) #获取所有输入的药
             if list_1 == ['', '']:
@@ -642,6 +643,8 @@ class Control:
             '''
         elif self.front.type == 0:
             #录入模式
+            print("###录入前")
+            print(self.front.search_area[3])
             for i in range(3):
                 if i < 2 and len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
                     for l in self.front.search_area[i]:
@@ -650,7 +653,6 @@ class Control:
 
                 if i == 2 and len(self.front.search_area[i])!= 0 and len(self.front.search_area[i+1]) != 0:
                     self.get_table_data(self.interface.tablewidgetMedicine, self.front.medicine_gram_list)
-
 
                     print("******")
                     #print(int(len(self.front.medicine_gram_list) / 2))
@@ -706,72 +708,75 @@ class Control:
 
 #information 病人信息录入面板
     def i_buttonInput_clicked(self):
-        name = self.information.lineName.text()
-        gender = self.information.lineGender.text()
-        age = self.information.lineAge.text()
-        phone = self.information.linePhone.text()
-        identitynum = self.information.lineIdentitynum.text()
-        address = self.information.lineAddress.text()
+        try:
+            name = self.information.lineName.text()
+            gender = self.information.lineGender.text()
+            age = self.information.lineAge.text()
+            phone = self.information.linePhone.text()
+            identitynum = self.information.lineIdentitynum.text()
+            address = self.information.lineAddress.text()
 
-        self.front.look = self.information.lineLook.text()
-        self.front.listen = self.information.lineListen.text()
-        self.front.question = self.information.lineQuestion.text()
-        self.front.feel = self.information.lineFeel.text()
-        self.front.menstruation = self.information.lineMenstruation.text()
-        self.front.leucorrhoea = self.information.lineLeucorrhoea.text()
-        #prescription = self.information.linePrescription.text()
-        #mainsymptom = self.information.lineSymptom.text()
-        self.front.mainsymptom = self.front.search_area[0]
-        #print (self.front.search_area[0])
-        prescription= "null"
-        #print(name,gender,age,
-        #phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
-        print(phone)
-        print(identitynum)
-        while phone == "" and identitynum == "":
-            #phone = self.information.linePhone.text()
-            phone = 0
-        else:
-            if identitynum == "":
-                print(identitynum)
-                identitynum = "000000000000000000"
-                # 这里有错
-                id = "000000000000000000" + phone
-
+            self.front.look = self.information.lineLook.text()
+            self.front.listen = self.information.lineListen.text()
+            self.front.question = self.information.lineQuestion.text()
+            self.front.feel = self.information.lineFeel.text()
+            self.front.menstruation = self.information.lineMenstruation.text()
+            self.front.leucorrhoea = self.information.lineLeucorrhoea.text()
+            #prescription = self.information.linePrescription.text()
+            #mainsymptom = self.information.lineSymptom.text()
+            self.front.mainsymptom = self.front.search_area[0]
+            #print (self.front.search_area[0])
+            prescription= "null"
+            #print(name,gender,age,
+            #phone,identitynum,address,look,listen,question,feel,menstruation,leucorrhoea,prescription,mainsymptom)
+            print(phone)
+            print(identitynum)
+            while phone == "" and identitynum == "":
+                #phone = self.information.linePhone.text()
+                phone = 0
             else:
-                id = identitynum + phone
-                #inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-                print(id)
-        self.front.id = id
-        #self.front.time = inquirydate
-        signal = self.front.back.i_save_data(name,gender,age,phone,identitynum,address,id)
-        if signal == 0:
-            data = self.front.back.iq_inquire(name, phone , identitynum)
-            if data != 0:
-                self.front.set_table(self.inquire.tableWidget, data)
-                self.inquire.show()
-        else:
-            self.interface.show()
-        self.information.hide()
+                if identitynum == "":
+                    print(identitynum)
+                    identitynum = "000000000000000000"
+                    #这里有错
+                    id = "000000000000000000" + phone
 
-        #清除所有的空
-        self.information.lineName.clear()
-        self.information.lineGender.clear()
-        self.information.lineAge.clear()
-        self.information.linePhone.clear()
-        self.information.lineIdentitynum.clear()
-        self.information.lineAddress.clear()
+                else:
+                    id = identitynum + phone
+                    #inquirydate = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                    print(id)
+            self.front.id = id
+            #self.front.time = inquirydate
+            signal = self.front.back.i_save_data(name,gender,age,phone,identitynum,address,id)
+            if signal == 0:
+                data = self.front.back.iq_inquire(name, phone , identitynum)
+                if data != 0:
+                    self.front.set_table(self.inquire.tableWidget, data)
+                    self.inquire.show()
+            else:
+                self.interface.show()
+            self.information.hide()
 
-        # inquirydate = line
-        self.information.lineLook.clear()
-        self.information.lineListen.clear()
-        self.information.lineQuestion.clear()
-        self.information.lineFeel.clear()
-        self.information.lineMenstruation.clear()
-        self.information.lineLeucorrhoea.clear()
-        # prescription = self.information.linePrescription.text()
-        # mainsymptom = self.information.lineSymptom.text()
-        self.front.mainsymptom = self.front.search_area[0]
+            #清除所有的空
+            self.information.lineName.clear()
+            self.information.lineGender.clear()
+            self.information.lineAge.clear()
+            self.information.linePhone.clear()
+            self.information.lineIdentitynum.clear()
+            self.information.lineAddress.clear()
+
+            # inquirydate = line
+            self.information.lineLook.clear()
+            self.information.lineListen.clear()
+            self.information.lineQuestion.clear()
+            self.information.lineFeel.clear()
+            self.information.lineMenstruation.clear()
+            self.information.lineLeucorrhoea.clear()
+            # prescription = self.information.linePrescription.text()
+            # mainsymptom = self.information.lineSymptom.text()
+            self.front.mainsymptom = self.front.search_area[0]
+        except Exception as e:
+            print(e)
         pass
 
 #iinquire 面板
@@ -804,6 +809,7 @@ class Control:
     def interface_out(self):
         self.interface.hide()
         self.front.result_list.clear()
+        self.information.show()
 
     def buttonOut_click(self):
         self.final.hide()
@@ -847,14 +853,17 @@ class Control:
 
     def inquire_widget_double_clicked(self,table):
         #text = str(table.selectedIteams().text())
-        id = str(table.selectedItems()[6].text())
-        self.front.id = id
-        print(id)
-        if id:
-            data = self.front.back.get_click_result(id)
-            print(data)
-            self.front.set_table(self.result.tableWidget,data)
-            self.result.show()
+        try:
+            id = str(table.selectedItems()[6].text())
+            self.front.id = id
+            print(id)
+            if id:
+                data = self.front.back.get_click_result(id)
+                print(data)
+                self.front.set_table(self.result.tableWidget,data)
+                self.result.show()
+        except Exception as e:
+            print(e)
 
     def buttonOut_clicked(self):
         self.result.hide()
@@ -885,7 +894,10 @@ class Control:
             #self.group_tables[5][int(n / 4)].append('')
             n += 1
             #print(self.front.result_list)
-        self.front.set_table(self.interface.tablewidgetPrescribe, self.front.result_list)
+            try:
+                self.front.set_table(self.interface.tablewidgetPrescribe, self.front.result_list)
+            except Exception as e:
+                print(e)
         print(self.front.result_list)
 
     def missPhone_clicked(self):

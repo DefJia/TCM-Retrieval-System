@@ -54,5 +54,6 @@ class Ui_missPhone(object):
         missPhone.setWindowTitle(_translate("missPhone", "MainWindow"))
         self.label_2.setText(_translate("missPhone", "     或身份证号"))
         self.yesButton.setText(_translate("missPhone", "确定"))
+        self.yesButton.setShortcut(_translate("missPhone", "Return"))
         self.label.setText(_translate("missPhone", "   请输入手机号"))
 

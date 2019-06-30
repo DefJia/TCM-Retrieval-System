@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_relationDelete(object):
     def setupUi(self, relationDelete):
         relationDelete.setObjectName("relationDelete")
-        relationDelete.resize(430, 335)
+        relationDelete.resize(430, 337)
         self.centralwidget = QtWidgets.QWidget(relationDelete)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -69,6 +69,7 @@ class Ui_relationDelete(object):
         self.label.setText(_translate("relationDelete", "      确定删除"))
         self.label_2.setText(_translate("relationDelete", "      的联系吗"))
         self.buttonYes.setText(_translate("relationDelete", "是的"))
+        self.buttonYes.setShortcut(_translate("relationDelete", "Return"))
         self.buttonNo.setText(_translate("relationDelete", "取消"))
         self.label_3.setText(_translate("relationDelete", "病症-病名-药方-药"))
 

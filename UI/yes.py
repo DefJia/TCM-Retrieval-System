@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Yes(object):
     def setupUi(self, Yes):
         Yes.setObjectName("Yes")
-        Yes.resize(383, 173)
+        Yes.resize(383, 197)
         self.centralwidget = QtWidgets.QWidget(Yes)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -47,4 +47,5 @@ class Ui_Yes(object):
         Yes.setWindowTitle(_translate("Yes", "MainWindow"))
         self.label.setText(_translate("Yes", "      操作成功"))
         self.yesButton.setText(_translate("Yes", "确定"))
+        self.yesButton.setShortcut(_translate("Yes", "Return"))
 

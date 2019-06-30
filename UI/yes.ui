@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>383</width>
-    <height>173</height>
+    <height>197</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,6 +38,9 @@
       </property>
       <property name="text">
        <string>确定</string>
+      </property>
+      <property name="shortcut">
+       <string>Return</string>
       </property>
      </widget>
     </item>

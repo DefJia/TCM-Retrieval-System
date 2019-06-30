@@ -77,5 +77,7 @@ class Ui_LogIn(object):
         self.label.setText(_translate("LogIn", "用户名"))
         self.label_2.setText(_translate("LogIn", "密码"))
         self.noButton.setText(_translate("LogIn", "取消"))
+        self.noButton.setShortcut(_translate("LogIn", "Esc"))
         self.yesButton.setText(_translate("LogIn", "确定"))
+        self.yesButton.setShortcut(_translate("LogIn", "Return"))
 

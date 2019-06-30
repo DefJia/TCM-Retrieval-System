@@ -75,6 +75,9 @@
       <property name="text">
        <string>取消</string>
       </property>
+      <property name="shortcut">
+       <string>Esc</string>
+      </property>
      </widget>
     </item>
     <item row="2" column="1">
@@ -87,6 +90,9 @@
       </property>
       <property name="text">
        <string>确定</string>
+      </property>
+      <property name="shortcut">
+       <string>Return, Enter</string>
       </property>
      </widget>
     </item>
