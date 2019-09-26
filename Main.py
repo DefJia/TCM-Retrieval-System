@@ -1,21 +1,14 @@
-import sys, os
-dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(dir)
-
-
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget, QTableWidgetItem, QVBoxLayout
-from View.Interface import MainWindow
-# from View.
-from Controller.C_MainWindow import Monitor
+import sys
+
+from App.C_MainWindow import C_MainWindow
 
 
 class Main:
     def __init__(self):
         app = QApplication(sys.argv)
-        self.
-        self.MainWindow = MainWindow()
-        # self.MainWindow.show()
-        Monitor(self.MainWindow)
+        self.MainWindow = C_MainWindow()
+        self.MainWindow.view.interface.show()
         sys.exit(app.exec_())
 
 
