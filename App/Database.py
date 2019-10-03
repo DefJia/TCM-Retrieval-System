@@ -29,16 +29,17 @@ class Database:
         :param text: 匹配文本
         :return: data
         """
-        #self.cursor.execute('select id from %s where name = ?' % self.index[box_id], (text, ))
-        # 先查询关系号
-        #res = self.cursor.fetchone()
-        #if res:
-            #id = res[0]
+        '''
+        self.cursor.execute('select id from %s where name = ?' % self.index[rid], (text, ))
+        res = self.cursor.fetchone()
+        if res:
+            id = res[0]
+        '''
         if text:
-            t = self.index[index]
-            s = self.index[box_id]
-            a = self.index[min(index, box_id)]#@
-            b = self.index[max(index, box_id)]
+            t = self.index[rid]
+            s = self.index[qid]
+            a = self.index[min(rid, qid)]
+            b = self.index[max(rid, qid)]
             #sql = format('select name from %s inner join %s_%s on %s.id = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
             sql = format('select name from %s inner join %s_%s on %s.name = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
             if 'medicine' in (a, b):

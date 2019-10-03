@@ -60,36 +60,3 @@ if __name__ == "__main__":
     a = C_MainWindow()
     a.view.interface.show()
     sys.exit(app.exec_())
-
-'''
-# --- information按钮组 --- #
-        self.information.IButtonYes.clicked.connect(lambda: self.i_buttonInput_clicked())
-        #self.information.IButtonYes.clicked.connect(lambda: self.view.interface.show())
-        self.information.IButtonInquire.clicked.connect(lambda: self.inquire.show())
-        self.information.IButtonOut.clicked.connect(lambda: self.information.hide())
-        # --- information 触发--- #
-        self.information.lineSymptom.textChanged.connect(lambda: self.i_line_text_changed())
-        self.information.option.hide()
-
-        self.information.option.clicked.connect(lambda: self.i_option_clicked(self.information.option))
-
-        # --- inquire按钮组 --- #
-        #self.inquire.ButtonYes.clicked.connect(lambda: self.inquire.hide())
-        # --- inquire 触发 --- #
-
-        # --- Inquire按钮组 --- #
-        self.inquire.ButtonYes.clicked.connect(lambda: self.iq_buttonYes_clicked())  # 查询
-        self.inquire.ButtonOut.clicked.connect(lambda: self.inquire.hide())
-        # --- Final按钮组 --- #
-        #self.view.interface.buttonSave.clicked.connect(lambda: self.buttonSave_clicked())
-        self.final.buttonContinue.clicked.connect(lambda: self.buttonContinue_click())
-        self.final.buttonOut.clicked.connect(lambda: self.buttonOut_click())
-
-        # --- quantity按钮组件 ---#
-        self.quantity.pushButton.clicked.connect(lambda: self.quantity_button_clicked())
-
-        # --- result按钮组件 ---#
-        self.inquire.tableWidget.doubleClicked.connect(lambda: self.inquire_widget_double_clicked(self.inquire.tableWidget))
-        self.result.ButtonOut.clicked.connect(lambda: self.buttonOut_clicked())
-        self.result.tableWidget.doubleClicked.connect(lambda: self.result_widget_double_clicked(self.result.tableWidget))
-'''

@@ -18,7 +18,43 @@
 
 ![深度截图_Control.py_20181107190137](_Backup/深度截图_Control.py_20181107190137.png)
 
-## 开发进程
+## 开发框架(新)
+
+### Control类
+
+- 各种信号槽
+
+### Model类
+
+需要添加键盘操作
+
+- 模式切换
+- 检测输入框->显示下拉框（加拼音）
+- 下拉框点击->表格显示
+- 表格点击->表格显示
+- 加号点击（回车）
+- 各种按钮操作
+  - ...
+
+### View类
+
+- 输入框组
+- 加号按钮组
+- 下拉框组
+- 表格组
+- 弹框显示
+
+### General方法
+
+- 日志记录 -> record(text)
+
+### Database类
+
+- 查找特定表中的匹配数据 -> query_similar_data(self, id, content)
+- 联合查询 -> union_query(self, rid, qid, text):
+- 查找相邻表中的匹配数据 -> find_relative_info(self, id, content)
+
+## 开发进程(旧)
 
 ### UI界面
 
