@@ -26,8 +26,6 @@
 
 ### Model类
 
-需要添加键盘操作
-
 - 模式切换
 - 检测输入框->显示下拉框（加拼音）
 - 下拉框点击->表格显示
@@ -53,6 +51,13 @@
 - 查找特定表中的匹配数据 -> query_similar_data(self, id, content)
 - 联合查询 -> union_query(self, rid, qid, text):
 - 查找相邻表中的匹配数据 -> find_relative_info(self, id, content)
+
+### 其他
+
+- 键盘匹配操作
+- 拼音导入
+- 前期数据导入
+- 文献查询
 
 ## 开发进程(旧)
 

@@ -3,6 +3,7 @@ from App.UI.MessageBox import MessageBox
 
 from PyQt5.QtWidgets import QMainWindow
 
+
 class Interface(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(Interface, self).__init__()
@@ -21,7 +22,7 @@ class V_MainWindow:
         # --- 设定部分区域结构 ---
         # 设定药方区结构
         for i in range(8):
-            width = 69 if i % 2 != 0 else 150
+            width = 60 if i % 2 != 0 else 120
             self.interface.tablewidgetPrescribe.setColumnWidth(i, width)
         # 设定药名区结构
         tmp = [90, 50]
@@ -53,16 +54,16 @@ class V_MainWindow:
         self.group_tables.append(self.interface.tablewidgetDisease)
         self.group_tables.append(self.interface.tablewidgetPrescription)
         self.group_tables.append(self.interface.tablewidgetMedicine)
-        self.group_tables.append(self.interface.tablewidgetBook)
         self.group_tables.append(self.interface.tablewidgetPrescribe)
+        # self.group_tables.append(self.interface.tablewidgetBook)
 
     @staticmethod
-    def show_reminder(title, text):
+    def show_reminder(text, title='系统消息'):
         # 显示弹框
         main_window = MessageBox(title, text)
         main_window.show()
         return main_window.status
-        # 1 -> Yes, 0 -> No
+        # 0 -> Yes, 1 -> No
 
 
 if __name__ == "__main__":

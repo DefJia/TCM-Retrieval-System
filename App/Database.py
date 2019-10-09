@@ -36,35 +36,124 @@ class Database:
             id = res[0]
         '''
         if text:
-            t = self.index[rid]
-            s = self.index[qid]
+            s = self.index[rid]
+            t = self.index[qid]
             a = self.index[min(rid, qid)]
             b = self.index[max(rid, qid)]
-            #sql = format('select name from %s inner join %s_%s on %s.id = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
-            sql = format('select name from %s inner join %s_%s on %s.name = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
-            if 'medicine' in (a, b):
-                #sql = format('select name, grams from %s inner join %s_%s on %s.id = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
-                sql = format('select name, grams from %s inner join %s_%s on %s.name = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
-            #self.cursor.execute(sql, (id, ))
+            sql = format('select id from %s where name = ?' % self.index[rid])
             self.cursor.execute(sql, (text, ))
+            id = self.cursor.fetchall()[0][0]
+            if qid == 3:
+                sql = format('select name, grams from %s inner join %s_%s on %s.id = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
+                flag = 1
+            else:
+                sql = format('select name from %s inner join %s_%s on %s.id = %s_%s.%s_id where %s_id = ?' % (t, a, b, t, a, b, t, s))
+                flag = 0
+            self.cursor.execute(sql, (id, ))
             raw = self.cursor.fetchall()
-            return self.convert_raw_to_data(raw)    
+            return self.convert_raw_to_data(raw, flag)    
 
     def find_relative_info(self, id, content):
-        data_left = self.query_similar_data(id-1, content) if 1 <= id <= 3 else list()
-        data_right = self.query_similar_data(id+1, content) if 0 <= id <= 2 else list()
+        data_left = self.union_query(id, id-1, content) if 1 <= id <= 3 else 0
+        data_right = self.union_query(id, id+1, content) if 0 <= id <= 2 else 0
         data = dict()
-        if data_left:
+        if data_left != 0:
             data[id-1] = data_left
-        if data_right:
+        if data_right != 0:
             data[id+1] = data_right
         return data
 
     @staticmethod
-    def convert_raw_to_data(raw):
+    def convert_raw_to_data(raw, flag=0):
+        # 若flag==1则需要加一列“克”
         lst = list()
         for elem in raw:
             lst.append(list())
             for item in elem:
                 lst[-1].append(str(item))
+            if flag: lst[-1].append('克')
         return lst
+
+    # 以下为插入操作
+    def save_single_item(self, id, name):
+        db_name = self.index[id]
+        sql = format('insert into %s (name) values ("%s")' % (db_name, name))
+        try:
+            self.cursor.execute(sql)
+            self.database.commit()
+            return 0    
+        except Exception as e:
+            print(e)
+            return 1
+
+    # 以下为删除操作
+    def delete_single_item(self, id, text):
+        sql = format('select id from %s where name = ?' % self.index[id])
+        self.cursor.execute(sql, (text, ))
+        ori_id = self.cursor.fetchall()[0][0]
+        sql = format('delete from %s where name = "%s"' % (self.index[id], text))
+        try:
+            self.cursor.execute(sql)
+            self.database.commit()
+        except Exception as e:
+            print(e)
+            return 1
+        if id < 3:
+            sql = format('delete from %s_%s where %s_id = %s' % (self.index[id], self.index[id+1], self.index[id], ori_id))
+            try:
+                self.cursor.execute(sql)
+                self.database.commit()
+            except Exception as e:
+                print(e)
+                return 1
+        if id > 0:
+            sql = format('delete from %s_%s where %s_id = %s' % (self.index[id-1], self.index[id], self.index[id], ori_id))
+            try:
+                self.cursor.execute(sql)
+                self.database.commit()
+            except Exception as e:
+                print(e)
+                return 1
+        return 0
+
+    def save_relation(self, dbid, name1, name2):
+        db_name = self.relations[dbid]
+        front_name = db_name.split("_")[0]
+        back_name = db_name.split("_")[-1]
+        front_id = int(self.search_data(front_name, "id", name1)[0])
+        back_id = int(self.search_data(back_name, "id", name2)[0])
+        sql = format('insert into %s (%s_id,%s_id) values (%d, %d)' % (db_name,front_name,back_name,front_id,back_id))
+        try:
+            self.cursor.execute(sql)
+            self.database.commit()
+        except Exception as e:
+            print(e)
+        return 0
+
+    def drop_relation(self, dbid, name1, name2):
+        db_name = self.relations[dbid]
+        front_name = db_name.split("_")[0]
+        back_name = db_name.split("_")[-1]
+        front_id = int(self.search_data(front_name, "id", name1)[0])
+        back_id = int(self.search_data(back_name, "id", name2)[0])
+        sql = format('DELETE FROM %s WHERE %s_id = %d and %s_id = %d' %(db_name, front_name, front_id, back_name, back_id))
+        try:
+            self.cursor.execute(sql)
+            self.database.commit()
+        except Exception as e:
+            print(e)
+        return 0
+
+    def search_data(self, dbname, column, data):
+        try:
+            sql = 'select ' + column + ' from ' + dbname + " where name = '" + data +"'"
+            self.cursor.execute(sql)
+            data = self.cursor.fetchall()
+            return data[0]
+        except Exception as e:
+            print(e)
+
+
+if __name__ == "__main__":
+    a = Database()
+    b = a.union_query(1,2,'少阳症')

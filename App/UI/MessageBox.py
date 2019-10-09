@@ -26,11 +26,11 @@ class MessageBox(QtWidgets.QWidget):
         self.setGeometry(self.left, self.top, self.width, self.height)
         self.buttonReply = QMessageBox.question(self, self.content, self.question, QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if self.buttonReply == QtWidgets.QMessageBox.Yes:
-            print('Yes clicked.')
-            return 1
-        else:
-            print('No clicked.')
+            print('点击Yes')
             return 0
+        else:
+            print('点击No')
+            return 1
 
 
 if __name__ == "__main__":

@@ -18,6 +18,10 @@ class C_MainWindow:
         self.radioboxs()
         self.buttons()
         # show
+        self.view.interface.lineSymptom.returnPressed.connect(lambda:self.view.interface.symptomOption.setFocus())
+        self.view.interface.lineDisease.returnPressed.connect(lambda:self.view.interface.diseaseOption.setFocus())
+        self.view.interface.linePrescription.returnPressed.connect(lambda:self.view.interface.prescriptionOption.setFocus())
+        self.view.interface.lineMedicine.returnPressed.connect(lambda:self.view.interface.medicineOption.setFocus())
 
     def additions(self):
         self.view.interface.buttonSymptom.clicked.connect(lambda: self.model.addition_clicked(0))
@@ -28,7 +32,7 @@ class C_MainWindow:
     def inputs(self):
         self.view.interface.lineSymptom.textChanged.connect(lambda: self.model.input_changed(0, self.view.interface.lineSymptom.text()))
         self.view.interface.lineDisease.textChanged.connect(lambda: self.model.input_changed(1, self.view.interface.lineDisease.text()))
-        self.view.interface.linePrescription.textChanged.connect(lambda: self.model.input_changed(2, self.view.interface.Prescription.text()))
+        self.view.interface.linePrescription.textChanged.connect(lambda: self.model.input_changed(2, self.view.interface.linePrescription.text()))
         self.view.interface.lineMedicine.textChanged.connect(lambda: self.model.input_changed(3, self.view.interface.lineMedicine.text()))
         
     def tables(self):

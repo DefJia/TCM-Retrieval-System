@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget, QTableWidgetItem, QVBoxLayout
 import sys
 
-from App.C_MainWindow import C_MainWindow
+from C_MainWindow import C_MainWindow
 
 
 class Main:
